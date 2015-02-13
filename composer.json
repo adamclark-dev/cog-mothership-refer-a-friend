@@ -1,0 +1,34 @@
+{
+	"name": "message/cog-mothership-refer-a-friend",
+	"description": "Cog module for 'Refer a Friend' functionality in Mothership",
+	"keywords": ["refer a friend", "rewards", "cog", "mothership"],
+	"homepage": "http://mothership.ec",
+	"license": "proprietary",
+	"authors": [
+		{
+			"name" : "The Mothership Development Team",
+			"email": "hello@mothership.ec"
+		}
+	],
+	"support": {
+		"wiki"  : "http://server.local/wiki/projects/cog",
+		"issues": "http://github.com/messagedigital/cog-mothership-refer-a-friend/issues"
+	},
+	"autoload": {
+		"psr-4": {
+			"Message\\Mothership\\ReferAFriend\\"      : "src",
+			"Message\\Mothership\\ReferAFriend\\Test\\": "tests"
+		}
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url" : "http://packages.message.co.uk"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0",
+
+		"message/cog" : "~3.12"
+	}
+}

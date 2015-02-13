@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0bae9e2a01bf50fe3996206dccda1f6b",
+    "hash": "61ed0e99e3149e68f92f5f56cf969303",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -491,6 +491,56 @@
                 "source": "https://github.com/messagedigital/cog/tree/3.12.1"
             },
             "time": "2015-02-10 15:26:18"
+        },
+        {
+            "name": "message/cog-user",
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:messagedigital/cog-user.git",
+                "reference": "1.4.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/messagedigital/cog-user/zipball/1.4.1",
+                "reference": "1.4.1",
+                "shasum": ""
+            },
+            "require": {
+                "message/cog": "~3.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Message\\User\\": "src",
+                    "Message\\User\\Test\\": "tests"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "The Message Development Team",
+                    "email": "dev@message.co.uk"
+                }
+            ],
+            "description": "Cog module for a very basic and extensible user system",
+            "homepage": "http://message.co.uk",
+            "keywords": [
+                "account",
+                "accounts",
+                "cog",
+                "user",
+                "users"
+            ],
+            "support": {
+                "wiki": "http://server.local/wiki/projects/cog",
+                "issues": "http://github.com/messagedigital/cog-user/issues",
+                "source": "https://github.com/messagedigital/cog-user/tree/1.4.1"
+            },
+            "time": "2015-01-27 17:04:04"
         },
         {
             "name": "message/wkhtmltopdf",

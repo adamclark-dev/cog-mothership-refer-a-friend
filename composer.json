@@ -3,7 +3,7 @@
 	"description": "Cog module for 'Refer a Friend' functionality in Mothership",
 	"keywords": ["refer a friend", "rewards", "cog", "mothership"],
 	"homepage": "http://mothership.ec",
-	"license": "proprietary",
+	"license": "GPL",
 	"authors": [
 		{
 			"name" : "The Mothership Development Team",
@@ -29,6 +29,7 @@
 	"require": {
 		"php": ">=5.4.0",
 
-		"message/cog" : "~3.12"
+		"message/cog" : "~3.12",
+		"message/cog-user" : "~1.4"
 	}
 }

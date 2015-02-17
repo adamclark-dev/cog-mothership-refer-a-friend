@@ -5,12 +5,12 @@ namespace Message\Mothership\ReferAFriend\Reward;
 use Message\User;
 
 /**
- * Class AbstractReward
+ * Class Reward
  * @package Message\Mothership\ReferAFriend\Reward
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  */
-abstract class AbstractReward implements RewardInterface
+class Reward implements RewardInterface
 {
 	/**
 	 * @var Type\TypeInterface
@@ -37,11 +37,22 @@ abstract class AbstractReward implements RewardInterface
 	 */
 	private $_constraints;
 
+	/**
+	 * @var Trigger\Collection
+	 */
+	private $_triggers;
+
 	public function __construct(Type\TypeInterface $type)
 	{
 		$this->_type = $type;
 
 		$this->_constraints = new Constraint\Collection;
+		$this->_triggers    = new Trigger\Collection;
+	}
+
+	public function getType()
+	{
+		return $this->_type;
 	}
 
 	/**
@@ -137,7 +148,31 @@ abstract class AbstractReward implements RewardInterface
 	 */
 	public function addConstraint(Constraint\ConstraintInterface $constraint)
 	{
+		if (false === $this->_type->allowConstraints()) {
+			throw new \LogicException('Constraints cannot be set on rewards with a type of `' . $this->_type->getName() . '`');
+		}
+
 		$this->_constraints->add($constraint);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getTriggers()
+	{
+		return $this->_triggers;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function addTrigger(Trigger\TriggerInterface $trigger)
+	{
+		if (false === $this->_type->allowTriggers()) {
+			throw new \LogicException('Triggers cannot be set on rewards with a type of `' . $this->_type->getName() . '`');
+		}
+
+		$this->_triggers->add($trigger);
 	}
 
 	/**

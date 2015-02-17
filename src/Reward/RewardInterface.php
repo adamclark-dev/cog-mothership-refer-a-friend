@@ -3,6 +3,7 @@
 namespace Message\Mothership\ReferAFriend\Reward;
 
 use Message\User\UserInterface;
+use Message\Cog\ValueObject\Authorship;
 
 /**
  * Interface RewardInterface
@@ -13,7 +14,7 @@ use Message\User\UserInterface;
 interface RewardInterface
 {
 	/**
-	 * @return Type\Type
+	 * @return Type\TypeInterface
 	 */
 	public function getType();
 
@@ -46,6 +47,16 @@ interface RewardInterface
 	 * @param Constraint\ConstraintInterface $constraint
 	 */
 	public function addConstraint(Constraint\ConstraintInterface $constraint);
+
+	/**
+	 * @return Trigger\Collection
+	 */
+	public function getTriggers();
+
+	/**
+	 * @param Trigger\TriggerInterface $trigger
+	 */
+	public function addTrigger(Trigger\TriggerInterface $trigger);
 
 	/**
 	 * @return string

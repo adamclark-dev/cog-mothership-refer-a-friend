@@ -2,15 +2,44 @@
 
 namespace Message\Mothership\ReferAFriend\Reward\Type;
 
-use Message\Mothership\ReferAFriend\Reward\Trigger\TriggerInterface;
-
+/**
+ * Interface TypeInterface
+ * @package Message\Mothership\ReferAFriend\Reward\Type
+ *
+ * @author Thomas Marchant <thomas@message.co.uk>
+ */
 interface TypeInterface
 {
+	/**
+	 * @return string
+	 */
 	public function getName();
 
+	/**
+	 * Return a translation string for the display name
+	 *
+	 * @return string
+	 */
 	public function getDisplayName();
 
-	public function getTriggers();
+	/**
+	 * Return a translation string for the description
+	 *
+	 * @return string
+	 */
+	public function getDescription();
 
-	public function addTrigger(TriggerInterface $trigger);
+	/**
+	 * Toggle whether constraints can be set against a reward
+	 *
+	 * @return bool
+	 */
+	public function allowConstraints();
+
+	/**
+	 * Toggle whether triggers can be set against a reward
+	 *
+	 * @return bool
+	 */
+	public function allowTriggers();
 }

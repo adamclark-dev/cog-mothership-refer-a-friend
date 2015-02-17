@@ -1,10 +1,10 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward\Type;
+namespace Message\Mothership\ReferAFriend\Referral\Type;
 
 /**
  * Interface TypeInterface
- * @package Message\Mothership\ReferAFriend\Reward\Type
+ * @package Message\Mothership\ReferAFriend\Referral\Type
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  */
@@ -30,14 +30,14 @@ interface TypeInterface
 	public function getDescription();
 
 	/**
-	 * Toggle whether constraints can be set against a reward
+	 * Toggle whether constraints can be set against a referral
 	 *
 	 * @return bool
 	 */
 	public function allowConstraints();
 
 	/**
-	 * Toggle whether triggers can be set against a reward
+	 * Toggle whether triggers can be set against a referral
 	 *
 	 * @return bool
 	 */

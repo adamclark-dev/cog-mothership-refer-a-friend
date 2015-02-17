@@ -1,8 +1,8 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward\Type;
+namespace Message\Mothership\ReferAFriend\Referral\Type;
 
-class NoRewardType implements TypeInterface
+class NoReferralType implements TypeInterface
 {
 	public function getName()
 	{
@@ -11,12 +11,12 @@ class NoRewardType implements TypeInterface
 
 	public function getDisplayName()
 	{
-		return 'ms.refer.reward.types.no_type.name';
+		return 'ms.refer.referral.types.no_type.name';
 	}
 
 	public function getDescription()
 	{
-		return 'ms.refer.reward.types.no_type.description';
+		return 'ms.refer.referral.types.no_type.description';
 	}
 
 	public function allowConstraints()

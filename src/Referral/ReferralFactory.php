@@ -1,16 +1,16 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward;
+namespace Message\Mothership\ReferAFriend\Referral;
 
 use Message\Cog\DB\Entity\EntityLoaderCollection;
 
 /**
- * Class RewardFactory
- * @package Message\Mothership\ReferAFriend\Reward
+ * Class ReferralFactory
+ * @package Message\Mothership\ReferAFriend\Referral
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  */
-class RewardFactory
+class ReferralFactory
 {
 	/**
 	 * @var Type\Collection
@@ -26,28 +26,28 @@ class RewardFactory
 	/**
 	 * @param $type
 	 *
-	 * @return Reward
+	 * @return Referral
 	 */
-	public function getReward($type)
+	public function getReferral($type)
 	{
 		$this->_checkType($type);
 
-		return new Reward($this->_types->get($type));
+		return new Referral($this->_types->get($type));
 	}
 
 	/**
 	 * @param $type
 	 *
-	 * @return RewardProxy
+	 * @return ReferralProxy
 	 */
-	public function getRewardProxy($type)
+	public function getReferralProxy($type)
 	{
 		$this->_checkType($type);
 
-		$reward = new RewardProxy($this->_types->get($type));
-		$reward->setLoaders($this->_loaders);
+		$referral = new ReferralProxy($this->_types->get($type));
+		$referral->setLoaders($this->_loaders);
 
-		return $reward;
+		return $referral;
 	}
 
 	/**

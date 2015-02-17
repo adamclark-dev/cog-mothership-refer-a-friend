@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward\Type;
+namespace Message\Mothership\ReferAFriend\Referral\Type;
 
 use Message\Cog\ValueObject\Collection as BaseCollection;
 

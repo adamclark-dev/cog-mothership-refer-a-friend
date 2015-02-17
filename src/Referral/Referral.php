@@ -1,16 +1,16 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward;
+namespace Message\Mothership\ReferAFriend\Referral;
 
 use Message\User;
 
 /**
- * Class Reward
- * @package Message\Mothership\ReferAFriend\Reward
+ * Class Referral
+ * @package Message\Mothership\ReferAFriend\Referral
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  */
-class Reward implements RewardInterface
+class Referral implements ReferralInterface
 {
 	/**
 	 * @var Type\TypeInterface
@@ -25,7 +25,7 @@ class Reward implements RewardInterface
 	/**
 	 * @var User\UserInterface
 	 */
-	private $_referrer;
+	protected $_referrer;
 
 	/**
 	 * @var string
@@ -50,6 +50,9 @@ class Reward implements RewardInterface
 		$this->_triggers    = new Trigger\Collection;
 	}
 
+	/**
+	 * @return Type\TypeInterface
+	 */
 	public function getType()
 	{
 		return $this->_type;
@@ -89,7 +92,7 @@ class Reward implements RewardInterface
 	public function setReferrer(User\UserInterface $referrer)
 	{
 		if ($referrer instanceof User\AnonymousUser) {
-			throw new \LogicException('Referrer must not be a registered user');
+			throw new \LogicException('Referrer must be a registered user');
 		};
 
 		$this->_referrer = $referrer;
@@ -149,7 +152,7 @@ class Reward implements RewardInterface
 	public function addConstraint(Constraint\ConstraintInterface $constraint)
 	{
 		if (false === $this->_type->allowConstraints()) {
-			throw new \LogicException('Constraints cannot be set on rewards with a type of `' . $this->_type->getName() . '`');
+			throw new \LogicException('Constraints cannot be set on referrals with a type of `' . $this->_type->getName() . '`');
 		}
 
 		$this->_constraints->add($constraint);
@@ -169,7 +172,7 @@ class Reward implements RewardInterface
 	public function addTrigger(Trigger\TriggerInterface $trigger)
 	{
 		if (false === $this->_type->allowTriggers()) {
-			throw new \LogicException('Triggers cannot be set on rewards with a type of `' . $this->_type->getName() . '`');
+			throw new \LogicException('Triggers cannot be set on referrals with a type of `' . $this->_type->getName() . '`');
 		}
 
 		$this->_triggers->add($trigger);

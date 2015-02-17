@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward\Constraint;
+namespace Message\Mothership\ReferAFriend\Referral\Constraint;
 
 use Message\Cog\ValueObject\Collection as BaseCollection;
 

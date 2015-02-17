@@ -6,7 +6,7 @@
  * Time: 11:41
  */
 
-namespace Message\Mothership\ReferAFriend\Reward\Constraint;
+namespace Message\Mothership\ReferAFriend\Referral\Constraint;
 
 
 class Create {

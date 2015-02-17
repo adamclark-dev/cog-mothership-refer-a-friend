@@ -1,6 +1,6 @@
 ms.refer:
   reward:
     types:
-      no_reward:
-        name: No reward
-        description: A blank reward type that cannot have any constraints or triggers
+      no_referral:
+        name: No referral
+        description: A blank referral type that cannot have any constraints or triggers

@@ -1,13 +1,14 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward;
+namespace Message\Mothership\ReferAFriend\Referral;
 
 use Message\Cog\DB\Transaction;
 use Message\Cog\DB\TransactionalInterface;
+use Message\User\UserInterface;
 
 /**
  * Class Create
- * @package Message\Mothership\ReferAFriend\Reward
+ * @package Message\Mothership\ReferAFriend\Referral
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  */
@@ -29,15 +30,26 @@ class Create implements TransactionalInterface
 	private $_triggerCreate;
 
 	/**
+	 * @var \Message\User\UserInterface
+	 */
+	private $_currentUser;
+
+	/**
 	 * @var bool
 	 */
 	private $_transOverride = false;
 
-	public function __construct(Transaction $trans, Constraint\Create $constraintCreate, Trigger\Create $triggerCreate)
+	public function __construct(
+		Transaction $trans,
+		Constraint\Create $constraintCreate,
+		Trigger\Create $triggerCreate,
+		UserInterface $currentUser
+	)
 	{
 		$this->_trans            = $trans;
 		$this->_constraintCreate = $constraintCreate;
 		$this->_triggerCreate    = $triggerCreate;
+		$this->_currentUser      = $currentUser;
 	}
 
 	/**
@@ -50,39 +62,35 @@ class Create implements TransactionalInterface
 	}
 
 	/**
-	 * @param RewardInterface $reward
+	 * @param ReferralInterface $referral
 	 */
-	public function save(RewardInterface $reward)
+	public function save(ReferralInterface $referral)
 	{
-		$this->_addToTransaction($reward);
+		$this->_addToTransaction($referral);
 		$this->_commitTransaction();
 	}
 
 	/**
-	 * @param array $rewards
+	 * @param array $referrals
 	 * @throws \InvalidArgumentException
 	 */
-	public function saveBatch(array $rewards)
+	public function saveBatch(array $referrals)
 	{
-		foreach ($rewards as $reward) {
-			if (!$reward instanceof RewardInterface) {
-				throw new \InvalidArgumentException('All rewards in array must implement RewardInterface');
-			}
-
-			$this->_addToTransaction($reward);
+		foreach ($referrals as $referral) {
+			$this->_addToTransaction($referral);
 		}
 
 		$this->_commitTransaction();
 	}
 
 	/**
-	 * @param RewardInterface $reward
+	 * @param ReferralInterface $referral
 	 */
-	private function _addToTransaction(RewardInterface $reward)
+	private function _addToTransaction(ReferralInterface $referral)
 	{
-		$this->_trans->add("
+		$this->_trans->add('
 			INSERT INTO
-				refer_a_friend_reward
+				refer_a_friend_referral
 				(
 					type,
 					status,
@@ -91,9 +99,7 @@ class Create implements TransactionalInterface
 					created_at,
 					created_by,
 					updated_at,
-					updated_by,
-					deleted_at,
-					deleted_by
+					updated_by
 				)
 			VALUES
 				(
@@ -106,7 +112,14 @@ class Create implements TransactionalInterface
 					:createdAt?d,
 					:createdBy?in
 				)
-		");
+		', [
+			'type'   => $referral->getType()->getName(),
+			'status' => $referral->getStatus(),
+			'referrerID' => $referral->getReferrer()->id,
+			'referredEmail' => $referral->getReferredEmail(),
+			'createdAt' => new \DateTime(),
+			'createdBy' => $this->_currentUser->id,
+		]);
 	}
 
 	/**

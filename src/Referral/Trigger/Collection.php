@@ -1,8 +1,9 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward\Trigger;
+namespace Message\Mothership\ReferAFriend\Referral\Trigger;
 
 use Message\Cog\ValueObject\Collection as BaseCollection;
+use Message\Mothership\ReferAFriend\Referral\Type\TypeInterface;
 
 class Collection extends BaseCollection
 {
@@ -14,5 +15,18 @@ class Collection extends BaseCollection
 				throw new \InvalidArgumentException('Item must be an instance of ' . __NAMESPACE__ . '\\TriggerInterface, ' . $type . ' given');
 			}
 		});
+	}
+
+	public function getAvailable(TypeInterface $type)
+	{
+		$available = [];
+
+		foreach ($this->all() as $trigger) {
+			if (in_array($type->getName(), $trigger->getTypes())) {
+				$available[] = $trigger;
+			}
+		}
+
+		return $available;
 	}
 }

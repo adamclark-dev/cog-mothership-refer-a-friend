@@ -1,17 +1,17 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward;
+namespace Message\Mothership\ReferAFriend\Referral;
 
 use Message\User\UserInterface;
 use Message\Cog\ValueObject\Authorship;
 
 /**
- * Interface RewardInterface
- * @package Message\Mothership\ReferAFriend\Reward
+ * Interface ReferralInterface
+ * @package Message\Mothership\ReferAFriend\Referral
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  */
-interface RewardInterface
+interface ReferralInterface
 {
 	/**
 	 * @return Type\TypeInterface

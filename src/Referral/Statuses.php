@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward;
+namespace Message\Mothership\ReferAFriend\Referral;
 
 class Statuses
 {

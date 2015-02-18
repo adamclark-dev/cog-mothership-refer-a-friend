@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "61ed0e99e3149e68f92f5f56cf969303",
+    "hash": "03639ef380376bfd0c11eaf6e125a598",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -490,6 +490,60 @@
                 "source": "https://github.com/messagedigital/cog/tree/3.12.1"
             },
             "time": "2015-02-10 15:26:18"
+        },
+        {
+            "name": "message/cog-mothership-cp",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:messagedigital/cog-mothership-cp.git",
+                "reference": "2.2.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/messagedigital/cog-mothership-cp/zipball/2.2.1",
+                "reference": "2.2.1",
+                "shasum": ""
+            },
+            "require": {
+                "message/cog": "~3.6",
+                "message/cog-user": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Message\\Mothership\\ControlPanel\\": "src",
+                    "Message\\Mothership\\ControlPanel\\Test\\": "tests"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "The Message Development Team",
+                    "email": "dev@message.co.uk"
+                }
+            ],
+            "description": "Cog module for the Mothership Control Panel",
+            "homepage": "http://message.co.uk",
+            "keywords": [
+                "admin",
+                "cog",
+                "control panel",
+                "cp",
+                "mothership"
+            ],
+            "support": {
+                "wiki": "http://server.local/wiki/projects/cog",
+                "issues": "http://github.com/messagedigital/cog-mothership-cp/issues",
+                "source": "https://github.com/messagedigital/cog-mothership-cp/tree/2.2.1"
+            },
+            "time": "2015-01-28 17:57:51"
         },
         {
             "name": "message/cog-user",
@@ -2141,6 +2195,7 @@
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.4.0"
     },

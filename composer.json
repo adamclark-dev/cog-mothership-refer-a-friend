@@ -29,7 +29,8 @@
 	"require": {
 		"php": ">=5.4.0",
 
-		"message/cog" : "~3.12",
-		"message/cog-user" : "~1.4"
+		"message/cog"                 : "~3.12",
+		"message/cog-user"            : "~1.4",
+        "message/cog-mothership-cp"   : "~2.1"
 	}
 }

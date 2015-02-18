@@ -3,11 +3,12 @@
 namespace Message\Mothership\ReferAFriend\Referral\Trigger;
 
 use Message\Mothership\ReferAFriend\Referral\EntityLoaderInterface;
+use Message\Mothership\ReferAFriend\Referral\BehaviourLoaderInterface;
 use Message\Mothership\ReferAFriend\Referral\ReferralProxy;
 
 use Message\Cog\DB\QueryBuilderFactory;
 
-class Loader implements EntityLoaderInterface
+class Loader implements EntityLoaderInterface, BehaviourLoaderInterface
 {
 	private $_columns;
 
@@ -39,13 +40,9 @@ class Loader implements EntityLoaderInterface
 		$triggers = new Collection;
 
 		foreach ($result as $row) {
-			$triggers->add($row->name);
+			$triggers->add($this->_triggers->get($row->name));
 		}
-	}
 
-	private function _getSelect()
-	{
-		return
-		;
+		return $triggers;
 	}
 }

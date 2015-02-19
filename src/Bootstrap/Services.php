@@ -37,11 +37,15 @@ class Services implements ServicesInterface
 		};
 
 		$services['refer.form.referral.no_reward'] = function($c) {
-			return new ReferAFriend\Form\ReferralType\NoReward;
+			return new ReferAFriend\Form\ReferralType\NoReward($c['refer.form.referral.referral_data_transformer']);
 		};
 
 		$services['refer.form.type_select'] = function($c) {
 			return new ReferAFriend\Form\TypeSelect($c['refer.referral.types'], $c['translator']);
+		};
+
+		$services['refer.form.referral.referral_data_transformer'] = function($c) {
+			return new ReferAFriend\Form\ReferralType\DataTransform\ReferralTypeTransformer($c['refer.referral.types']);
 		};
 
 		$services['refer.referral.entity_loaders'] = function($c) {
@@ -82,6 +86,16 @@ class Services implements ServicesInterface
 
 		$services['refer.reward.config.loader'] = function($c) {
 			return new ReferAFriend\Reward\Config\Loader($c['db.query.builder.factory'], $c['refer.referral.types']);
+		};
+
+		$services['refer.reward.config.builders'] = function($c) {
+			return new ReferAFriend\Reward\Config\Builder\Collection([
+				$c['refer.reward.config.builder.no_reward']
+			]);
+		};
+
+		$services['refer.reward.config.builder.no_reward'] = function($c) {
+			return new ReferAFriend\Reward\Config\Builder\NoRewardBuilder;
 		};
 	}
 }

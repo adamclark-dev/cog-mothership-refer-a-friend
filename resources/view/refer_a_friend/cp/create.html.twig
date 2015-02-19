@@ -23,6 +23,9 @@
                 <p>{{ referralTypes.get(type.vars.value).description | trans }}</p>
             </label>
         {% endfor %}
+        <button class="button">Save</button>
+
         {{ form_end(form) }}
+
     </div>
 {% endblock %}

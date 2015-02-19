@@ -8,3 +8,6 @@ ms.refer:
     type_select:
       name: Select referral type
       help: Referrals can come in different forms, with different rewards and triggers. This field determines which set of rules will apply to the referrals.
+    config:
+      name:
+        name: Name

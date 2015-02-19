@@ -10,7 +10,8 @@ use Symfony\Component\Validator\Constraints;
 
 class TypeSelect extends Form\AbstractType
 {
-	const NAME = 'refer_a_friend_type_select';
+	const NAME       = 'refer_a_friend_type_select';
+	const FIELD_NAME = 'type';
 
 	/**
 	 * @var ReferralTypes
@@ -35,7 +36,7 @@ class TypeSelect extends Form\AbstractType
 
 	public function buildForm(Form\FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('type', 'choice', [
+		$builder->add(self::FIELD_NAME, 'choice', [
 			'label'    => 'ms.refer.form.type_select.name',
 			'choices'  => $this->_getChoices(),
 			'expanded' => true,

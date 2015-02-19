@@ -3,6 +3,7 @@
 namespace Message\Mothership\ReferAFriend\Controller;
 
 use Message\Cog\Controller\Controller;
+use Message\Mothership\ReferAFriend\Form\TypeSelect;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -16,6 +17,24 @@ class Create extends Controller
 			'form'          => $form,
 			'referralTypes' => $this->get('refer.referral.types'),
 		]);
+	}
+
+	public function createAction()
+	{
+		$form = $this->createForm($this->get('refer.form.type_select'));
+
+		$form->handleRequest();
+
+		if ($form->isValid()) {
+			$data = $form->getData();
+			$type = $data[TypeSelect::FIELD_NAME];
+
+			return $this->redirectToRoute('ms.cp.refer_a_friend.set_options', [
+				'type' => $type
+			]);
+		}
+
+		return $this->redirectToReferer();
 	}
 
 	public function setOptions($type)

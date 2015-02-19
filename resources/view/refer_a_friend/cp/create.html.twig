@@ -1,0 +1,28 @@
+{% extends 'Message:Mothership:ControlPanel::_templates/full_slideout' %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    '@Message:Mothership:ReferAFriend::resources/assets/js/setup.js'
+
+    output='/assets/js/ms_refer_a_friend.js'
+    filter='?jsmin'
+
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block main %}
+    <div class="container-content create-page extended">
+        {{ form_start(form) }}
+        {{ form_label(form.type) }}
+        {% for type in form.type %}
+            <label class="option-block">
+                {{ form_widget(type) }}
+                <p class="type"><strong>{{ type.vars.label }}</strong></p>
+                <p>{{ referralTypes.get(type.vars.value).description | trans }}</p>
+            </label>
+        {% endfor %}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

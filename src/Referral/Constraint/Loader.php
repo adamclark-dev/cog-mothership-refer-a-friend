@@ -3,12 +3,11 @@
 namespace Message\Mothership\ReferAFriend\Referral\Constraint;
 
 use Message\Mothership\ReferAFriend\Referral\EntityLoaderInterface;
-use Message\Mothership\ReferAFriend\Referral\BehaviourLoaderInterface;
 use Message\Mothership\ReferAFriend\Referral\ReferralProxy;
 
 use Message\Cog\DB\QueryBuilderFactory;
 
-class Loader implements EntityLoaderInterface, BehaviourLoaderInterface
+class Loader implements EntityLoaderInterface
 {
 	private $_constraints;
 	private $_columns = [];

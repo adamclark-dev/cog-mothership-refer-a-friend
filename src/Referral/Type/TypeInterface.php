@@ -2,6 +2,8 @@
 
 namespace Message\Mothership\ReferAFriend\Referral\Type;
 
+use Symfony\Component\Form\AbstractType as Form;
+
 /**
  * Interface TypeInterface
  * @package Message\Mothership\ReferAFriend\Referral\Type
@@ -28,6 +30,11 @@ interface TypeInterface
 	 * @return string
 	 */
 	public function getDescription();
+
+	/**
+	 * @return Form
+	 */
+	public function getForm();
 
 	/**
 	 * Toggle whether constraints can be set against a referral

@@ -3,12 +3,11 @@
 namespace Message\Mothership\ReferAFriend\Referral\Trigger;
 
 use Message\Mothership\ReferAFriend\Referral\EntityLoaderInterface;
-use Message\Mothership\ReferAFriend\Referral\BehaviourLoaderInterface;
 use Message\Mothership\ReferAFriend\Referral\ReferralProxy;
 
 use Message\Cog\DB\QueryBuilderFactory;
 
-class Loader implements EntityLoaderInterface, BehaviourLoaderInterface
+class Loader implements EntityLoaderInterface
 {
 	private $_columns;
 
@@ -21,11 +20,6 @@ class Loader implements EntityLoaderInterface, BehaviourLoaderInterface
 	public function getName()
 	{
 		return 'trigger';
-	}
-
-	public function getType()
-	{
-		return 'no_referral';
 	}
 
 	public function load(ReferralProxy $referral)

@@ -41,12 +41,12 @@ class Loader
 		EntityLoaderCollection $loaders
 	)
 	{
-		$this->_qbFactory     = $qbFactory;
+		$this->_qbFactory       = $qbFactory;
 		$this->_referralFactory = $referralFactory;
-		$this->_entityLoaders = $loaders;
+		$this->_entityLoaders   = $loaders;
 	}
 
-	public function loadAll()
+	public function getAll()
 	{
 		$result = $this->_getSelect()
 			->getQuery()

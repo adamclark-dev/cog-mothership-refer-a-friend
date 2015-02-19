@@ -1,6 +1,10 @@
 ms.refer:
-  reward:
+  referral:
     types:
-      no_referral:
-        name: No referral
+      no_reward:
+        name: No reward
         description: A blank referral type that cannot have any constraints or triggers
+  form:
+    type_select:
+      name: Select referral type
+      help: Referrals can come in different forms, with different rewards and triggers. This field determines which set of rules will apply to the referrals.

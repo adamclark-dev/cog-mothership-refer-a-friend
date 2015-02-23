@@ -2,7 +2,7 @@
 
 namespace Message\Mothership\ReferAFriend\Referral\Type;
 
-use Symfony\Component\Form\AbstractType as Form;
+use Message\Mothership\ReferAFriend\Form\ReferralType\AbstractForm as TypeForm;
 
 /**
  * Interface TypeInterface
@@ -32,7 +32,7 @@ interface TypeInterface
 	public function getDescription();
 
 	/**
-	 * @return Form
+	 * @return TypeForm
 	 */
 	public function getForm();
 

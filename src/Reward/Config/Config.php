@@ -3,6 +3,7 @@
 namespace Message\Mothership\ReferAFriend\Reward\Config;
 
 use Message\Mothership\ReferAFriend\Referral\Type\TypeInterface;
+use Message\Cog\Localisation\Translator;
 
 class Config
 {
@@ -26,7 +27,17 @@ class Config
 	/**
 	 * @var \DateTime
 	 */
-	private $_updatedAt;
+	private $_createdAt;
+
+	/**
+	 * @var Translator
+	 */
+	private $_translator;
+
+	public function __construct(Translator $translator)
+	{
+		$this->_translator = $translator;
+	}
 
 	public function setID($id)
 	{
@@ -64,8 +75,8 @@ class Config
 	{
 		$name = [];
 
-		if ($this->_name) {
-			$name[] = $this->_name;
+		if ($this->getName()) {
+			$name[] = $this->getName();
 		}
 
 		$name[] = $this->_getNameSuffix();
@@ -73,9 +84,9 @@ class Config
 		return implode(' ', $name);
 	}
 
-	public function setUpdatedAt(\DateTime $updatedAt)
+	public function setCreatedAt(\DateTime $createdAt)
 	{
-		$this->_updatedAt = $updatedAt;
+		$this->_createdAt = $createdAt;
 	}
 
 	public function setReferralType(TypeInterface $type)
@@ -94,15 +105,15 @@ class Config
 
 	private function _getNameSuffix()
 	{
-		$suffix = '(';
+		$suffix = $this->getName() ? '(' : '';
 
-		$suffix .= $this->getReferralType()->getDisplayName();
+		$suffix .= $this->_translator->trans($this->getReferralType()->getDisplayName());
 
-		if (null !== $this->_updatedAt) {
-			$suffix .= ', ' . $this->_updatedAt->format(self::DATE_FORMAT);
+		if (null !== $this->_createdAt) {
+			$suffix .= ', ' . $this->_createdAt->format(self::DATE_FORMAT);
 		}
 
-		$suffix .= ')';
+		$suffix .= $this->getName() ? ')' : '';
 
 		return $suffix;
 	}

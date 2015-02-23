@@ -5,30 +5,44 @@ namespace Message\Mothership\ReferAFriend\Reward\Config;
 use Message\Mothership\ReferAFriend\Referral\Type\Collection as ReferralTypes;
 use Message\Cog\DB\QueryBuilderFactory;
 use Message\Cog\DB\Result;
+use Message\Cog\Localisation\Translator;
 
 class Loader
 {
+	/**
+	 * @var QueryBuilderFactory
+	 */
 	private $_qbFactory;
+
+	/**
+	 * @var ReferralTypes
+	 */
 	private $_referralTypes;
+
+	/**
+	 * @var Translator
+	 */
+	private $_translator;
 
 	private $_columns = [
 		'reward_config_id AS id',
 		'name',
 		'referral_type AS referralType',
-		'updated_at AS updatedAt',
+		'created_at AS createdAt',
 	];
 
-	public function __construct(QueryBuilderFactory $qbFactory, ReferralTypes $referralTypes)
+	public function __construct(QueryBuilderFactory $qbFactory, ReferralTypes $referralTypes, Translator $translator)
 	{
 		$this->_qbFactory     = $qbFactory;
 		$this->_referralTypes = $referralTypes;
+		$this->_translator    = $translator;
 	}
 
 	public function getCurrent()
 	{
 		$result = $this->_getSelect()
 			->where('deleted_at IS NULL')
-			->orderBy('updated_at DESC')
+			->orderBy('createdAt DESC')
 			->getQuery()
 			->run()
 		;
@@ -50,7 +64,7 @@ class Loader
 	public function getAll()
 	{
 		$result = $this->_getSelect()
-			->orderBy('updated_at DESC')
+			->orderBy('createdAt DESC')
 			->getQuery()
 			->run()
 		;
@@ -72,14 +86,14 @@ class Loader
 		$configs = [];
 
 		foreach ($result as $row) {
-			$config = new Config;
+			$config = new Config($this->_translator);
 			$config->setID((int) $row->id);
 			$config->setName($row->name);
 			$config->setReferralType($this->_referralTypes->get($row->referralType));
 
-			$updatedAt = new \DateTime;
-			$updatedAt->setTimestamp($row->updatedAt);
-			$config->setUpdatedAt($updatedAt);
+			$createdAt = new \DateTime;
+			$createdAt->setTimestamp($row->createdAt);
+			$config->setCreatedAt($createdAt);
 
 			$configs[] = $config;
 		}

@@ -49,4 +49,26 @@ class Create extends Controller
 			'form' => $form,
 		]);
 	}
+
+	public function setOptionsAction($type)
+	{
+		$referralType = $this->get('refer.referral.types')->get($type);
+
+		$form = $this->createForm($referralType->getForm());
+
+		$form->handleRequest();
+
+		if ($form->isValid()) {
+			$data = $form->getData();
+			$rewardConfig = $this->get('refer.reward.config.builders')->get($type)->build($data);
+			$rewardConfig->setReferralType($referralType);
+
+			// Current version only supports one configuration at at time, so all will be 'deleted'
+			$this->get('refer.reward.config.delete')->deleteAll();
+			$this->get('refer.reward.config.create')->save($rewardConfig);
+			$this->addFlash('success', $this->get('translator')->trans('ms.refer.config.success'));
+		}
+
+		return $this->redirectToRoute('ms.cp.refer_a_friend.dashboard');
+	}
 }

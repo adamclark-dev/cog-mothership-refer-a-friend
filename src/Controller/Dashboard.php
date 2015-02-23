@@ -8,7 +8,11 @@ class Dashboard extends Controller
 {
 	public function index()
 	{
-		return $this->render('Message:Mothership:ReferAFriend::refer_a_friend:cp:dashboard');
+		$currentRewardConfig = $this->get('refer.reward.config.loader')->getCurrent();
+
+		return $this->render('Message:Mothership:ReferAFriend::refer_a_friend:cp:dashboard', [
+			'currentRewardConfig' => array_shift($currentRewardConfig)
+		]);
 	}
 
 	public function referralTable()

@@ -36,16 +36,18 @@ class TypeSelect extends Form\AbstractType
 
 	public function buildForm(Form\FormBuilderInterface $builder, array $options)
 	{
-		$builder->add(self::FIELD_NAME, 'choice', [
-			'label'    => 'ms.refer.form.type_select.name',
-			'choices'  => $this->_getChoices(),
-			'expanded' => true,
-			'multiple' => false,
-			'constraints' => [
-				new Constraints\NotBlank,
-			],
-			'attr' => ['data-help-key' => 'ms.refer.form.type_select.help']
-		]);
+		$builder->add(
+			$builder->create(self::FIELD_NAME, 'choice', [
+				'label'    => 'ms.refer.form.type_select.name',
+				'choices'  => $this->_getChoices(),
+				'expanded' => true,
+				'multiple' => false,
+				'constraints' => [
+					new Constraints\NotBlank,
+				],
+				'attr' => ['data-help-key' => 'ms.refer.form.type_select.help']
+			])
+		);
 	}
 
 	private function _getChoices()

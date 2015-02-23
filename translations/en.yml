@@ -11,3 +11,6 @@ ms.refer:
     config:
       name:
         name: Name
+  config:
+    current: Current reward config
+    success: Reward configuration saved successfully

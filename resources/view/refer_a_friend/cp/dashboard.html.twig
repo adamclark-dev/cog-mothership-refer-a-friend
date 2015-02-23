@@ -13,5 +13,6 @@
 {% endblock %}
 
 {% block main %}
+    <h2>{{ 'ms.refer.config.current' | trans }}: {{ currentRewardConfig.fullName }}</h2>
     {{ render(controller('Message:Mothership:ReferAFriend::Controller:Dashboard#referralTable')) }}
 {% endblock %}

@@ -9,7 +9,7 @@ class Collection extends BaseCollection
 	protected function _configure()
 	{
 		$this->setKey(function ($item) {
-			return $item->getName();
+			return $item->getType();
 		});
 
 		$this->addValidator(function ($item) {

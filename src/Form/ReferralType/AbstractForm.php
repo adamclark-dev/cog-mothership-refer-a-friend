@@ -9,13 +9,6 @@ abstract class AbstractForm extends Form\AbstractType
 {
 	const REFERRAL_TYPE = 'referral_type';
 
-	private $_referralTypes;
-
-	final public function setTypeCollection(ReferralTypes $referralTypes)
-	{
-		$this->_referralTypes = $referralTypes;
-	}
-
 	public function buildForm(Form\FormBuilderInterface $builder, array $options)
 	{
 		$type = $this->_getType();

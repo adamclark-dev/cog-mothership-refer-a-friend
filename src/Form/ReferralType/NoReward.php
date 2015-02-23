@@ -1,6 +1,7 @@
 <?php
 
 namespace Message\Mothership\ReferAFriend\Form\ReferralType;
+
 use Symfony\Component\Form;
 
 class NoReward extends AbstractForm

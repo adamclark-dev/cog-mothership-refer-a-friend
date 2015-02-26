@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "03639ef380376bfd0c11eaf6e125a598",
+    "hash": "982526d64c6d5ff269820c15df705e24",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -398,204 +398,6 @@
             "time": "2013-02-28 11:59:46"
         },
         {
-            "name": "message/cog",
-            "version": "3.12.1",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:messagedigital/cog.git",
-                "reference": "3.12.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/messagedigital/cog/zipball/3.12.1",
-                "reference": "3.12.1",
-                "shasum": ""
-            },
-            "require": {
-                "dflydev/markdown": "~1.0",
-                "ext-curl": "*",
-                "ext-gd": "*",
-                "ext-intl": "*",
-                "ext-json": "*",
-                "ext-mysqli": "*",
-                "ext-simplexml": "*",
-                "filp/whoops": "1.0.*",
-                "itbz/fpdf": "1.7.*",
-                "itbz/fpdi": "1.4.*",
-                "jeremeamia/superclosure": "~1.0",
-                "knplabs/knp-snappy": "0.1.*",
-                "kriswallsmith/assetic": "1.1.*",
-                "lmammino/jsmin4assetic": "1.0.*",
-                "message/wkhtmltopdf": "1.0.*",
-                "monolog/monolog": "1.7.*",
-                "mtdowling/cron-expression": "1.0.*",
-                "natxet/cssmin": "3.0.*",
-                "php": ">=5.4.0",
-                "pimple/pimple": "~2.0",
-                "swiftmailer/swiftmailer": "~5.2.1 | ~5.3",
-                "symfony/console": "2.3.*",
-                "symfony/event-dispatcher": "2.1.*",
-                "symfony/filesystem": "2.3.*",
-                "symfony/finder": "2.2.*",
-                "symfony/form": "2.3.*",
-                "symfony/http-kernel": "2.3.*",
-                "symfony/process": "2.1.*",
-                "symfony/routing": "2.3.*",
-                "symfony/templating": "2.1.*",
-                "symfony/translation": "2.3.*",
-                "symfony/twig-bridge": "2.3.*",
-                "symfony/twig-bundle": "2.3.*",
-                "symfony/validator": "2.3.*",
-                "symfony/yaml": "2.1.*",
-                "treasure-chest/treasure-chest": "0.1.*",
-                "twig/twig": "1.13.*",
-                "zendframework/zend-debug": "~2.2.6"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "1.1.*",
-                "mockery/mockery": "~0.9"
-            },
-            "suggest": {
-                "ext-apc": "The preferred caching system in Cog",
-                "ext-mysqlnd": "Extension for converting data types that come out of a MySQL database. There may be strange behaviour if this is not installed",
-                "ext-oauth": "Extension for managing OAuth requests",
-                "message/cog-raven": "A Cog module that logs errors, exceptions and messages to Sentry"
-            },
-            "bin": [
-                "bin/cog",
-                "bin/cog-console"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Message\\Cog\\": "src",
-                    "Message\\Cog\\Test\\": "tests"
-                }
-            },
-            "authors": [
-                {
-                    "name": "The Message Development Team",
-                    "email": "dev@message.co.uk"
-                }
-            ],
-            "description": "Message's powerful PHP5 framework for building modular systems",
-            "homepage": "http://message.co.uk",
-            "keywords": [
-                "cog",
-                "framework"
-            ],
-            "support": {
-                "wiki": "http://server.local/wiki/projects/cog",
-                "issues": "http://github.com/messagedigital/cog/issues",
-                "source": "https://github.com/messagedigital/cog/tree/3.12.1"
-            },
-            "time": "2015-02-10 15:26:18"
-        },
-        {
-            "name": "message/cog-mothership-cp",
-            "version": "2.2.1",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:messagedigital/cog-mothership-cp.git",
-                "reference": "2.2.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/messagedigital/cog-mothership-cp/zipball/2.2.1",
-                "reference": "2.2.1",
-                "shasum": ""
-            },
-            "require": {
-                "message/cog": "~3.6",
-                "message/cog-user": "~1.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Message\\Mothership\\ControlPanel\\": "src",
-                    "Message\\Mothership\\ControlPanel\\Test\\": "tests"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "The Message Development Team",
-                    "email": "dev@message.co.uk"
-                }
-            ],
-            "description": "Cog module for the Mothership Control Panel",
-            "homepage": "http://message.co.uk",
-            "keywords": [
-                "admin",
-                "cog",
-                "control panel",
-                "cp",
-                "mothership"
-            ],
-            "support": {
-                "wiki": "http://server.local/wiki/projects/cog",
-                "issues": "http://github.com/messagedigital/cog-mothership-cp/issues",
-                "source": "https://github.com/messagedigital/cog-mothership-cp/tree/2.2.1"
-            },
-            "time": "2015-01-28 17:57:51"
-        },
-        {
-            "name": "message/cog-user",
-            "version": "1.4.1",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:messagedigital/cog-user.git",
-                "reference": "1.4.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/messagedigital/cog-user/zipball/1.4.1",
-                "reference": "1.4.1",
-                "shasum": ""
-            },
-            "require": {
-                "message/cog": "~3.0",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Message\\User\\": "src",
-                    "Message\\User\\Test\\": "tests"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "The Message Development Team",
-                    "email": "dev@message.co.uk"
-                }
-            ],
-            "description": "Cog module for a very basic and extensible user system",
-            "homepage": "http://message.co.uk",
-            "keywords": [
-                "account",
-                "accounts",
-                "cog",
-                "user",
-                "users"
-            ],
-            "support": {
-                "wiki": "http://server.local/wiki/projects/cog",
-                "issues": "http://github.com/messagedigital/cog-user/issues",
-                "source": "https://github.com/messagedigital/cog-user/tree/1.4.1"
-            },
-            "time": "2015-01-27 17:04:04"
-        },
-        {
             "name": "message/wkhtmltopdf",
             "version": "1.0.0",
             "source": {
@@ -712,6 +514,192 @@
                 "psr-3"
             ],
             "time": "2013-11-14 19:48:31"
+        },
+        {
+            "name": "mothership-ec/cog",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mothership-ec/cog.git",
+                "reference": "c3b31bb61a50c4e0a9e34dbfc695da97288e8a6e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mothership-ec/cog/zipball/c3b31bb61a50c4e0a9e34dbfc695da97288e8a6e",
+                "reference": "c3b31bb61a50c4e0a9e34dbfc695da97288e8a6e",
+                "shasum": ""
+            },
+            "require": {
+                "dflydev/markdown": "~1.0",
+                "ext-curl": "*",
+                "ext-gd": "*",
+                "ext-intl": "*",
+                "ext-json": "*",
+                "ext-mysqli": "*",
+                "ext-simplexml": "*",
+                "filp/whoops": "1.0.*",
+                "itbz/fpdf": "1.7.*",
+                "itbz/fpdi": "1.4.*",
+                "jeremeamia/superclosure": "~1.0",
+                "knplabs/knp-snappy": "0.1.*",
+                "kriswallsmith/assetic": "1.1.*",
+                "lmammino/jsmin4assetic": "1.0.*",
+                "message/wkhtmltopdf": "1.0.*",
+                "monolog/monolog": "1.7.*",
+                "mtdowling/cron-expression": "1.0.*",
+                "natxet/cssmin": "3.0.*",
+                "php": ">=5.4.0",
+                "pimple/pimple": "~2.0",
+                "swiftmailer/swiftmailer": "~5.2.1 | ~5.3",
+                "symfony/console": "2.3.*",
+                "symfony/event-dispatcher": "2.1.*",
+                "symfony/filesystem": "2.3.*",
+                "symfony/finder": "2.2.*",
+                "symfony/form": "2.3.*",
+                "symfony/http-kernel": "2.3.*",
+                "symfony/process": "2.1.*",
+                "symfony/routing": "2.3.*",
+                "symfony/templating": "2.1.*",
+                "symfony/translation": "2.3.*",
+                "symfony/twig-bridge": "2.3.*",
+                "symfony/twig-bundle": "2.3.*",
+                "symfony/validator": "2.3.*",
+                "symfony/yaml": "2.1.*",
+                "treasure-chest/treasure-chest": "0.1.*",
+                "twig/twig": "1.13.*",
+                "zendframework/zend-debug": "~2.2.6"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "1.1.*",
+                "mockery/mockery": "~0.9"
+            },
+            "suggest": {
+                "ext-apc": "The preferred caching system in Cog",
+                "ext-mysqlnd": "Extension for converting data types that come out of a MySQL database. There may be strange behaviour if this is not installed",
+                "ext-oauth": "Extension for managing OAuth requests",
+                "message/cog-raven": "A Cog module that logs errors, exceptions and messages to Sentry"
+            },
+            "bin": [
+                "bin/cog",
+                "bin/cog-console"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Message\\Cog\\": "src",
+                    "Message\\Cog\\Test\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "The Mothership Development Team",
+                    "email": "hello@mothership.ec"
+                }
+            ],
+            "description": "Mothership's PHP5 framework for building modular systems",
+            "homepage": "http://mothership.ec",
+            "keywords": [
+                "cog",
+                "framework"
+            ],
+            "time": "2015-02-25 14:14:39"
+        },
+        {
+            "name": "mothership-ec/cog-mothership-cp",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mothership-ec/cog-mothership-cp.git",
+                "reference": "3a717271f8353154c096b194d6e730ffdb283e64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mothership-ec/cog-mothership-cp/zipball/3a717271f8353154c096b194d6e730ffdb283e64",
+                "reference": "3a717271f8353154c096b194d6e730ffdb283e64",
+                "shasum": ""
+            },
+            "require": {
+                "mothership-ec/cog": "~4.0",
+                "mothership-ec/cog-user": "~2.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Message\\Mothership\\ControlPanel\\": "src",
+                    "Message\\Mothership\\ControlPanel\\Test\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "The Mothership Development Team",
+                    "email": "dev@mothership.ec"
+                }
+            ],
+            "description": "Cog module for the Mothership Control Panel",
+            "homepage": "http://mothership.ec",
+            "keywords": [
+                "CP",
+                "admin",
+                "cog",
+                "control panel",
+                "mothership"
+            ],
+            "time": "2015-02-24 14:51:58"
+        },
+        {
+            "name": "mothership-ec/cog-user",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mothership-ec/cog-user.git",
+                "reference": "56cbaa0046b5aed659edde3534e951bba829a4d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mothership-ec/cog-user/zipball/56cbaa0046b5aed659edde3534e951bba829a4d1",
+                "reference": "56cbaa0046b5aed659edde3534e951bba829a4d1",
+                "shasum": ""
+            },
+            "require": {
+                "mothership-ec/cog": "~4.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Message\\User\\": "src",
+                    "Message\\User\\Test\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "The Mothership Development Team",
+                    "email": "dev@mothership.ec"
+                }
+            ],
+            "description": "Cog module for a very basic and extensible user system",
+            "homepage": "http://mothership.ec",
+            "keywords": [
+                "Users",
+                "account",
+                "accounts",
+                "cog",
+                "user"
+            ],
+            "time": "2015-02-24 14:40:17"
         },
         {
             "name": "mtdowling/cron-expression",

@@ -11,4 +11,14 @@ interface ConstraintInterface extends ReferralEntityInterface
 	 * @param ReferralInterface $referral
 	 */
 	public function validate(ReferralInterface $referral);
+
+	/**
+	 * @param $value
+	 */
+	public function setValue($value);
+
+	/**
+	 * @return mixed
+	 */
+	public function getValue();
 }

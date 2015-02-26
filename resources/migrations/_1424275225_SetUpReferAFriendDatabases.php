@@ -57,7 +57,7 @@ class _1424275225_SetUpReferAFriendDatabases extends Migration
 				(
 					referral_id INT(11) NOT NULL,
 					`name` VARCHAR(11) NOT NULL,
-					`value` VARCHAT(255) NOT NULL,
+					`value` VARCHAR(255) NOT NULL,
 					PRIMARY KEY (referral_id, `name`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		");

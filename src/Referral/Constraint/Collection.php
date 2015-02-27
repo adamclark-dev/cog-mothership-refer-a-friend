@@ -2,9 +2,10 @@
 
 namespace Message\Mothership\ReferAFriend\Referral\Constraint;
 
+use Message\Mothership\ReferAFriend\Referral\ReferralEntityCollectionInterface;
 use Message\Cog\ValueObject\Collection as BaseCollection;
 
-class Collection extends BaseCollection
+class Collection extends BaseCollection implements ReferralEntityCollectionInterface
 {
 	protected function _configure()
 	{
@@ -15,7 +16,7 @@ class Collection extends BaseCollection
 			}
 		});
 		$this->setKey(function($item) {
-			return $item->getID();
+			return $item->getName();
 		});
 	}
 

@@ -32,21 +32,16 @@ interface TypeInterface
 	public function getDescription();
 
 	/**
-	 * @return TypeForm
+	 * Toggle which constraints can be set against this of referral
+	 *
+	 * @return array       Array of constraint names
 	 */
-	public function getForm();
+	public function validConstraints();
 
 	/**
-	 * Toggle whether constraints can be set against a referral
+	 * Toggle which triggers can be set against this of referral
 	 *
-	 * @return bool
+	 * @return array       Array of trigger names
 	 */
-	public function allowConstraints();
-
-	/**
-	 * Toggle whether triggers can be set against a referral
-	 *
-	 * @return bool
-	 */
-	public function allowTriggers();
+	public function validTriggers();
 }

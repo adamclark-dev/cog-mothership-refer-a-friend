@@ -33,11 +33,7 @@ class Services implements ServicesInterface
 		};
 
 		$services['refer.referral.types.no_reward'] = function($c) {
-			return new ReferAFriend\Referral\Type\NoRewardType($c['refer.form.referral.no_reward']);
-		};
-
-		$services['refer.form.referral.no_reward'] = function($c) {
-			return new ReferAFriend\Form\ReferralType\NoReward($c['refer.form.referral.referral_data_transformer']);
+			return new ReferAFriend\Referral\Type\NoRewardType;
 		};
 
 		$services['refer.form.type_select'] = function($c) {
@@ -60,12 +56,20 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Referral\Constraint\Collection();
 		};
 
+		$services['refer.referral.constraint.collection_builder'] = function($c) {
+			return new ReferAFriend\Referral\Constraint\CollectionBuilder($c['refer.referral.constraints']);
+		};
+
 		$services['refer.referral.trigger_loader'] = function($c) {
 			return new ReferAFriend\Referral\Trigger\Loader($c['db.query.builder.factory'], $c['refer.referral.triggers']);
 		};
 
 		$services['refer.referral.triggers'] = function($c) {
 			return new ReferAFriend\Referral\Trigger\Collection();
+		};
+
+		$services['refer.referral.trigger.collection_builder'] = function($c) {
+			return new ReferAFriend\Referral\Trigger\CollectionBuilder($c['refer.referral.triggers']);
 		};
 
 		$services['refer.referral.referrer_loader'] = function($c) {

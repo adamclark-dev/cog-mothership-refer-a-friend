@@ -2,6 +2,8 @@
 
 namespace Message\Mothership\ReferAFriend\Referral;
 
+use Symfony\Component\Form\FormBuilderInterface;
+
 /**
  * Interface ReferralEntityInterface
  * @package Message\Mothership\ReferAFriend\Referral
@@ -24,9 +26,4 @@ interface ReferralEntityInterface
 	 * @return string
 	 */
 	public function getDescription();
-
-	/**
-	 * @return array
-	 */
-	public function getTypes();
 }

@@ -14,11 +14,11 @@ class Routes implements RoutesInterface
 			->setMethod('POST')
 		;
 		$router['ms.cp.refer_a_friend']->add('ms.cp.refer_a_friend.create', '/create', 'Message:Mothership:ReferAFriend::Controller:Create#create');
-		$router['ms.cp.refer_a_friend']->add('ms.cp.refer_a_friend.setOptionsAction', '/options/{type}', 'Message:Mothership:ReferAFriend::Controller:Create#setOptionsAction')
+		$router['ms.cp.refer_a_friend']->add('ms.cp.refer_a_friend.set_options_action', '/options/{type}', 'Message:Mothership:ReferAFriend::Controller:Create#setOptionsAction')
 			->setRequirement('type', '[a-z0-9\-_\/]+')
 			->setMethod('POST')
 		;
-		$router['ms.cp.refer_a_friend']->add('ms.cp.refer_a_friend.setOptions', '/options/{type}', 'Message:Mothership:ReferAFriend::Controller:Create#setOptions')
+		$router['ms.cp.refer_a_friend']->add('ms.cp.refer_a_friend.set_options', '/options/{type}', 'Message:Mothership:ReferAFriend::Controller:Create#setOptions')
 			->setRequirement('type', '[a-z0-9\-_\/]+')
 			->setMethod('GET')
 		;

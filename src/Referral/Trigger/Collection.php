@@ -2,10 +2,11 @@
 
 namespace Message\Mothership\ReferAFriend\Referral\Trigger;
 
-use Message\Cog\ValueObject\Collection as BaseCollection;
+use Message\Mothership\ReferAFriend\Referral\ReferralEntityCollectionInterface;
 use Message\Mothership\ReferAFriend\Referral\Type\TypeInterface;
+use Message\Cog\ValueObject\Collection as BaseCollection;
 
-class Collection extends BaseCollection
+class Collection extends BaseCollection implements ReferralEntityCollectionInterface
 {
 	protected function _configure()
 	{

@@ -2,6 +2,7 @@
 
 namespace Message\Mothership\ReferAFriend\Referral;
 
+use Message\Mothership\ReferAFriend\Reward\Config\Config as RewardConfig;
 use Message\User;
 
 /**
@@ -26,6 +27,11 @@ class Referral implements ReferralInterface
 	 * @var User\UserInterface
 	 */
 	protected $_referrer;
+
+	/**
+	 * @var RewardConfig
+	 */
+	protected $_rewardConfig;
 
 	/**
 	 * @var string
@@ -176,6 +182,22 @@ class Referral implements ReferralInterface
 		}
 
 		$this->_triggers->add($trigger);
+	}
+
+	/**
+	 * @param RewardConfig $rewardConfig
+	 */
+	public function setRewardConfig(RewardConfig $rewardConfig)
+	{
+		$this->_rewardConfig = $rewardConfig;
+	}
+
+	/**
+	 * @return RewardConfig
+	 */
+	public function getRewardConfig()
+	{
+		return $this->_rewardConfig;
 	}
 
 	/**

@@ -25,6 +25,11 @@ class ReferralProxy extends Referral
 	private $_referrerID;
 
 	/**
+	 * @var int
+	 */
+	private $_rewardConfigID;
+
+	/**
 	 * @param EntityLoaderCollection $loaders
 	 */
 	public function setLoaders(EntityLoaderCollection $loaders)
@@ -57,6 +62,33 @@ class ReferralProxy extends Referral
 	public function getReferrerID()
 	{
 		return $this->_referrerID;
+	}
+
+	/**
+	 * Set the ID for the configuration of the reward
+	 *
+	 * @param $id
+	 * @throws \LogicException
+	 */
+	public function setRewardConfigID($id)
+	{
+		$id = (int) $id;
+
+		if (0 === $id) {
+			throw new \LogicException('Reward configuration cannot have an ID of zero!');
+		}
+
+		$this->_rewardConfigID = $id;
+	}
+
+	/**
+	 * Get the ID of the configuration for the reward
+	 *
+	 * @return int
+	 */
+	public function getRewardConfigID()
+	{
+		return $this->_rewardConfigID;
 	}
 
 	/**
@@ -119,5 +151,27 @@ class ReferralProxy extends Referral
 		}
 
 		return parent::getReferrer();
+	}
+
+	/**
+	 * @return \Message\Mothership\ReferAFriend\Reward\Config\Config
+	 */
+	public function getRewardConfig()
+	{
+		if (null === $this->_rewardConfig) {
+			if (null === $this->_rewardConfigID) {
+				throw new \LogicException('No reward config ID set on ReferralProxy object!');
+			}
+
+			$rewardConfig = $this->_loaders->get('reward_config')->load($this);
+
+			if (!$rewardConfig) {
+				throw new \LogicException('Could not load reward config with ID `' . $this->_rewardConfigID . '`');
+			}
+
+			$this->setRewardConfig($rewardConfig);
+		}
+
+		return parent::getRewardConfig();
 	}
 }

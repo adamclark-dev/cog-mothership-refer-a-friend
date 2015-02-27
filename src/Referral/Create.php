@@ -92,6 +92,7 @@ class Create implements TransactionalInterface
 			INSERT INTO
 				refer_a_friend_referral
 				(
+					reward_config_id,
 					type,
 					status,
 					referrer_id,
@@ -103,6 +104,7 @@ class Create implements TransactionalInterface
 				)
 			VALUES
 				(
+					:rewardConfigID?i,
 					:type?s,
 					:status?s,
 					:referrerID?i,
@@ -113,12 +115,13 @@ class Create implements TransactionalInterface
 					:createdBy?in
 				)
 		', [
-			'type'   => $referral->getType()->getName(),
-			'status' => $referral->getStatus(),
-			'referrerID' => $referral->getReferrer()->id,
-			'referredEmail' => $referral->getReferredEmail(),
-			'createdAt' => new \DateTime(),
-			'createdBy' => $this->_currentUser->id,
+			'rewardConfigID' => $referral->getRewardConfig()->getID(),
+			'type'           => $referral->getType()->getName(),
+			'status'         => $referral->getStatus(),
+			'referrerID'     => $referral->getReferrer()->id,
+			'referredEmail'  => $referral->getReferredEmail(),
+			'createdAt'      => new \DateTime(),
+			'createdBy'      => $this->_currentUser->id,
 		]);
 	}
 

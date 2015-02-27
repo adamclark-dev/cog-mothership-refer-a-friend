@@ -49,9 +49,10 @@ class Services implements ServicesInterface
 
 		$services['refer.referral.entity_loaders'] = function($c) {
 			return new \Message\Cog\DB\Entity\EntityLoaderCollection([
-				$c['refer.referral.constraint_loader']->getName() => $c['refer.referral.constraint_loader'],
-				$c['refer.referral.trigger_loader']->getName()    => $c['refer.referral.trigger_loader'],
-				$c['refer.referral.referrer_loader']->getName()   => $c['refer.referral.referrer_loader'],
+				$c['refer.referral.constraint_loader']->getName()    => $c['refer.referral.constraint_loader'],
+				$c['refer.referral.trigger_loader']->getName()       => $c['refer.referral.trigger_loader'],
+				$c['refer.referral.referrer_loader']->getName()      => $c['refer.referral.referrer_loader'],
+				$c['refer.referral.reward_config_loader']->getName() => $c['refer.referral.reward_config_loader'],
 			]);
 		};
 
@@ -81,6 +82,12 @@ class Services implements ServicesInterface
 
 		$services['refer.referral.referrer_loader'] = function($c) {
 			return new ReferAFriend\Referral\Referrer\Loader($c['user.loader']);
+		};
+
+		$services['refer.referral.reward_config_loader'] = function($c) {
+			return new ReferAFriend\Referral\RewardConfig\Loader(
+				$c['refer.reward.config.loader']
+			);
 		};
 
 		$services['refer.reward.config.create'] = function($c) {

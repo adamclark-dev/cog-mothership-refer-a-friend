@@ -32,6 +32,7 @@ class Loader
 		'type',
 		'status',
 		'referrer_id AS referrerID',
+		'reward_config_id AS rewardConfigID',
 		'referred_email AS referredEmail'
 	];
 

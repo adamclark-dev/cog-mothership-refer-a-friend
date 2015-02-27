@@ -11,6 +11,7 @@ class _1424275225_SetUpReferAFriendDatabases extends Migration
 				refer_a_friend_referral
 				(
 					referral_id INT(11) AUTO_INCREMENT,
+					reward_config_id INT(11) NOT NULL,
 					`type` VARCHAR(255) NOT NULL,
 					status VARCHAR(255) NOT NULL,
 					referrer_id INT(11) NOT NULL,
@@ -45,9 +46,9 @@ class _1424275225_SetUpReferAFriendDatabases extends Migration
 			CREATE TABLE
 				refer_a_friend_referral_trigger
 				(
-					referral_id INT(11) NOT NULL,
+					reward_config_id INT(11) NOT NULL,
 					`name` VARCHAR(11) NOT NULL,
-					PRIMARY KEY (referral_id, `name`)
+					PRIMARY KEY (reward_config_id, `name`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		");
 
@@ -55,10 +56,10 @@ class _1424275225_SetUpReferAFriendDatabases extends Migration
 			CREATE TABLE
 				refer_a_friend_referral_constraint
 				(
-					referral_id INT(11) NOT NULL,
+					reward_config_id INT(11) NOT NULL,
 					`name` VARCHAR(11) NOT NULL,
 					`value` VARCHAR(255) NOT NULL,
-					PRIMARY KEY (referral_id, `name`)
+					PRIMARY KEY (reward_config_id, `name`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		");
 	}

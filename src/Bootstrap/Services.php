@@ -40,6 +40,13 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Form\TypeSelect($c['refer.referral.types'], $c['translator']);
 		};
 
+		$services['refer.form.referral_type_form'] = function($c) {
+			return new ReferAFriend\Form\ReferralTypeForm(
+				$c['refer.referral.constraint.collection_builder'],
+				$c['refer.referral.trigger.collection_builder']
+			);
+		};
+
 		$services['refer.referral.entity_loaders'] = function($c) {
 			return new \Message\Cog\DB\Entity\EntityLoaderCollection([
 				$c['refer.referral.constraint_loader']->getName() => $c['refer.referral.constraint_loader'],

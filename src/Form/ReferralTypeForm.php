@@ -7,8 +7,9 @@ use Message\Mothership\ReferAFriend\Referral\Constraint;
 use Message\Mothership\ReferAFriend\Referral\Trigger;
 use Symfony\Component\Form;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints;
 
-class OptionsForm extends Form\AbstractType
+class ReferralTypeForm extends Form\AbstractType
 {
 	const REFERRAL_TYPE = 'referral_type';
 
@@ -38,25 +39,25 @@ class OptionsForm extends Form\AbstractType
 
 	public function buildForm(Form\FormBuilderInterface $builder, array $options)
 	{
-		if (null === $options['referrer_type']) {
-			throw new \LogicException('You must set the `referrer_type` option as an instance of TypeInterface');
+		if (null === $options['referral_type']) {
+			throw new \LogicException('You must set the `referral_type` option as an instance of TypeInterface');
 		}
 
-		if (!$options['referrer_type'] instanceof TypeInterface) {
-			$type = gettype($options['referrer_type']) === 'object' ? get_class($options['referrer_type']) : gettype($options['referrer_type']);
-			throw new \InvalidArgumentException('`referrer_type` option must be an instance of TypeInterface, ' . $type . ' given');
+		if (!$options['referral_type'] instanceof TypeInterface) {
+			$type = gettype($options['referral_type']) === 'object' ? get_class($options['referral_type']) : gettype($options['referral_type']);
+			throw new \InvalidArgumentException('`referral_type` option must be an instance of TypeInterface, ' . $type . ' given');
 		}
 
 		$builder->add(self::REFERRAL_TYPE, 'hidden', [
-			'data' => $options['referrer_type']->getName(),
+			'data' => $options['referral_type']->getName(),
 		]);
 
 		$builder->add('name', 'text', [
 			'label' => 'ms.refer.form.config.name.name'
 		]);
 
-		$this->_addConstraintFields($builder, $options['referrer_type']);
-		$this->_addTriggerFields($builder, $options['referrer_type']);
+		$this->_addConstraintFields($builder, $options['referral_type']);
+		$this->_addTriggerFields($builder, $options['referral_type']);
 	}
 
 	public function finishView(Form\FormView $view, Form\FormInterface $form, array $options)
@@ -69,13 +70,16 @@ class OptionsForm extends Form\AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults([
-			'referrer_type' => null
+			'referral_type' => null
 		]);
 	}
 
 	private function _addConstraintFields(Form\FormBuilderInterface $builder, TypeInterface $referralType)
 	{
-		$constraintsForm = $builder->create('ms.refer.form.constraints');
+		$constraintsForm = $builder->create('constraints', null, [
+			'label'    => 'ms.refer.form.constraints.label',
+			'compound' => true,
+		]);
 
 		$constraints = $this->_constraintCollectionBuilder
 			->getCollectionFromType($referralType)
@@ -92,20 +96,36 @@ class OptionsForm extends Form\AbstractType
 
 	private function _addTriggerFields(Form\FormBuilderInterface $builder, TypeInterface $referralType)
 	{
-		$triggers = $this->_constraintCollectionBuilder
+		$triggers = $this->_triggerCollectionBuilder
 			->getCollectionFromType($referralType);
 
-		$choices = [];
+		switch ($triggers->count()) {
+			case 0:
+				$builder->add('triggers', 'hidden', [
+					'data' => 'none'
+				]);
+				break;
+			case 1:
+				$builder->add('triggers', 'hidden', [
+					'data' => key($triggers->all()),
+				]);
+				break;
+			default:
+				$choices = [];
 
-		foreach ($triggers as $trigger) {
-			$choices[$trigger->getName()] = $trigger->getDisplayName();
+				foreach ($triggers as $trigger) {
+					$choices[$trigger->getName()] = $trigger->getDisplayName();
+				}
+
+				$builder->add('triggers', 'choice', [
+					'label'    => 'ms.refer.form.triggers',
+					'multiple' => false,
+					'expanded' => true,
+					'choices'  => $choices,
+					'constraints' => [
+						new Constraints\NotBlank,
+					]
+				]);
 		}
-
-		$builder->add('triggers', 'choice', [
-			'label'    => 'ms.refer.form.triggers',
-			'multiple' => false,
-			'expanded' => true,
-			'choices'  => $choices,
-		]);
 	}
 }

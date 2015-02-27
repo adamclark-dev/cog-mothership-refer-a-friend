@@ -39,11 +39,7 @@ class Create extends Controller
 
 	public function setOptions($type)
 	{
-		if (!$this->get('refer.referral.types')->exists($type)) {
-			throw new HttpException(404, 'No referral with type `' . $type . '` found!');
-		}
-
-		$form = $this->createForm($this->get('refer.referral.types')->get($type)->getForm());
+		$form = $this->_getTypeForm($type);
 
 		return $this->render('Message:Mothership:ReferAFriend::refer_a_friend:cp:set_options', [
 			'form' => $form,
@@ -54,7 +50,7 @@ class Create extends Controller
 	{
 		$referralType = $this->get('refer.referral.types')->get($type);
 
-		$form = $this->createForm($referralType->getForm());
+		$form = $this->_getTypeForm($type);
 
 		$form->handleRequest();
 
@@ -70,5 +66,12 @@ class Create extends Controller
 		}
 
 		return $this->redirectToRoute('ms.cp.refer_a_friend.dashboard');
+	}
+
+	private function _getTypeForm($type)
+	{
+		return $this->createForm($this->get('refer.form.referral_type_form'), null, [
+			'referral_type' => $this->get('refer.referral.types')->get($type),
+		]);
 	}
 }

@@ -11,6 +11,8 @@ ms.refer:
     config:
       name:
         name: Name
+    constraints:
+      label: Constraints
   config:
     current: Current reward config
     success: Reward configuration saved successfully

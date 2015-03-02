@@ -33,7 +33,7 @@ class _1424275225_SetUpReferAFriendDatabases extends Migration
 				(
 					reward_config_id INT(11) AUTO_INCREMENT,
 					`name` VARCHAR(255) DEFAULT NULL,
-					referral_type VARCHAR(255) NOT NULL,
+					`type` VARCHAR(255) NOT NULL,
 					created_at INT(11) NOT NULL,
 					created_by VARCHAR(255) NOT NULL,
 					deleted_at INT(11) DEFAULT NULL,

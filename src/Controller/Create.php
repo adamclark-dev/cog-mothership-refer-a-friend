@@ -4,8 +4,7 @@ namespace Message\Mothership\ReferAFriend\Controller;
 
 use Message\Cog\Controller\Controller;
 use Message\Mothership\ReferAFriend\Form\TypeSelect;
-
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Message\Mothership\ReferAFriend\Form\RewardTypeForm;
 
 class Create extends Controller
 {
@@ -14,8 +13,8 @@ class Create extends Controller
 		$form = $this->createForm($this->get('refer.form.type_select'));
 
 		return $this->render('Message:Mothership:ReferAFriend::refer_a_friend:cp:create', [
-			'form'          => $form,
-			'referralTypes' => $this->get('refer.referral.types'),
+			'form'        => $form,
+			'rewardTypes' => $this->get('refer.reward.types'),
 		]);
 	}
 
@@ -48,7 +47,7 @@ class Create extends Controller
 
 	public function setOptionsAction($type)
 	{
-		$referralType = $this->get('refer.referral.types')->get($type);
+		$rewardType = $this->get('refer.reward.types')->get($type);
 
 		$form = $this->_getTypeForm($type);
 
@@ -57,7 +56,7 @@ class Create extends Controller
 		if ($form->isValid()) {
 			$data = $form->getData();
 			$rewardConfig = $this->get('refer.reward.config.builders')->get($type)->build($data);
-			$rewardConfig->setReferralType($referralType);
+			$rewardConfig->setReferralType($rewardType);
 
 			// Current version only supports one configuration at at time, so all will be 'deleted'
 			$this->get('refer.reward.config.delete')->deleteAll();
@@ -70,8 +69,8 @@ class Create extends Controller
 
 	private function _getTypeForm($type)
 	{
-		return $this->createForm($this->get('refer.form.referral_type_form'), null, [
-			'referral_type' => $this->get('refer.referral.types')->get($type),
+		return $this->createForm($this->get('refer.form.reward_type_form'), null, [
+			RewardTypeForm::REWARD_TYPE => $this->get('refer.reward.types')->get($type),
 		]);
 	}
 }

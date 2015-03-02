@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Referral;
+namespace Message\Mothership\ReferAFriend\Reward;
 
 interface EntityCollectionBuilderInterface
 {

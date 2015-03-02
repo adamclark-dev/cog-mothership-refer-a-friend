@@ -2,7 +2,7 @@
 
 namespace Message\Mothership\ReferAFriend\Form;
 
-use Message\Mothership\ReferAFriend\Referral\Type\Collection as ReferralTypes;
+use Message\Mothership\ReferAFriend\Reward\Type\Collection as RewardTypes;
 use Message\Cog\Localisation\Translator;
 
 use Symfony\Component\Form;
@@ -14,7 +14,7 @@ class TypeSelect extends Form\AbstractType
 	const FIELD_NAME = 'type';
 
 	/**
-	 * @var ReferralTypes
+	 * @var RewardTypes
 	 */
 	private $_types;
 
@@ -23,7 +23,7 @@ class TypeSelect extends Form\AbstractType
 	 */
 	private $_translator;
 
-	public function __construct(ReferralTypes $types, Translator $translator)
+	public function __construct(RewardTypes $types, Translator $translator)
 	{
 		$this->_types      = $types;
 		$this->_translator = $translator;

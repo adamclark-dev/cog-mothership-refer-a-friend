@@ -2,10 +2,10 @@
 
 namespace Message\Mothership\ReferAFriend\Reward\Config;
 
-use Message\Mothership\ReferAFriend\Referral\Type\TypeInterface;
+use Message\Mothership\ReferAFriend\Reward\Type;
 use Message\Cog\Localisation\Translator;
 
-class Config
+class Config implements ConfigInterface
 {
 	const DATE_FORMAT = 'D j M Y';
 
@@ -20,9 +20,9 @@ class Config
 	private $_name;
 
 	/**
-	 * @var TypeInterface
+	 * @var Type\TypeInterface
 	 */
-	private $_referralType;
+	private $_type;
 
 	/**
 	 * @var \DateTime
@@ -34,9 +34,15 @@ class Config
 	 */
 	private $_translator;
 
-	private $_constraints;
+	/**
+	 * @var Constraint\Collection
+	 */
+	protected $_constraints;
 
-	private $_triggers;
+	/**
+	 * @var Trigger\Collection
+	 */
+	protected $_triggers;
 
 	public function __construct(Translator $translator)
 	{
@@ -93,27 +99,26 @@ class Config
 		$this->_createdAt = $createdAt;
 	}
 
-	public function setReferralType(TypeInterface $type)
+	public function setType(Type\TypeInterface $type)
 	{
-		$this->_referralType = $type;
+		$this->_type = $type;
 	}
 
-	public function getReferralType()
+	public function getType()
 	{
-		if (null === $this->_referralType) {
-			throw new \LogicException('Referral type not set!');
+		if (null === $this->_type) {
+			throw new \LogicException('Reward type not set!');
 		}
 
-		return $this->_referralType;
+		return $this->_type;
 	}
-
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getConstraints()
 	{
-		return $this->getRewardConfig()->getConstraints();
+		return $this->_constraints ?: new Constraint\Collection;
 	}
 
 	/**
@@ -121,8 +126,8 @@ class Config
 	 */
 	public function addConstraint(Constraint\ConstraintInterface $constraint)
 	{
-		if (false === $this->_type->allowConstraints()) {
-			throw new \LogicException('Constraints cannot be set on referrals with a type of `' . $this->_type->getName() . '`');
+		if (!in_array($constraint->getName(), $this->_type->validConstraints())) {
+			throw new \LogicException('Constraints of type `' . $constraint->getName() . '` cannot be set on rewards with a type of `' . $this->_type->getName() . '`');
 		}
 
 		$this->_constraints->add($constraint);
@@ -133,7 +138,7 @@ class Config
 	 */
 	public function getTriggers()
 	{
-		return $this->_triggers;
+		return $this->_triggers ?: new Trigger\Collection;
 	}
 
 	/**
@@ -141,8 +146,8 @@ class Config
 	 */
 	public function addTrigger(Trigger\TriggerInterface $trigger)
 	{
-		if (false === $this->_type->allowTriggers()) {
-			throw new \LogicException('Triggers cannot be set on referrals with a type of `' . $this->_type->getName() . '`');
+		if (!in_array($trigger->getName(), $this->_type->validConstraints())) {
+			throw new \LogicException('Triggers of type `' . $trigger->getName() . '` be set on rewards with a type of `' . $this->_type->getName() . '`');
 		}
 
 		$this->_triggers->add($trigger);

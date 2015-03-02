@@ -45,7 +45,7 @@ class Create implements DB\TransactionalInterface
 				refer_a_friend_reward_config
 				(
 					`name`,
-					referral_type,
+					`type`,
 					created_at,
 					created_by
 				)
@@ -59,7 +59,7 @@ class Create implements DB\TransactionalInterface
 			;
 		", [
 			'name' => $config->getName(),
-			'type' => $config->getReferralType()->getName(),
+			'type' => $config->getType()->getName(),
 			'createdAt' => new \DateTime,
 			'createdBy' => $this->_currentUser->id,
 		]);

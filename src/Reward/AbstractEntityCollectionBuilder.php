@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Referral;
+namespace Message\Mothership\ReferAFriend\Reward;
 
 /**
  * Class AbstractEntityCollectionBuilder
@@ -11,11 +11,11 @@ namespace Message\Mothership\ReferAFriend\Referral;
 abstract class AbstractEntityCollectionBuilder implements EntityCollectionBuilderInterface
 {
 	/**
-	 * @var ReferralEntityCollectionInterface
+	 * @var EntityCollectionInterface
 	 */
 	protected $_completeCollection;
 
-	public function __construct(ReferralEntityCollectionInterface $completeCollection)
+	public function __construct(EntityCollectionInterface $completeCollection)
 	{
 		$this->_completeCollection = $completeCollection;
 	}

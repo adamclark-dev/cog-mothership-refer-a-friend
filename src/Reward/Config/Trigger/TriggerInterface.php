@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Referral\Trigger;
+namespace Message\Mothership\ReferAFriend\Reward\Config\Trigger;
 
 use Message\Mothership\ReferAFriend\Referral\ReferralEntityInterface;
 

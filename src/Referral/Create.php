@@ -20,16 +20,6 @@ class Create implements TransactionalInterface
 	private $_trans;
 
 	/**
-	 * @var Constraint\Create
-	 */
-	private $_constraintCreate;
-
-	/**
-	 * @var Trigger\Create
-	 */
-	private $_triggerCreate;
-
-	/**
 	 * @var \Message\User\UserInterface
 	 */
 	private $_currentUser;
@@ -41,14 +31,10 @@ class Create implements TransactionalInterface
 
 	public function __construct(
 		Transaction $trans,
-		Constraint\Create $constraintCreate,
-		Trigger\Create $triggerCreate,
 		UserInterface $currentUser
 	)
 	{
 		$this->_trans            = $trans;
-		$this->_constraintCreate = $constraintCreate;
-		$this->_triggerCreate    = $triggerCreate;
 		$this->_currentUser      = $currentUser;
 	}
 

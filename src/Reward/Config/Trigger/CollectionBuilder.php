@@ -1,9 +1,9 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Referral\Trigger;
+namespace Message\Mothership\ReferAFriend\Reward\Config\Trigger;
 
-use Message\Mothership\ReferAFriend\Referral\AbstractEntityCollectionBuilder;
-use Message\Mothership\ReferAFriend\Referral\Type;
+use Message\Mothership\ReferAFriend\Reward\AbstractEntityCollectionBuilder;
+use Message\Mothership\ReferAFriend\Reward\Type;
 
 class CollectionBuilder extends AbstractEntityCollectionBuilder
 {

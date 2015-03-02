@@ -2,7 +2,7 @@
 
 namespace Message\Mothership\ReferAFriend\Reward\Config;
 
-use Message\Mothership\ReferAFriend\Referral\Type\Collection as ReferralTypes;
+use Message\Mothership\ReferAFriend\Reward\Type\Collection as Types;
 use Message\Cog\DB\QueryBuilderFactory;
 use Message\Cog\DB\Result;
 use Message\Cog\Localisation\Translator;
@@ -15,27 +15,27 @@ class Loader
 	private $_qbFactory;
 
 	/**
-	 * @var ReferralTypes
+	 * @var Types
 	 */
-	private $_referralTypes;
+	private $_types;
 
 	/**
-	 * @var Translator
+	 * @var ConfigFactory
 	 */
-	private $_translator;
+	private $_configFactory;
 
 	private $_columns = [
 		'reward_config_id AS id',
 		'name',
-		'referral_type AS referralType',
+		'type',
 		'created_at AS createdAt',
 	];
 
-	public function __construct(QueryBuilderFactory $qbFactory, ReferralTypes $referralTypes, Translator $translator)
+	public function __construct(QueryBuilderFactory $qbFactory, Types $types, ConfigFactory $configFactory)
 	{
 		$this->_qbFactory     = $qbFactory;
-		$this->_referralTypes = $referralTypes;
-		$this->_translator    = $translator;
+		$this->_types         = $types;
+		$this->_configFactory = $configFactory;
 	}
 
 	public function getCurrent()
@@ -86,10 +86,10 @@ class Loader
 		$configs = [];
 
 		foreach ($result as $row) {
-			$config = new Config($this->_translator);
+			$config = $this->_configFactory->getConfigProxy();
 			$config->setID((int) $row->id);
 			$config->setName($row->name);
-			$config->setReferralType($this->_referralTypes->get($row->referralType));
+			$config->setType($this->_types->get($row->type));
 
 			$createdAt = new \DateTime;
 			$createdAt->setTimestamp($row->createdAt);

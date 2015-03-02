@@ -14,11 +14,6 @@ use Message\User;
 class Referral implements ReferralInterface
 {
 	/**
-	 * @var Type\TypeInterface
-	 */
-	private $_type;
-
-	/**
 	 * @var string
 	 */
 	private $_status;
@@ -37,32 +32,6 @@ class Referral implements ReferralInterface
 	 * @var string
 	 */
 	private $_referredEmail;
-
-	/**
-	 * @var Constraint\Collection
-	 */
-	private $_constraints;
-
-	/**
-	 * @var Trigger\Collection
-	 */
-	private $_triggers;
-
-	public function __construct(Type\TypeInterface $type)
-	{
-		$this->_type = $type;
-
-		$this->_constraints = new Constraint\Collection;
-		$this->_triggers    = new Trigger\Collection;
-	}
-
-	/**
-	 * @return Type\TypeInterface
-	 */
-	public function getType()
-	{
-		return $this->_type;
-	}
 
 	/**
 	 * {@inheritDoc}

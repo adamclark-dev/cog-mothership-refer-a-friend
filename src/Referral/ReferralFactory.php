@@ -13,53 +13,32 @@ use Message\Cog\DB\Entity\EntityLoaderCollection;
 class ReferralFactory
 {
 	/**
-	 * @var Type\Collection
+	 * @var EntityLoaderCollection
 	 */
-	private $_types;
+	private $_loaders;
 
-	final public function __construct(Type\Collection $types, EntityLoaderCollection $loaders)
+	final public function __construct(EntityLoaderCollection $loaders)
 	{
-		$this->_types   = $types;
 		$this->_loaders = $loaders;
 	}
 
 	/**
-	 * @param $type
-	 *
 	 * @return Referral
 	 */
-	public function getReferral($type)
+	public function getReferral()
 	{
-		$this->_checkType($type);
-
-		return new Referral($this->_types->get($type));
+		return new Referral;
 	}
 
 	/**
-	 * @param $type
-	 *
 	 * @return ReferralProxy
 	 */
-	public function getReferralProxy($type)
+	public function getReferralProxy()
 	{
-		$this->_checkType($type);
-
-		$referral = new ReferralProxy($this->_types->get($type));
+		$referral = new ReferralProxy;
 		$referral->setLoaders($this->_loaders);
 
 		return $referral;
 	}
 
-	/**
-	 * @param $type
-	 *
-	 * @throws \InvalidArgumentException
-	 */
-	private function _checkType($type)
-	{
-		if (!is_string($type)) {
-			$varType = gettype($type) === 'object' ? get_class($type) : gettype($type);
-			throw new \InvalidArgumentException('Type must be a string, ' . $varType . ' given');
-		}
-	}
 }

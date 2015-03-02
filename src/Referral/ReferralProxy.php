@@ -92,42 +92,6 @@ class ReferralProxy extends Referral
 	}
 
 	/**
-	 * Load constraints on request
-	 *
-	 * @return Constraint\Collection
-	 */
-	public function getConstraints()
-	{
-		if (parent::getConstraints()->count() === 0) {
-			$constraints = $this->_loaders->get('constraint')->load($this);
-
-			foreach ($constraints as $constraint) {
-				$this->addConstraint($constraint);
-			}
-		}
-
-		return parent::getConstraints();
-	}
-
-	/**
-	 * Load triggers on request
-	 *
-	 * @return Trigger\Collection
-	 */
-	public function getTriggers()
-	{
-		if (parent::getTriggers()->count() === 0) {
-			$triggers = $this->_loaders->get('trigger')->load($this);
-
-			foreach ($triggers as $trigger) {
-				$this->addTrigger($trigger);
-			}
-		}
-
-		return parent::getTriggers();
-	}
-
-	/**
 	 * Load referrer on request
 	 *
 	 * @throws \LogicException               Throws exception if no user can be found

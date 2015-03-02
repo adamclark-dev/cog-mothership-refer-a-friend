@@ -15,11 +15,6 @@ use Message\Mothership\ReferAFriend\Reward\Config\Config as RewardConfig;
 interface ReferralInterface
 {
 	/**
-	 * @return Type\TypeInterface
-	 */
-	public function getType();
-
-	/**
 	 * @return UserInterface
 	 */
 	public function getReferrer();
@@ -48,26 +43,6 @@ interface ReferralInterface
 	 * @param string $email
 	 */
 	public function setReferredEmail($email);
-
-	/**
-	 * @return Constraint\Collection;
-	 */
-	public function getConstraints();
-
-	/**
-	 * @param Constraint\ConstraintInterface $constraint
-	 */
-	public function addConstraint(Constraint\ConstraintInterface $constraint);
-
-	/**
-	 * @return Trigger\Collection
-	 */
-	public function getTriggers();
-
-	/**
-	 * @param Trigger\TriggerInterface $trigger
-	 */
-	public function addTrigger(Trigger\TriggerInterface $trigger);
 
 	/**
 	 * @return string

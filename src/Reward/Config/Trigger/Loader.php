@@ -2,7 +2,7 @@
 
 namespace Message\Mothership\ReferAFriend\Reward\Config\Trigger;
 
-use Message\Mothership\ReferAFriend\Reward\EntityLoaderInterface;
+use Message\Mothership\ReferAFriend\Reward\Config\EntityLoaderInterface;
 use Message\Mothership\ReferAFriend\Reward\Config\ConfigProxy;
 
 use Message\Cog\DB\QueryBuilderFactory;

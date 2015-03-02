@@ -41,8 +41,8 @@ class Services implements ServicesInterface
 
 		$services['refer.form.reward_type_form'] = function($c) {
 			return new ReferAFriend\Form\RewardTypeForm(
-				$c['refer.referral.constraint.collection_builder'],
-				$c['refer.referral.trigger.collection_builder']
+				$c['refer.reward.config.constraint.collection_builder'],
+				$c['refer.reward.config.trigger.collection_builder']
 			);
 		};
 

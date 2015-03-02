@@ -2,7 +2,7 @@
 
 namespace Message\Mothership\ReferAFriend\Reward\Config\Constraint;
 
-use Message\Mothership\ReferAFriend\Referral\AbstractEntityCollectionBuilder;
+use Message\Mothership\ReferAFriend\Reward\AbstractEntityCollectionBuilder;
 use Message\Mothership\ReferAFriend\Reward\Type;
 
 class CollectionBuilder extends AbstractEntityCollectionBuilder

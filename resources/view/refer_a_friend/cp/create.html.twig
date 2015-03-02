@@ -20,7 +20,7 @@
             <label class="option-block">
                 {{ form_widget(type) }}
                 <p class="type"><strong>{{ type.vars.label }}</strong></p>
-                <p>{{ referralTypes.get(type.vars.value).description | trans }}</p>
+                <p>{{ rewardTypes.get(type.vars.value).description | trans }}</p>
             </label>
         {% endfor %}
         <button class="button">Save</button>

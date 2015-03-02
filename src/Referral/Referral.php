@@ -144,45 +144,6 @@ class Referral implements ReferralInterface
 		return $this->_referredEmail;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getConstraints()
-	{
-		return $this->_constraints;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function addConstraint(Constraint\ConstraintInterface $constraint)
-	{
-		if (false === $this->_type->allowConstraints()) {
-			throw new \LogicException('Constraints cannot be set on referrals with a type of `' . $this->_type->getName() . '`');
-		}
-
-		$this->_constraints->add($constraint);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getTriggers()
-	{
-		return $this->_triggers;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function addTrigger(Trigger\TriggerInterface $trigger)
-	{
-		if (false === $this->_type->allowTriggers()) {
-			throw new \LogicException('Triggers cannot be set on referrals with a type of `' . $this->_type->getName() . '`');
-		}
-
-		$this->_triggers->add($trigger);
-	}
 
 	/**
 	 * @param RewardConfig $rewardConfig

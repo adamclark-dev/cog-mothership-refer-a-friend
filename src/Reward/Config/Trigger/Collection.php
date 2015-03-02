@@ -1,12 +1,12 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Referral\Trigger;
+namespace Message\Mothership\ReferAFriend\Reward\Config\Trigger;
 
-use Message\Mothership\ReferAFriend\Referral\ReferralEntityCollectionInterface;
-use Message\Mothership\ReferAFriend\Referral\Type\TypeInterface;
+use Message\Mothership\ReferAFriend\Reward\EntityCollectionInterface;
+use Message\Mothership\ReferAFriend\Reward\Type\TypeInterface;
 use Message\Cog\ValueObject\Collection as BaseCollection;
 
-class Collection extends BaseCollection implements ReferralEntityCollectionInterface
+class Collection extends BaseCollection implements EntityCollectionInterface
 {
 	protected function _configure()
 	{

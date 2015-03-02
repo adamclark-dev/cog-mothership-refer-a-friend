@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Referral\Type;
+namespace Message\Mothership\ReferAFriend\Reward\Type;
 
 class NoRewardType implements TypeInterface
 {

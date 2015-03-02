@@ -44,7 +44,7 @@ class _1424275225_SetUpReferAFriendDatabases extends Migration
 
 		$this->run("
 			CREATE TABLE
-				refer_a_friend_referral_trigger
+				refer_a_friend_reward_trigger
 				(
 					reward_config_id INT(11) NOT NULL,
 					`name` VARCHAR(11) NOT NULL,
@@ -54,7 +54,7 @@ class _1424275225_SetUpReferAFriendDatabases extends Migration
 
 		$this->run("
 			CREATE TABLE
-				refer_a_friend_referral_constraint
+				refer_a_friend_reward_constraint
 				(
 					reward_config_id INT(11) NOT NULL,
 					`name` VARCHAR(11) NOT NULL,

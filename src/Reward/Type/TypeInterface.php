@@ -1,8 +1,6 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Referral\Type;
-
-use Message\Mothership\ReferAFriend\Form\ReferralType\AbstractForm as TypeForm;
+namespace Message\Mothership\ReferAFriend\Reward\Type;
 
 /**
  * Interface TypeInterface

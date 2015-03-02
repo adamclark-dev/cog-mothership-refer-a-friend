@@ -34,6 +34,10 @@ class Config
 	 */
 	private $_translator;
 
+	private $_constraints;
+
+	private $_triggers;
+
 	public function __construct(Translator $translator)
 	{
 		$this->_translator = $translator;
@@ -101,6 +105,47 @@ class Config
 		}
 
 		return $this->_referralType;
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getConstraints()
+	{
+		return $this->getRewardConfig()->getConstraints();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function addConstraint(Constraint\ConstraintInterface $constraint)
+	{
+		if (false === $this->_type->allowConstraints()) {
+			throw new \LogicException('Constraints cannot be set on referrals with a type of `' . $this->_type->getName() . '`');
+		}
+
+		$this->_constraints->add($constraint);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getTriggers()
+	{
+		return $this->_triggers;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function addTrigger(Trigger\TriggerInterface $trigger)
+	{
+		if (false === $this->_type->allowTriggers()) {
+			throw new \LogicException('Triggers cannot be set on referrals with a type of `' . $this->_type->getName() . '`');
+		}
+
+		$this->_triggers->add($trigger);
 	}
 
 	private function _getNameSuffix()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Referral\Constraint;
+namespace Message\Mothership\ReferAFriend\Reward\Config\Constraint;
 
 use Message\Mothership\ReferAFriend\Referral\EntityLoaderInterface;
 use Message\Mothership\ReferAFriend\Referral\ReferralProxy;
@@ -9,8 +9,24 @@ use Message\Cog\DB\QueryBuilderFactory;
 
 class Loader implements EntityLoaderInterface
 {
+	/**
+	 * @var QueryBuilderFactory
+	 */
+	private $_qbFactory;
+
+	/**
+	 * @var Collection
+	 */
 	private $_constraints;
-	private $_columns = [];
+
+	/**
+	 * @var array
+	 */
+	private $_columns = [
+		'reward_config_id',
+		'name',
+		'value'
+	];
 
 	final public function __construct(QueryBuilderFactory $qbFactory, Collection $constraints)
 	{
@@ -28,7 +44,8 @@ class Loader implements EntityLoaderInterface
 		$result = $this->_qbFactory
 			->getQueryBuilder()
 			->select($this->_columns)
-			->from('referral_constraint')
+			->from('refer_a_friend_reward_constraint')
+			->where('reward_config_id = :id?i', ['id' => $referral->getRewardConfig()->getID()])
 			->getQuery()
 			->run()
 		;
@@ -36,16 +53,11 @@ class Loader implements EntityLoaderInterface
 		$constraints = new Collection;
 
 		foreach ($result as $row) {
+			$constraint = $this->_constraints->get($row->name);
+			$constraint->setValue($row->value);
 			$constraints->add($this->_constraints->get($row->name));
 		}
 
 		return $constraints;
-
 	}
-
-    protected function _getSelect()
-    {
-        return
-        ;
-    }
 }

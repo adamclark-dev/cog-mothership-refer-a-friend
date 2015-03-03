@@ -107,8 +107,6 @@ class RewardTypeForm extends Form\AbstractType
 				]);
 				break;
 			case 1:
-				de($triggers->all());
-
 				$builder->add('triggers', 'hidden', [
 					'data' => key($triggers->all()),
 				]);

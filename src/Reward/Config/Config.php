@@ -150,8 +150,8 @@ class Config implements ConfigInterface
 	 */
 	public function addTrigger(Trigger\TriggerInterface $trigger)
 	{
-		if (!in_array($trigger->getName(), $this->_type->validConstraints())) {
-			throw new \LogicException('Triggers of type `' . $trigger->getName() . '` be set on rewards with a type of `' . $this->_type->getName() . '`');
+		if (!in_array($trigger->getName(), $this->_type->validTriggers())) {
+			throw new \LogicException('Triggers of type `' . $trigger->getName() . '` cannot be set on rewards with a type of `' . $this->_type->getName() . '`');
 		}
 
 		if (null === $this->_triggers) {

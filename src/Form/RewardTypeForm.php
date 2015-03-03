@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints;
 class RewardTypeForm extends Form\AbstractType
 {
 	const REWARD_TYPE = 'reward_type';
+	const NONE        = 'none';
 
 	/**
 	 * @var Constraint\CollectionBuilder
@@ -102,10 +103,12 @@ class RewardTypeForm extends Form\AbstractType
 		switch ($triggers->count()) {
 			case 0:
 				$builder->add('triggers', 'hidden', [
-					'data' => 'none'
+					'data' => self::NONE
 				]);
 				break;
 			case 1:
+				de($triggers->all());
+
 				$builder->add('triggers', 'hidden', [
 					'data' => key($triggers->all()),
 				]);

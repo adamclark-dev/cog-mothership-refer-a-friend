@@ -2,6 +2,7 @@
 
 namespace Message\Mothership\ReferAFriend\Reward\Config\Constraint;
 
+use Message\Mothership\ReferAFriend\Reward\Config\Config;
 use Message\Cog\DB\Transaction;
 use Message\Cog\DB\TransactionalInterface;
 
@@ -21,27 +22,16 @@ class Create implements TransactionalInterface
 		$this->_transOverride = true;
 	}
 
-	public function save(ConstraintInterface $constraint)
+	public function save(Config $config)
 	{
-		$this->_addToTransaction($constraint);
-		$this->_commitTransaction();
-	}
-
-	public function saveBatch($constraints)
-	{
-		if (!$constraints instanceof Collection || !is_array($constraints)) {
-			$type = gettype($constraints) === 'object' ? get_class($constraints) : gettype($constraints);
-			throw new \InvalidArgumentException('$constraints must be an instance of Constraint\\Collection or an array, ' . $type . ' given');
-		}
-
-		foreach ($constraints as $constraint) {
-			$this->_addToTransaction($constraint);
+		foreach ($config->getConstraints() as $constraint) {
+			$this->_addToTransaction($config, $constraint);
 		}
 
 		$this->_commitTransaction();
 	}
 
-	private function _addToTransaction(ConstraintInterface $constraint)
+	private function _addToTransaction(Config $config, ConstraintInterface $constraint)
 	{
 		$this->_transaction->add("
 			INSERT INTO
@@ -58,7 +48,7 @@ class Create implements TransactionalInterface
 					:value?s
 				)
 		", [
-			'rewardConfigID' => $constraint->getRewardConfig()->getID(),
+			'rewardConfigID' => $config->getID(),
 			'name'           => $constraint->getName(),
 			'value'          => $constraint->getValue(),
 		]);

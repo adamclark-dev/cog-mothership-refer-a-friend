@@ -15,6 +15,7 @@ class Collection extends BaseCollection implements EntityCollectionInterface
 				throw new \InvalidArgumentException('Item must be an instance of ' . __NAMESPACE__ . '\\ConstraintInterface, ' . $type . ' given');
 			}
 		});
+
 		$this->setKey(function($item) {
 			return $item->getName();
 		});

@@ -61,7 +61,11 @@ class Services implements ServicesInterface
 		};
 
 		$services['refer.reward.config.constraint_loader'] = function($c) {
-			return new ReferAFriend\Reward\Config\Constraint\Loader($c['db.query.builder.factory'], $c['refer.referral.constraints']);
+			return new ReferAFriend\Reward\Config\Constraint\Loader($c['db.query.builder.factory'], $c['refer.reward.config.constraints']);
+		};
+
+		$services['refer.reward.config.constraint_create'] = function($c) {
+			return new ReferAFriend\Reward\Config\Constraint\Create($c['db.transaction']);
 		};
 
 		$services['refer.reward.config.constraints'] = function($c) {
@@ -74,6 +78,10 @@ class Services implements ServicesInterface
 
 		$services['refer.reward.config.trigger_loader'] = function($c) {
 			return new ReferAFriend\Reward\Config\Trigger\Loader($c['db.query.builder.factory'], $c['refer.reward.config.triggers']);
+		};
+
+		$services['refer.reward.config.trigger_create'] = function($c) {
+			return new ReferAFriend\Reward\Config\Trigger\Create($c['db.transaction']);
 		};
 
 		$services['refer.reward.config.triggers'] = function($c) {
@@ -95,7 +103,7 @@ class Services implements ServicesInterface
 		};
 
 		$services['refer.reward.config.create'] = function($c) {
-			return new ReferAFriend\Reward\Config\Create($c['db.transaction'], $c['user.current']);
+			return new ReferAFriend\Reward\Config\Create($c['db.query'], $c['user.current']);
 		};
 
 		$services['refer.reward.config.delete'] = function($c) {
@@ -110,14 +118,8 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Reward\Config\ConfigFactory($c['refer.reward.config.entity_loaders'], $c['translator']);
 		};
 
-		$services['refer.reward.config.builders'] = function($c) {
-			return new ReferAFriend\Reward\Config\Builder\Collection([
-				$c['refer.reward.config.builder.no_reward']
-			]);
-		};
-
-		$services['refer.reward.config.builder.no_reward'] = function($c) {
-			return new ReferAFriend\Reward\Config\Builder\NoRewardBuilder($c['translator']);
+		$services['refer.reward.config.builder'] = function($c) {
+			return new ReferAFriend\Reward\Config\ConfigBuilder($c['refer.reward.config.factory'], $c['refer.reward.config.constraints'], $c['refer.reward.config.triggers']);
 		};
 	}
 }

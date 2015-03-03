@@ -16,6 +16,10 @@ class Collection extends BaseCollection implements EntityCollectionInterface
 				throw new \InvalidArgumentException('Item must be an instance of ' . __NAMESPACE__ . '\\TriggerInterface, ' . $type . ' given');
 			}
 		});
+
+		$this->setKey(function ($item) {
+			return $item->getName();
+		});
 	}
 
 	public function getAvailable(TypeInterface $type)

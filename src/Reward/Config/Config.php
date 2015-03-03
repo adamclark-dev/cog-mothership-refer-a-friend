@@ -130,6 +130,10 @@ class Config implements ConfigInterface
 			throw new \LogicException('Constraints of type `' . $constraint->getName() . '` cannot be set on rewards with a type of `' . $this->_type->getName() . '`');
 		}
 
+		if (null === $this->_constraints) {
+			$this->_constraints = new Constraint\Collection;
+		}
+
 		$this->_constraints->add($constraint);
 	}
 
@@ -150,6 +154,10 @@ class Config implements ConfigInterface
 			throw new \LogicException('Triggers of type `' . $trigger->getName() . '` be set on rewards with a type of `' . $this->_type->getName() . '`');
 		}
 
+		if (null === $this->_triggers) {
+			$this->_triggers = new Trigger\Collection;
+		}
+
 		$this->_triggers->add($trigger);
 	}
 
@@ -157,7 +165,7 @@ class Config implements ConfigInterface
 	{
 		$suffix = $this->getName() ? '(' : '';
 
-		$suffix .= $this->_translator->trans($this->getReferralType()->getDisplayName());
+		$suffix .= $this->_translator->trans($this->getType()->getDisplayName());
 
 		if (null !== $this->_createdAt) {
 			$suffix .= ', ' . $this->_createdAt->format(self::DATE_FORMAT);

@@ -2,6 +2,7 @@
 
 namespace Message\Mothership\ReferAFriend\Reward\Config\Trigger;
 
+use Message\Mothership\ReferAFriend\Reward\Config\Config;
 use Message\Cog\DB\Transaction;
 use Message\Cog\DB\TransactionalInterface;
 
@@ -21,27 +22,16 @@ class Create implements TransactionalInterface
 		$this->_transOverride = true;
 	}
 
-	public function save(TriggerInterface $trigger)
+	public function save(Config $config)
 	{
-		$this->_addToTransaction($trigger);
-		$this->_commitTransaction();
-	}
-
-	public function saveBatch($triggers)
-	{
-		if (!$triggers instanceof Collection || !is_array($triggers)) {
-			$type = gettype($triggers) === 'object' ? get_class($triggers) : gettype($triggers);
-			throw new \InvalidArgumentException('$triggers must be an instance of Trigger\\Collection or an array, ' . $type . ' given');
-		}
-
-		foreach ($triggers as $trigger) {
-			$this->_addToTransaction($trigger);
+		foreach ($config->getTriggers() as $trigger) {
+			$this->_addToTransaction($config, $trigger);
 		}
 
 		$this->_commitTransaction();
 	}
 
-	private function _addToTransaction(TriggerInterface $trigger)
+	private function _addToTransaction(Config $config, TriggerInterface $trigger)
 	{
 		$this->_transaction->add("
 			INSERT INTO
@@ -56,7 +46,7 @@ class Create implements TransactionalInterface
 					:name?s
 				)
 		", [
-			'rewardConfigID' => $trigger->getRewardConfig()->getID(),
+			'rewardConfigID' => $config->getID(),
 			'name'           => $trigger->getName(),
 		]);
 	}

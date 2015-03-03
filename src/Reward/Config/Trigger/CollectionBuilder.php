@@ -21,7 +21,7 @@ class CollectionBuilder extends AbstractEntityCollectionBuilder
 				throw new \LogicException('Entity must be an instance of TriggerInterface!');
 			}
 
-			if (in_array($entity->getName(), $type->validConstraints())) {
+			if (in_array($entity->getName(), $type->validTriggers())) {
 				$collection->add($entity);
 			}
 		}

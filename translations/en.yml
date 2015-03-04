@@ -9,9 +9,7 @@ ms.refer:
         name: No reward
         description: A blank referral type that cannot have any constraints or triggers
     constraints:
-      timeout:
-        name: Time out (in days)
-        description: Set the amount of time it takes for the referral to be become invalidated
+
   form:
     type_select:
       name: Select referral type

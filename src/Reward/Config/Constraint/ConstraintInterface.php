@@ -11,7 +11,7 @@ interface ConstraintInterface extends ReferralEntityInterface
 	/**
 	 * @param ReferralInterface $referral
 	 */
-	public function validate(ReferralInterface $referral);
+	public function isValid(ReferralInterface $referral);
 
 	/**
 	 * @param $value

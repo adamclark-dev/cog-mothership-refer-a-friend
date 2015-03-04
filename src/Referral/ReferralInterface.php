@@ -75,6 +75,13 @@ interface ReferralInterface
 	public function setStatus($status);
 
 	/**
+	 * @param string $eventName
+	 *
+	 * @return bool
+	 */
+	public function hasTriggered($eventName);
+
+	/**
 	 * @return bool
 	 */
 	public function isPending();

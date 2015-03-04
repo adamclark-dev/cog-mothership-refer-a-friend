@@ -54,7 +54,7 @@ class Timeout implements ConstraintInterface
 		];
 	}
 
-	public function validate(ReferralInterface $referral)
+	public function isValid(ReferralInterface $referral)
 	{
 
 	}

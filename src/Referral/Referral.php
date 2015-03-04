@@ -174,6 +174,18 @@ class Referral implements ReferralInterface
 	}
 
 	/**
+	 * @param string $eventName
+	 *
+	 * @return bool
+	 */
+	public function hasTriggered($eventName)
+	{
+		$triggers = $this->getRewardConfig()->getTriggers()->filterByEvent($eventName);
+
+		return count($triggers) > 0;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	public function isPending()

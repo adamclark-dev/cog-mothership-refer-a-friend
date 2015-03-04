@@ -3,7 +3,7 @@
 namespace Message\Mothership\ReferAFriend\Reward\Config;
 
 use Message\Mothership\ReferAFriend\Reward\Type;
-use Message\Mothership\ReferAFriend\Form\RewardTypeForm;
+use Message\Mothership\ReferAFriend\Form\RewardOptions;
 
 class ConfigBuilder
 {
@@ -60,7 +60,7 @@ class ConfigBuilder
 
 	private function _addTriggers(Config $config, array $formData)
 	{
-		if (empty($formData['triggers']) || $formData['triggers'] === RewardTypeForm::NONE) {
+		if (empty($formData['triggers']) || $formData['triggers'] === RewardOptions::NONE) {
 			return;
 		}
 

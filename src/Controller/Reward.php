@@ -4,7 +4,7 @@ namespace Message\Mothership\ReferAFriend\Controller;
 
 use Message\Cog\Controller\Controller;
 use Message\Mothership\ReferAFriend\Form\TypeSelect;
-use Message\Mothership\ReferAFriend\Form\RewardTypeForm;
+use Message\Mothership\ReferAFriend\Form\RewardOptions;
 use Message\Mothership\ReferAFriend\Reward\Config\Config;
 
 class Create extends Controller
@@ -87,8 +87,8 @@ class Create extends Controller
 
 	private function _getTypeForm($type)
 	{
-		return $this->createForm($this->get('refer.form.reward_type_form'), null, [
-			RewardTypeForm::REWARD_TYPE => $this->get('refer.reward.types')->get($type),
+		return $this->createForm($this->get('refer.form.reward_options'), null, [
+			RewardOptions::REWARD_TYPE => $this->get('refer.reward.types')->get($type),
 		]);
 	}
 }

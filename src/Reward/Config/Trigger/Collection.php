@@ -22,16 +22,21 @@ class Collection extends BaseCollection implements EntityCollectionInterface
 		});
 	}
 
-	public function getAvailable(TypeInterface $type)
+	public function filterByEvent($eventName)
 	{
-		$available = [];
+		if (!is_string($eventName)) {
+			$type = gettype($eventName) === 'object' ? get_class($eventName) : gettype($eventName);
+			throw new \InvalidArgumentException('Event name must be a string, ' . $type . ' given');
+		}
 
-		foreach ($this->all() as $trigger) {
-			if (in_array($type->getName(), $trigger->getTypes())) {
-				$available[] = $trigger;
+		$triggers = [];
+
+		foreach ($this as $trigger) {
+			if ($eventName === $trigger->getEventName()) {
+				$triggers[] = $trigger;
 			}
 		}
 
-		return $available;
+		return new Collection($triggers);
 	}
 }

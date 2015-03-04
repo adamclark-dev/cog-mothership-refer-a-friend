@@ -39,11 +39,15 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Form\TypeSelect($c['refer.reward.types'], $c['translator']);
 		};
 
-		$services['refer.form.reward_type_form'] = function($c) {
-			return new ReferAFriend\Form\RewardTypeForm(
+		$services['refer.form.reward_options'] = function($c) {
+			return new ReferAFriend\Form\RewardOptions(
 				$c['refer.reward.config.constraint.collection_builder'],
 				$c['refer.reward.config.trigger.collection_builder']
 			);
+		};
+
+		$services['refer.form.refer_a_friend'] = function($c) {
+			return new ReferAFriend\Form\ReferAFriend;
 		};
 
 		$services['refer.referral.entity_loaders'] = function($c) {

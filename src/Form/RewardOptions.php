@@ -9,7 +9,7 @@ use Symfony\Component\Form;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class RewardTypeForm extends Form\AbstractType
+class RewardOptions extends Form\AbstractType
 {
 	const REWARD_TYPE = 'reward_type';
 	const NONE        = 'none';
@@ -35,7 +35,7 @@ class RewardTypeForm extends Form\AbstractType
 
 	public function getName()
 	{
-		return 'refer_a_friend_options';
+		return 'refer_a_friend_reward_options';
 	}
 
 	public function buildForm(Form\FormBuilderInterface $builder, array $options)
@@ -119,7 +119,7 @@ class RewardTypeForm extends Form\AbstractType
 				}
 
 				$builder->add('triggers', 'choice', [
-					'label'    => 'ms.refer.form.triggers',
+					'label'    => 'ms.refer.form.triggers.label',
 					'multiple' => false,
 					'expanded' => true,
 					'choices'  => $choices,

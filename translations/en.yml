@@ -13,6 +13,7 @@ ms.refer:
         name: Name
     constraints:
       label: Constraints
+    refer_a_friend
   config:
     current: Current reward config
     success: Reward configuration saved successfully

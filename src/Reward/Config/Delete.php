@@ -52,6 +52,8 @@ class Delete implements DB\TransactionalInterface
 			'deletedAt' => new \DateTime,
 			'deletedBy' => $this->_currentUser->id,
 		]);
+
+		$this->_commitTransaction();
 	}
 
 	private function _addToTransaction(Config $config)

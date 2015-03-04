@@ -22,5 +22,9 @@ class Routes implements RoutesInterface
 			->setRequirement('type', '[a-z0-9\-_\/]+')
 			->setMethod('GET')
 		;
+
+		$router['ms.refer_a_friend']->setPrefix('/')->setPriority(-400);
+		$router['ms.refer_a_friend']->add('ms.refer_a_friend.refer_action', '/refer-a-friend/submit', 'Message:Mothership:ReferAFriend::Controller:Referral#referAFriendAction')
+			->setMethod('POST');
 	}
 }

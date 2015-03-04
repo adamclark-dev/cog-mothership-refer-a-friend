@@ -7,7 +7,7 @@ use Message\Mothership\ReferAFriend\Form\TypeSelect;
 use Message\Mothership\ReferAFriend\Form\RewardOptions;
 use Message\Mothership\ReferAFriend\Reward\Config\Config;
 
-class Create extends Controller
+class Reward extends Controller
 {
 	public function create()
 	{

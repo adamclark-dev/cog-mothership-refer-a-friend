@@ -10,5 +10,6 @@ class Events implements EventsInterface
 	public function registerEvents($dispatcher)
 	{
 		$dispatcher->addSubscriber(new EventListener\MenuListener);
+		$dispatcher->addSubscriber(new EventListener\ReferralListener);
 	}
 }

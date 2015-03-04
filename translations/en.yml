@@ -1,9 +1,17 @@
 ms.refer:
   referral:
+    create:
+      success: Thank you, your referral has been saved successfully
+      email_not_sent: Email could not be sent
+  reward:
     types:
       no_reward:
         name: No reward
         description: A blank referral type that cannot have any constraints or triggers
+    constraints:
+      timeout:
+        name: Time out (in days)
+        description: Set the amount of time it takes for the referral to be become invalidated
   form:
     type_select:
       name: Select referral type
@@ -13,7 +21,13 @@ ms.refer:
         name: Name
     constraints:
       label: Constraints
-    refer_a_friend
+    refer_a_friend:
+      email: Friend's email address
+      name: Friend's name
+      message: A message to your friend
   config:
     current: Current reward config
     success: Reward configuration saved successfully
+  validator:
+    already_referred: This user has already been referred
+    user_exists: This user already exists

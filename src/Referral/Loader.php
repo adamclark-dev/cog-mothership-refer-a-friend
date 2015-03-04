@@ -29,11 +29,11 @@ class Loader
 	 * @var array
 	 */
 	private $_columns = [
-		'type',
 		'status',
 		'referrer_id AS referrerID',
 		'reward_config_id AS rewardConfigID',
-		'referred_email AS referredEmail'
+		'referred_email AS referredEmail',
+		'referred_name AS referredName',
 	];
 
 	final public function __construct(
@@ -127,10 +127,11 @@ class Loader
 		$referrals = [];
 
 		foreach ($result as $row) {
-			$referral = $this->_referralFactory->getReferralProxy($row->type);
+			$referral = $this->_referralFactory->getReferralProxy();
 			$referral->setStatus($row->status);
 			$referral->setReferrerID($row->referrerID);
 			$referral->setReferredEmail($row->referredEmail);
+			$referral->setReferredName($row->referredName);
 			$referral->setLoaders($this->_entityLoaders);
 
 			$referrals[] = $referral;

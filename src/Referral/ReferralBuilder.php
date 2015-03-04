@@ -40,10 +40,13 @@ class ReferralBuilder
 		}
 
 		$referral = $this->_factory->getReferral();
+		$rewardConfig = $this->_configLoader->getCurrent();
+		$rewardConfig = array_shift($rewardConfig);
 
 		$referral->setReferrer($this->_user);
-		$referral->setRewardConfig($this->_configLoader->getCurrent());
+		$referral->setRewardConfig($rewardConfig);
 		$referral->setReferredEmail($data['email']);
+		$referral->setReferredName($data['name']);
 		$referral->setStatus(Statuses::PENDING);
 
 		return $referral;

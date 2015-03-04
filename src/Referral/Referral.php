@@ -14,6 +14,11 @@ use Message\User;
 class Referral implements ReferralInterface
 {
 	/**
+	 * @var int
+	 */
+	private $_id;
+
+	/**
 	 * @var string
 	 */
 	private $_status;
@@ -32,6 +37,25 @@ class Referral implements ReferralInterface
 	 * @var string
 	 */
 	private $_referredEmail;
+
+	/**
+	 * @var string
+	 */
+	private $_referredName;
+
+	public function setID($id)
+	{
+		if (!is_numeric($id) || $id != (int) $id) {
+			throw new \InvalidArgumentException('ID must be a whole number!');
+		}
+
+		$this->_id = (int) $id;
+	}
+
+	public function getID()
+	{
+		return $this->_id;
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -113,6 +137,25 @@ class Referral implements ReferralInterface
 		return $this->_referredEmail;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	public function setReferredName($name)
+	{
+		if (!is_string($name)) {
+			throw new \InvalidArgumentException('Referred name must be a string');
+		}
+
+		$this->_referredName = $name;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getReferredName()
+	{
+		return $this->_referredName;
+	}
 
 	/**
 	 * @param RewardConfig $rewardConfig

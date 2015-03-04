@@ -25,14 +25,52 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Referral\Loader($c['db.query.builder.factory'], $c['refer.referral_factory'], $c['refer.referral.entity_loaders']);
 		};
 
-		$services['refer.reward.types'] = function($c) {
-			return new ReferAFriend\Reward\Type\Collection([
-				$c['refer.reward.types.no_reward'],
+		$services['refer.referral.create'] = function($c) {
+			return new ReferAFriend\Referral\Create($c['db.query'], $c['user.current']);
+		};
+
+		$services['refer.referral.entity_loaders'] = function($c) {
+			return new \Message\Cog\DB\Entity\EntityLoaderCollection([
+				$c['refer.referral.referrer_loader']->getName()      => $c['refer.referral.referrer_loader'],
+				$c['refer.referral.reward_config_loader']->getName() => $c['refer.referral.reward_config_loader'],
 			]);
 		};
 
-		$services['refer.reward.types.no_reward'] = function($c) {
-			return new ReferAFriend\Reward\Type\NoRewardType;
+		$services['refer.referral.referrer_loader'] = function($c) {
+			return new ReferAFriend\Referral\Referrer\Loader($c['user.loader']);
+		};
+
+		$services['refer.referral.reward_config_loader'] = function($c) {
+			return new ReferAFriend\Referral\RewardConfig\Loader(
+				$c['refer.reward.config.loader']
+			);
+		};
+
+		$services['refer.referral_builder'] = function($c) {
+			return new ReferAFriend\Referral\ReferralBuilder(
+				$c['refer.referral_factory'],
+				$c['refer.reward.config.loader'],
+				$c['user.current']
+			);
+		};
+
+		$services['refer.validator'] = function($c) {
+			return new ReferAFriend\Referral\Validator\Collection([
+				$c['refer.validator.user_exists'],
+				$c['refer.validator.already_referred'],
+			]);
+		};
+
+		$services['refer.validator_factory'] = function($c) {
+			return new ReferAFriend\Referral\Validator\CollectionFactory($c['refer.validator']);
+		};
+
+		$services['refer.validator.already_referred'] = function($c) {
+			return new ReferAFriend\Referral\Validator\AlreadyReferred($c['refer.referral.loader']);
+		};
+
+		$services['refer.validator.user_exists'] = function($c) {
+			return new ReferAFriend\Referral\Validator\UserExists($c['user.loader']);
 		};
 
 		$services['refer.form.type_select'] = function($c) {
@@ -50,60 +88,14 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Form\ReferAFriend;
 		};
 
-		$services['refer.referral.entity_loaders'] = function($c) {
-			return new \Message\Cog\DB\Entity\EntityLoaderCollection([
-				$c['refer.referral.referrer_loader']->getName()      => $c['refer.referral.referrer_loader'],
-				$c['refer.referral.reward_config_loader']->getName() => $c['refer.referral.reward_config_loader'],
+		$services['refer.reward.types'] = function($c) {
+			return new ReferAFriend\Reward\Type\Collection([
+				$c['refer.reward.types.no_reward'],
 			]);
 		};
 
-		$services['refer.reward.config.entity_loaders'] = function($c) {
-			return new \Message\Cog\DB\Entity\EntityLoaderCollection([
-				$c['refer.reward.config.constraint_loader']->getName() => $c['refer.reward.config.constraint_loader'],
-				$c['refer.reward.config.trigger_loader']->getName()    => $c['refer.reward.config.trigger_loader'],
-			]);
-		};
-
-		$services['refer.reward.config.constraint_loader'] = function($c) {
-			return new ReferAFriend\Reward\Config\Constraint\Loader($c['db.query.builder.factory'], $c['refer.reward.config.constraints']);
-		};
-
-		$services['refer.reward.config.constraint_create'] = function($c) {
-			return new ReferAFriend\Reward\Config\Constraint\Create($c['db.transaction']);
-		};
-
-		$services['refer.reward.config.constraints'] = function($c) {
-			return new ReferAFriend\Reward\Config\Constraint\Collection();
-		};
-
-		$services['refer.reward.config.constraint.collection_builder'] = function($c) {
-			return new ReferAFriend\Reward\Config\Constraint\CollectionBuilder($c['refer.reward.config.constraints']);
-		};
-
-		$services['refer.reward.config.trigger_loader'] = function($c) {
-			return new ReferAFriend\Reward\Config\Trigger\Loader($c['db.query.builder.factory'], $c['refer.reward.config.triggers']);
-		};
-
-		$services['refer.reward.config.trigger_create'] = function($c) {
-			return new ReferAFriend\Reward\Config\Trigger\Create($c['db.transaction']);
-		};
-
-		$services['refer.reward.config.triggers'] = function($c) {
-			return new ReferAFriend\Reward\Config\Trigger\Collection();
-		};
-
-		$services['refer.reward.config.trigger.collection_builder'] = function($c) {
-			return new ReferAFriend\Reward\Config\Trigger\CollectionBuilder($c['refer.reward.config.triggers']);
-		};
-
-		$services['refer.referral.referrer_loader'] = function($c) {
-			return new ReferAFriend\Referral\Referrer\Loader($c['user.loader']);
-		};
-
-		$services['refer.referral.reward_config_loader'] = function($c) {
-			return new ReferAFriend\Referral\RewardConfig\Loader(
-				$c['refer.reward.config.loader']
-			);
+		$services['refer.reward.types.no_reward'] = function($c) {
+			return new ReferAFriend\Reward\Type\NoRewardType;
 		};
 
 		$services['refer.reward.config.create'] = function($c) {
@@ -125,5 +117,52 @@ class Services implements ServicesInterface
 		$services['refer.reward.config.builder'] = function($c) {
 			return new ReferAFriend\Reward\Config\ConfigBuilder($c['refer.reward.config.factory'], $c['refer.reward.config.constraints'], $c['refer.reward.config.triggers']);
 		};
+
+
+		$services['refer.reward.config.entity_loaders'] = function($c) {
+			return new \Message\Cog\DB\Entity\EntityLoaderCollection([
+				$c['refer.reward.config.constraint_loader']->getName() => $c['refer.reward.config.constraint_loader'],
+				$c['refer.reward.config.trigger_loader']->getName()    => $c['refer.reward.config.trigger_loader'],
+			]);
+		};
+
+		$services['refer.reward.config.constraint_loader'] = function($c) {
+			return new ReferAFriend\Reward\Config\Constraint\Loader($c['db.query.builder.factory'], $c['refer.reward.config.constraints']);
+		};
+
+		$services['refer.reward.config.constraint_create'] = function($c) {
+			return new ReferAFriend\Reward\Config\Constraint\Create($c['db.transaction']);
+		};
+
+		$services['refer.reward.config.constraints'] = function($c) {
+			return new ReferAFriend\Reward\Config\Constraint\Collection([
+				$c['refer.reward.config.constraints.timeout'],
+			]);
+		};
+
+		$services['refer.reward.config.constraint.collection_builder'] = function($c) {
+			return new ReferAFriend\Reward\Config\Constraint\CollectionBuilder($c['refer.reward.config.constraints']);
+		};
+
+		$services['refer.reward.config.constraints.timeout'] = function($c) {
+			return new ReferAFriend\Reward\Config\Constraint\Constraints\Timeout;
+		};
+
+		$services['refer.reward.config.trigger_loader'] = function($c) {
+			return new ReferAFriend\Reward\Config\Trigger\Loader($c['db.query.builder.factory'], $c['refer.reward.config.triggers']);
+		};
+
+		$services['refer.reward.config.trigger_create'] = function($c) {
+			return new ReferAFriend\Reward\Config\Trigger\Create($c['db.transaction']);
+		};
+
+		$services['refer.reward.config.triggers'] = function($c) {
+			return new ReferAFriend\Reward\Config\Trigger\Collection();
+		};
+
+		$services['refer.reward.config.trigger.collection_builder'] = function($c) {
+			return new ReferAFriend\Reward\Config\Trigger\CollectionBuilder($c['refer.reward.config.triggers']);
+		};
+
 	}
 }

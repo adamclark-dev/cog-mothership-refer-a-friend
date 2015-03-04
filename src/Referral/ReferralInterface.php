@@ -15,6 +15,16 @@ use Message\Mothership\ReferAFriend\Reward\Config\Config as RewardConfig;
 interface ReferralInterface
 {
 	/**
+	 * @return int
+	 */
+	public function getID();
+
+	/**
+	 * @param int $id
+	 */
+	public function setID($id);
+
+	/**
 	 * @return UserInterface
 	 */
 	public function getReferrer();
@@ -43,6 +53,16 @@ interface ReferralInterface
 	 * @param string $email
 	 */
 	public function setReferredEmail($email);
+
+	/**
+	 * @return string
+	 */
+	public function getReferredName();
+
+	/**
+	 * @param string $name
+	 */
+	public function setReferredName($name);
 
 	/**
 	 * @return string

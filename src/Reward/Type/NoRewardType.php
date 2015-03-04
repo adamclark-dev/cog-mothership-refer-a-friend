@@ -11,12 +11,12 @@ class NoRewardType implements TypeInterface
 
 	public function getDisplayName()
 	{
-		return 'ms.refer.referral.types.no_reward.name';
+		return 'ms.refer.reward.types.no_reward.name';
 	}
 
 	public function getDescription()
 	{
-		return 'ms.refer.referral.types.no_reward.description';
+		return 'ms.refer.reward.types.no_reward.description';
 	}
 
 	public function validConstraints()

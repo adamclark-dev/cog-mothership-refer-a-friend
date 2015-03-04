@@ -2,8 +2,7 @@
 
 namespace Message\Mothership\ReferAFriend\Referral;
 
-use Message\Cog\DB\Transaction;
-use Message\Cog\DB\TransactionalInterface;
+use Message\Cog\DB\Query;
 use Message\User\UserInterface;
 
 /**
@@ -12,39 +11,26 @@ use Message\User\UserInterface;
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  */
-class Create implements TransactionalInterface
+class Create
 {
 	/**
-	 * @var \Message\Cog\DB\Transaction
+	 * @var \Message\Cog\DB\Query
 	 */
-	private $_trans;
+	private $_query;
 
 	/**
 	 * @var \Message\User\UserInterface
 	 */
 	private $_currentUser;
 
-	/**
-	 * @var bool
-	 */
-	private $_transOverride = false;
 
 	public function __construct(
-		Transaction $trans,
+		Query $query,
 		UserInterface $currentUser
 	)
 	{
-		$this->_trans            = $trans;
-		$this->_currentUser      = $currentUser;
-	}
-
-	/**
-	 * @param Transaction $trans
-	 */
-	public function setTransaction(Transaction $trans)
-	{
-		$this->_trans = $trans;
-		$this->_transOverride = true;
+		$this->_query       = $query;
+		$this->_currentUser = $currentUser;
 	}
 
 	/**
@@ -52,37 +38,15 @@ class Create implements TransactionalInterface
 	 */
 	public function save(ReferralInterface $referral)
 	{
-		$this->_addToTransaction($referral);
-		$this->_commitTransaction();
-	}
-
-	/**
-	 * @param array $referrals
-	 * @throws \InvalidArgumentException
-	 */
-	public function saveBatch(array $referrals)
-	{
-		foreach ($referrals as $referral) {
-			$this->_addToTransaction($referral);
-		}
-
-		$this->_commitTransaction();
-	}
-
-	/**
-	 * @param ReferralInterface $referral
-	 */
-	private function _addToTransaction(ReferralInterface $referral)
-	{
-		$this->_trans->add('
+		$result = $this->_query->run('
 			INSERT INTO
 				refer_a_friend_referral
 				(
 					reward_config_id,
-					type,
 					status,
 					referrer_id,
 					referred_email,
+					referred_name,
 					created_at,
 					created_by,
 					updated_at,
@@ -91,33 +55,27 @@ class Create implements TransactionalInterface
 			VALUES
 				(
 					:rewardConfigID?i,
-					:type?s,
 					:status?s,
 					:referrerID?i,
 					:referredEmail?s,
-					:createdAt?d
+					:referredName?s,
+					:createdAt?d,
 					:createdBy?in,
 					:createdAt?d,
 					:createdBy?in
 				)
 		', [
 			'rewardConfigID' => $referral->getRewardConfig()->getID(),
-			'type'           => $referral->getType()->getName(),
 			'status'         => $referral->getStatus(),
 			'referrerID'     => $referral->getReferrer()->id,
 			'referredEmail'  => $referral->getReferredEmail(),
+			'referredName'   => $referral->getReferredName(),
 			'createdAt'      => new \DateTime(),
 			'createdBy'      => $this->_currentUser->id,
 		]);
-	}
 
-	/**
-	 * Commit the transaction if $_transOverride is false
-	 */
-	private function _commitTransaction()
-	{
-		if (false === $this->_transOverride) {
-			$this->_trans->commit();
-		}
+		$referral->setID($result->id());
+
+		return $referral;
 	}
 }

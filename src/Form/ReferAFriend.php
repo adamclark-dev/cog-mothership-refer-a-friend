@@ -14,7 +14,7 @@ class ReferAFriend extends Form\AbstractType
 
 	public function buildForm(Form\FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('text', 'email', [
+		$builder->add('email', 'text', [
 			'label'       => 'ms.refer.form.refer_a_friend.email',
 			'constraints' => [
 				new Constraints\Email,
@@ -22,8 +22,15 @@ class ReferAFriend extends Form\AbstractType
 			]
 		]);
 
-		$builder->add('textarea', 'message', [
-			'label'       => 'ms.refer.form.refer_a_friend.message',
+		$builder->add('name', 'text', [
+			'label'       => 'ms.refer.form.refer_a_friend.name',
+			'constraints' => [
+				new Constraints\NotBlank,
+			]
+		]);
+
+		$builder->add('message', 'textarea', [
+			'label' => 'ms.refer.form.refer_a_friend.message',
 		]);
 	}
 }

@@ -48,6 +48,7 @@ class ReferralBuilder
 		$referral->setReferredEmail($data['email']);
 		$referral->setReferredName($data['name']);
 		$referral->setStatus(Statuses::PENDING);
+		$referral->setCreatedAt(new \DateTime);
 
 		return $referral;
 	}

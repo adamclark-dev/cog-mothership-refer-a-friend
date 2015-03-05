@@ -34,6 +34,7 @@ class Loader
 		'reward_config_id AS rewardConfigID',
 		'referred_email AS referredEmail',
 		'referred_name AS referredName',
+		'created_at AS createdAt'
 	];
 
 	final public function __construct(
@@ -68,9 +69,9 @@ class Loader
 		return $this->_bind($result);
 	}
 
-	public function getByType($type)
+	public function getByType($type, $status = null)
 	{
-		$result = $this->_getSelect()
+		$result = $this->_getSelect($status)
 			->where('type = :type?s', ['type' => $type])
 			->getQuery()
 			->run()
@@ -81,8 +82,7 @@ class Loader
 
 	public function getByStatus($status)
 	{
-		$result = $this->_getSelect()
-			->where('status = :status?s', ['status' => $status])
+		$result = $this->_getSelect($status)
 			->getQuery()
 			->run()
 		;
@@ -90,9 +90,9 @@ class Loader
 		return $this->_bind($result);
 	}
 
-	public function getByUser(UserInterface $user)
+	public function getByUser(UserInterface $user, $status = null)
 	{
-		$result = $this->_getSelect()
+		$result = $this->_getSelect($status)
 			->where('referrer_id = :referrerID', ['referrerID' => $user->id])
 			->getQuery()
 			->run()
@@ -101,9 +101,9 @@ class Loader
 		return $this->_bind($result);
 	}
 
-	public function getByEmail($email)
+	public function getByEmail($email, $status = null)
 	{
-		$result = $this->_getSelect()
+		$result = $this->_getSelect($status)
 			->where('referred_email = :email?s', ['email' => $email])
 			->getQuery()
 			->run()
@@ -112,14 +112,20 @@ class Loader
 		return $this->_bind($result);
 	}
 
-	private function _getSelect()
+	private function _getSelect($status = null)
 	{
-		return $this->_qbFactory
+		$select = $this->_qbFactory
 			->getQueryBuilder()
 			->select($this->_columns)
 			->from('refer_a_friend_referral')
 			->where('deleted_at IS NULL')
 		;
+
+		if (null !== $status) {
+			$select->where('status = :status?s', ['status' => $status]);
+		}
+
+		return $select;
 	}
 
 	private function _bind(Result $result)
@@ -129,10 +135,15 @@ class Loader
 		foreach ($result as $row) {
 			$referral = $this->_referralFactory->getReferralProxy();
 			$referral->setStatus($row->status);
+			$referral->setRewardConfigID($row->rewardConfigID);
 			$referral->setReferrerID($row->referrerID);
 			$referral->setReferredEmail($row->referredEmail);
 			$referral->setReferredName($row->referredName);
 			$referral->setLoaders($this->_entityLoaders);
+
+			$createdAt = new \DateTime;
+			$createdAt->setTimestamp($row->createdAt);
+			$referral->setCreatedAt($createdAt);
 
 			$referrals[] = $referral;
 		}

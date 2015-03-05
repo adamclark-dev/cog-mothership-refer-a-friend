@@ -43,6 +43,11 @@ class Referral implements ReferralInterface
 	 */
 	private $_referredName;
 
+	/**
+	 * @var \DateTime
+	 */
+	private $_createdAt;
+
 	public function setID($id)
 	{
 		if (!is_numeric($id) || $id != (int) $id) {
@@ -122,7 +127,7 @@ class Referral implements ReferralInterface
 			}
 		}
 
-		$this->_referredEmail = $email;
+		$this->_referredEmail = trim($email);
 	}
 
 	/**
@@ -146,7 +151,7 @@ class Referral implements ReferralInterface
 			throw new \InvalidArgumentException('Referred name must be a string');
 		}
 
-		$this->_referredName = $name;
+		$this->_referredName = trim($name);
 	}
 
 	/**
@@ -188,32 +193,16 @@ class Referral implements ReferralInterface
 	/**
 	 * {@inheritDoc}
 	 */
-	public function isPending()
+	public function setCreatedAt(\DateTime $createdAt)
 	{
-		return $this->_status === Statuses::PENDING;
+		$this->_createdAt = $createdAt;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function isActive()
+	public function getCreatedAt()
 	{
-		return $this->_status === Statuses::ACTIVE;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function isUsed()
-	{
-		return $this->_status === Statuses::USED;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function isExpired()
-	{
-		return $this->_status === Statuses::EXPIRED;
+		return $this->_createdAt;
 	}
 }

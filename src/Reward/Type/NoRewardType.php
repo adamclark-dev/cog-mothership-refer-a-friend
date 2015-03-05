@@ -28,4 +28,9 @@ class NoRewardType implements TypeInterface
 	{
 		return [];
 	}
+
+	public function validRewardOptions()
+	{
+		return [];
+	}
 }

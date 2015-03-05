@@ -53,10 +53,6 @@ class Referral extends Controller
 			$event = new Event\EmailReferralEvent;
 			$event->setReferral($referral);
 
-			if (!empty($data['message'])) {
-				$event->setMessage($data['message']);
-			}
-
 			$event->setUrl($this->get('request')->headers->get('referer'));
 
 			try {

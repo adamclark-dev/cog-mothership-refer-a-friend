@@ -82,22 +82,12 @@ interface ReferralInterface
 	public function hasTriggered($eventName);
 
 	/**
-	 * @return bool
+	 * @param \DateTime $createdAt
 	 */
-	public function isPending();
+	public function setCreatedAt(\DateTime $createdAt);
 
 	/**
-	 * @return bool
+	 * @return \DateTime
 	 */
-	public function isActive();
-
-	/**
-	 * @return bool
-	 */
-	public function isExpired();
-
-	/**
-	 * @return bool
-	 */
-	public function isUsed();
+	public function getCreatedAt();
 }

@@ -28,9 +28,5 @@ class ReferAFriend extends Form\AbstractType
 				new Constraints\NotBlank,
 			]
 		]);
-
-		$builder->add('message', 'textarea', [
-			'label' => 'ms.refer.form.refer_a_friend.message',
-		]);
 	}
 }

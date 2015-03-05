@@ -24,6 +24,7 @@ class Create
 				(
 					`name`,
 					`type`,
+					message,
 					created_at,
 					created_by
 				)
@@ -31,13 +32,15 @@ class Create
 				(
 					:name?s,
 					:type?s,
+					:message?s,
 					:createdAt?d,
 					:createdBy?i
 				)
 			;
 		", [
-			'name' => $config->getName(),
-			'type' => $config->getType()->getName(),
+			'name'      => $config->getName(),
+			'type'      => $config->getType()->getName(),
+			'message'   => $config->getMessage(),
 			'createdAt' => new \DateTime,
 			'createdBy' => $this->_currentUser->id,
 		]);

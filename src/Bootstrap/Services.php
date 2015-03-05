@@ -29,6 +29,10 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Referral\Create($c['db.query'], $c['user.current']);
 		};
 
+		$services['refer.referral.edit'] = function($c) {
+			return new ReferAFriend\Referral\Edit($c['db.transaction'], $c['user.current']);
+		};
+
 		$services['refer.referral.entity_loaders'] = function($c) {
 			return new \Message\Cog\DB\Entity\EntityLoaderCollection([
 				$c['refer.referral.referrer_loader']->getName()      => $c['refer.referral.referrer_loader'],
@@ -56,6 +60,7 @@ class Services implements ServicesInterface
 
 		$services['refer.validator'] = function($c) {
 			return new ReferAFriend\Referral\Validator\Collection([
+				$c['refer.validator.current_user'],
 				$c['refer.validator.user_exists'],
 				$c['refer.validator.already_referred'],
 			]);
@@ -67,6 +72,10 @@ class Services implements ServicesInterface
 
 		$services['refer.validator.already_referred'] = function($c) {
 			return new ReferAFriend\Referral\Validator\AlreadyReferred($c['refer.referral.loader']);
+		};
+
+		$services['refer.validator.current_user'] = function($c) {
+			return new ReferAFriend\Referral\Validator\CurrentUser;
 		};
 
 		$services['refer.validator.user_exists'] = function($c) {
@@ -116,14 +125,20 @@ class Services implements ServicesInterface
 		};
 
 		$services['refer.reward.config.builder'] = function($c) {
-			return new ReferAFriend\Reward\Config\ConfigBuilder($c['refer.reward.config.factory'], $c['refer.reward.config.constraints'], $c['refer.reward.config.triggers']);
+			return new ReferAFriend\Reward\Config\ConfigBuilder(
+				$c['refer.reward.config.factory'],
+				$c['refer.reward.config.constraints'],
+				$c['refer.reward.config.triggers'],
+				$c['refer.reward.config.reward_options']
+			);
 		};
 
 
 		$services['refer.reward.config.entity_loaders'] = function($c) {
 			return new \Message\Cog\DB\Entity\EntityLoaderCollection([
-				$c['refer.reward.config.constraint_loader']->getName() => $c['refer.reward.config.constraint_loader'],
-				$c['refer.reward.config.trigger_loader']->getName()    => $c['refer.reward.config.trigger_loader'],
+				$c['refer.reward.config.constraint_loader']->getName()    => $c['refer.reward.config.constraint_loader'],
+				$c['refer.reward.config.trigger_loader']->getName()       => $c['refer.reward.config.trigger_loader'],
+				$c['refer.reward.config.reward_option_loader']->getName() => $c['refer.reward.config.reward_option_loader'],
 			]);
 		};
 

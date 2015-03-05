@@ -69,18 +69,14 @@ class Edit implements TransactionalInterface
 			UPDATE
 				refer_a_friend_referral
 			SET
-				reward_config_id = :rewardConfigID?i,
-				type             = :type?s,
-				status           = :status?s,
-				referrer_id      = :referrerID?i,
-				referred_email   = :referredEmail?s,
-				updated_at       = :updatedAt?d,
-				updated_by       = :updatedBy?in
+				status         = :status?s,
+				referrer_id    = :referrerID?i,
+				referred_email = :referredEmail?s,
+				updated_at     = :updatedAt?d,
+				updated_by     = :updatedBy?in
 			WHERE
 				referral_id = :id?i
 		', [
-			'rewardConfigID' => $referral->getRewardConfig()->getID(),
-			'type'           => $referral->getType()->getName(),
 			'status'         => $referral->getStatus(),
 			'referrerID'     => $referral->getReferrer()->id,
 			'referredEmail'  => $referral->getReferredEmail(),

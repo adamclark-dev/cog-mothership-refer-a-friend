@@ -70,7 +70,7 @@ class Create
 			'referrerID'     => $referral->getReferrer()->id,
 			'referredEmail'  => $referral->getReferredEmail(),
 			'referredName'   => $referral->getReferredName(),
-			'createdAt'      => new \DateTime(),
+			'createdAt'      => $referral->getCreatedAt() ?: new \DateTime(),
 			'createdBy'      => $this->_currentUser->id,
 		]);
 

@@ -17,6 +17,8 @@ ms.refer:
     config:
       name:
         name: Name
+      message:
+        name: Email message
     constraints:
       label: Constraints
     refer_a_friend:

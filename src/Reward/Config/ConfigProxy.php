@@ -49,4 +49,21 @@ class ConfigProxy extends Config
 
 		return parent::getTriggers();
 	}
+
+	public function getRewardOptions()
+	{
+		if (null === $this->_rewardOptions) {
+			$rewardOptions = $this->_loaders->get('reward_option')->load($this);
+
+			if (!$rewardOptions) {
+				throw new \LogicException('Could not load reward options!');
+			}
+
+			foreach ($rewardOptions as $rewardOption) {
+				$this->addRewardOption($rewardOption);
+			}
+		}
+
+		return parent::getRewardOptions();
+	}
 }

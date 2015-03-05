@@ -185,11 +185,17 @@ class Config implements ConfigInterface
 		$this->_triggers->add($trigger);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getRewardOptions()
 	{
 		return $this->_rewardOptions ?: new RewardOption\Collection;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function addRewardOption(RewardOption\RewardOptionInterface $rewardOption)
 	{
 		if (!in_array($rewardOption->getName(), $this->_type->validRewardOptions())) {

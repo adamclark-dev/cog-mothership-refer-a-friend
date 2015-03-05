@@ -38,13 +38,13 @@ class Loader implements EntityLoaderInterface
 		return 'trigger';
 	}
 
-	public function load(ConfigProxy $referral)
+	public function load(ConfigProxy $config)
 	{
 		$result = $this->_qbFactory
 			->getQueryBuilder()
 			->select($this->_columns)
 			->from('refer_a_friend_reward_trigger')
-			->where('reward_config_id = :id?i', ['id' => $referral->getRewardConfig()->getID()])
+			->where('reward_config_id = :id?i', ['id' => $config->getID()])
 			->getQuery()
 			->run()
 		;

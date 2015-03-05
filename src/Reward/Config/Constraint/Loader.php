@@ -2,8 +2,8 @@
 
 namespace Message\Mothership\ReferAFriend\Reward\Config\Constraint;
 
-use Message\Mothership\ReferAFriend\Referral\EntityLoaderInterface;
-use Message\Mothership\ReferAFriend\Referral\ReferralProxy;
+use Message\Mothership\ReferAFriend\Reward\Config\EntityLoaderInterface;
+use Message\Mothership\ReferAFriend\Reward\Config\ConfigProxy;
 
 use Message\Cog\DB\QueryBuilderFactory;
 
@@ -39,13 +39,13 @@ class Loader implements EntityLoaderInterface
 		return 'constraint';
 	}
 
-	public function load(ReferralProxy $referral)
+	public function load(ConfigProxy $config)
 	{
 		$result = $this->_qbFactory
 			->getQueryBuilder()
 			->select($this->_columns)
 			->from('refer_a_friend_reward_constraint')
-			->where('reward_config_id = :id?i', ['id' => $referral->getRewardConfig()->getID()])
+			->where('reward_config_id = :id?i', ['id' => $config->getID()])
 			->getQuery()
 			->run()
 		;

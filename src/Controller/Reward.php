@@ -4,7 +4,7 @@ namespace Message\Mothership\ReferAFriend\Controller;
 
 use Message\Cog\Controller\Controller;
 use Message\Mothership\ReferAFriend\Form\TypeSelect;
-use Message\Mothership\ReferAFriend\Form\RewardOptions;
+use Message\Mothership\ReferAFriend\Form\RewardConfig;
 use Message\Mothership\ReferAFriend\Reward\Config\Config;
 
 class Reward extends Controller
@@ -82,13 +82,17 @@ class Reward extends Controller
 		$triggerCreate->setTransaction($transaction);
 		$triggerCreate->save($config);
 
+		$RewardOptionCreate = clone($this->get('refer.reward.config.reward_option_create'));
+		$RewardOptionCreate->setTransaction($transaction);
+		$RewardOptionCreate->save($config);
+
 		$transaction->commit();
 	}
 
 	private function _getTypeForm($type)
 	{
-		return $this->createForm($this->get('refer.form.reward_options'), null, [
-			RewardOptions::REWARD_TYPE => $this->get('refer.reward.types')->get($type),
+		return $this->createForm($this->get('refer.form.reward_config'), null, [
+			RewardConfig::REWARD_TYPE => $this->get('refer.reward.types')->get($type),
 		]);
 	}
 }

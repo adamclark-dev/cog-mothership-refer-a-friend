@@ -5,11 +5,12 @@ namespace Message\Mothership\ReferAFriend\Form;
 use Message\Mothership\ReferAFriend\Reward\Type\TypeInterface;
 use Message\Mothership\ReferAFriend\Reward\Config\Constraint;
 use Message\Mothership\ReferAFriend\Reward\Config\Trigger;
+use Message\Mothership\ReferAFriend\Reward\Config\RewardOption;
 use Symfony\Component\Form;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Constraints as FormConstraints;
 
-class RewardOptions extends Form\AbstractType
+class RewardConfig extends Form\AbstractType
 {
 	const REWARD_TYPE = 'reward_type';
 	const NONE        = 'none';
@@ -24,13 +25,20 @@ class RewardOptions extends Form\AbstractType
 	 */
 	private $_triggerCollectionBuilder;
 
+	/**
+	 * @var RewardOption\CollectionBuilder
+	 */
+	private $_rewardOptionCollectionBuilder;
+
 	public function __construct(
 		Constraint\CollectionBuilder $constraintCollectionBuilder,
-		Trigger\CollectionBuilder $triggerCollectionBuilder
+		Trigger\CollectionBuilder $triggerCollectionBuilder,
+		RewardOption\CollectionBuilder $rewardOptionBuilder
 	)
 	{
-		$this->_constraintCollectionBuilder = $constraintCollectionBuilder;
-		$this->_triggerCollectionBuilder    = $triggerCollectionBuilder;
+		$this->_constraintCollectionBuilder   = $constraintCollectionBuilder;
+		$this->_triggerCollectionBuilder      = $triggerCollectionBuilder;
+		$this->_rewardOptionCollectionBuilder = $rewardOptionBuilder;
 	}
 
 	public function getName()
@@ -57,8 +65,16 @@ class RewardOptions extends Form\AbstractType
 			'label' => 'ms.refer.form.config.name.name'
 		]);
 
+		$builder->add('message', 'textarea', [
+			'label' => 'ms.refer.form.config.message.name',
+			'constraints' => [
+				new FormConstraints\NotBlank
+			]
+		]);
+
 		$this->_addConstraintFields($builder, $options[self::REWARD_TYPE]);
 		$this->_addTriggerFields($builder, $options[self::REWARD_TYPE]);
+		$this->_addRewardOptionFields($builder, $options[self::REWARD_TYPE]);
 	}
 
 	public function finishView(Form\FormView $view, Form\FormInterface $form, array $options)
@@ -95,10 +111,10 @@ class RewardOptions extends Form\AbstractType
 		$builder->add($constraintsForm);
 	}
 
-	private function _addTriggerFields(Form\FormBuilderInterface $builder, TypeInterface $referralType)
+	private function _addTriggerFields(Form\FormBuilderInterface $builder, TypeInterface $rewardType)
 	{
 		$triggers = $this->_triggerCollectionBuilder
-			->getCollectionFromType($referralType);
+			->getCollectionFromType($rewardType);
 
 		switch ($triggers->count()) {
 			case 0:
@@ -124,9 +140,29 @@ class RewardOptions extends Form\AbstractType
 					'expanded' => true,
 					'choices'  => $choices,
 					'constraints' => [
-						new Constraints\NotBlank,
+						new FormConstraints\NotBlank,
 					]
 				]);
 		}
+	}
+
+	private function _addRewardOptionFields(Form\FormBuilderInterface $builder, TypeInterface $rewardType)
+	{
+		$rewardOptionsForm = $builder->create('reward_options', null, [
+			'label'    => 'ms.refer.form.reward_options.label',
+			'compound' => true,
+		]);
+
+		$rewardOptions = $this->_rewardOptionCollectionBuilder
+			->getCollectionFromType($rewardType)
+		;
+
+		foreach ($rewardOptions as $rewardOption) {
+			$options = ['label' => $rewardOption->getDisplayName()];
+			$options = $rewardOption->getFormOptions() + $options;
+			$rewardOptionsForm->add($rewardOption->getName(), $rewardOption->getFormType(), $options);
+		};
+
+		$builder->add($rewardOptionsForm);
 	}
 }

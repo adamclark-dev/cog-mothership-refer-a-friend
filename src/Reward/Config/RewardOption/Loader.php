@@ -2,10 +2,11 @@
 
 namespace Message\Mothership\ReferAFriend\Reward\Config\RewardOption;
 
-use Message\Mothership\ReferAFriend\Referral\ReferralProxy;
+use Message\Mothership\ReferAFriend\Reward\Config\EntityLoaderInterface;
+use Message\Mothership\ReferAFriend\Reward\Config\ConfigProxy;
 use Message\Cog\DB\QueryBuilderFactory;
 
-class Loader
+class Loader implements EntityLoaderInterface
 {
 	/**
 	 * @var QueryBuilderFactory
@@ -37,25 +38,25 @@ class Loader
 		return 'reward_option';
 	}
 
-	public function load(ReferralProxy $referral)
+	public function load(ConfigProxy $config)
 	{
 		$result = $this->_qbFactory
 			->getQueryBuilder()
 			->select($this->_columns)
 			->from('refer_a_friend_reward_option')
-			->where('reward_config_id = :id?i', ['id' => $referral->getRewardConfig()->getID()])
+			->where('reward_config_id = :id?i', ['id' => $config->getID()])
 			->getQuery()
 			->run()
 		;
 
-		$constraints = new Collection;
+		$rewardOptions = new Collection;
 
 		foreach ($result as $row) {
-			$constraint = $this->_rewardOptions->get($row->name);
-			$constraint->setValue($row->value);
-			$constraints->add($this->_rewardOptions->get($row->name));
+			$rewardOption = $this->_rewardOptions->get($row->name);
+			$rewardOption->setValue($row->value);
+			$rewardOptions->add($this->_rewardOptions->get($row->name));
 		}
 
-		return $constraints;
+		return $rewardOptions;
 	}
 }

@@ -77,10 +77,11 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Form\TypeSelect($c['refer.reward.types'], $c['translator']);
 		};
 
-		$services['refer.form.reward_options'] = function($c) {
-			return new ReferAFriend\Form\RewardOptions(
+		$services['refer.form.reward_config'] = function($c) {
+			return new ReferAFriend\Form\RewardConfig(
 				$c['refer.reward.config.constraint.collection_builder'],
-				$c['refer.reward.config.trigger.collection_builder']
+				$c['refer.reward.config.trigger.collection_builder'],
+				$c['refer.reward.config.reward_option.collection_builder']
 			);
 		};
 
@@ -157,12 +158,27 @@ class Services implements ServicesInterface
 		};
 
 		$services['refer.reward.config.triggers'] = function($c) {
-			return new ReferAFriend\Reward\Config\Trigger\Collection();
+			return new ReferAFriend\Reward\Config\Trigger\Collection;
 		};
 
 		$services['refer.reward.config.trigger.collection_builder'] = function($c) {
 			return new ReferAFriend\Reward\Config\Trigger\CollectionBuilder($c['refer.reward.config.triggers']);
 		};
 
+		$services['refer.reward.config.reward_option_loader'] = function($c) {
+			return new ReferAFriend\Reward\Config\RewardOption\Loader($c['db.query.builder.factory'], $c['refer.reward.config.reward_options']);
+		};
+
+		$services['refer.reward.config.reward_option_create'] = function($c) {
+			return new ReferAFriend\Reward\Config\RewardOption\Create($c['db.transaction']);
+		};
+
+		$services['refer.reward.config.reward_options'] = function($c) {
+			return new ReferAFriend\Reward\Config\RewardOption\Collection;
+		};
+
+		$services['refer.reward.config.reward_option.collection_builder'] = function($c) {
+			return new ReferAFriend\Reward\Config\RewardOption\CollectionBuilder($c['refer.reward.config.reward_options']);
+		};
 	}
 }

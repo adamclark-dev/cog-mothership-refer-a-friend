@@ -3,19 +3,26 @@
 namespace Message\Mothership\ReferAFriend\Reward\Config;
 
 use Message\Mothership\ReferAFriend\Reward\Type;
-use Message\Mothership\ReferAFriend\Form\RewardOptions;
+use Message\Mothership\ReferAFriend\Form\RewardConfig;
 
 class ConfigBuilder
 {
 	private $_factory;
 	private $_constraints;
 	private $_triggers;
+	private $_rewardOptions;
 
-	public function __construct(ConfigFactory $factory, Constraint\Collection $constraints, Trigger\Collection $triggers)
+	public function __construct(
+		ConfigFactory $factory,
+		Constraint\Collection $constraints,
+		Trigger\Collection $triggers,
+		RewardOption\Collection $rewardOptions
+	)
 	{
-		$this->_factory     = $factory;
-		$this->_constraints = $constraints;
-		$this->_triggers    = $triggers;
+		$this->_factory       = $factory;
+		$this->_constraints   = $constraints;
+		$this->_triggers      = $triggers;
+		$this->_rewardOptions = $rewardOptions;
 	}
 
 	public function build(Type\TypeInterface $type, array $formData)
@@ -27,8 +34,11 @@ class ConfigBuilder
 			$config->setName($formData['name']);
 		}
 
+		$config->setMessage($formData['message']);
+
 		$this->_addConstraints($config, $formData);
 		$this->_addTriggers($config, $formData);
+		$this->_addRewardOptions($config, $formData);
 
 		return $config;
 	}
@@ -60,11 +70,35 @@ class ConfigBuilder
 
 	private function _addTriggers(Config $config, array $formData)
 	{
-		if (empty($formData['triggers']) || $formData['triggers'] === RewardOptions::NONE) {
+		if (empty($formData['triggers']) || $formData['triggers'] === RewardConfig::NONE) {
 			return;
 		}
 
 		$trigger = $this->_triggers->get($formData['triggers']);
 		$config->addTrigger($trigger);
+	}
+
+	private function _addRewardOptions(Config $config, array $formData)
+	{
+		if (empty($formData['reward_options'])) {
+			return;
+		}
+
+		$rewardOptionsData = $formData['reward_options'];
+
+		if (!is_array($rewardOptionsData)) {
+			$type = gettype($rewardOptionsData) === 'object' ? get_class($rewardOptionsData) : gettype($rewardOptionsData);
+			throw new \LogicException('Reward option form data must be an array, ' . $type . ' given');
+		}
+
+		foreach ($rewardOptionsData as $name => $value) {
+			if (null === $value) {
+				continue;
+			}
+
+			$rewardOption = clone $this->_rewardOptions->get($name);
+			$rewardOption->setValue($value);
+			$config->addRewardOption($rewardOption);
+		}
 	}
 }

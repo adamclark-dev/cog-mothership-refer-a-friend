@@ -1,8 +1,9 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward\Config\Constraint;
+namespace Message\Mothership\ReferAFriend\Reward\Config\RewardOption;
 
 use Message\Mothership\ReferAFriend\Reward\Config\ConfigInterface;
+
 use Message\Cog\DB\Transaction;
 use Message\Cog\DB\TransactionalInterface;
 
@@ -24,18 +25,18 @@ class Create implements TransactionalInterface
 
 	public function save(ConfigInterface $config)
 	{
-		foreach ($config->getConstraints() as $constraint) {
-			$this->_addToTransaction($config, $constraint);
+		foreach ($config->getRewardOptions() as $rewardOption) {
+			$this->_addToTransaction($config, $rewardOption);
 		}
 
 		$this->_commitTransaction();
 	}
 
-	private function _addToTransaction(ConfigInterface $config, ConstraintInterface $constraint)
+	private function _addToTransaction(ConfigInterface $config, RewardOptionInterface $rewardOption)
 	{
 		$this->_transaction->add("
 			INSERT INTO
-				refer_a_friend_reward_constraint
+				refer_a_friend_reward_option
 				(
 					reward_config_id,
 					`name`,
@@ -49,8 +50,8 @@ class Create implements TransactionalInterface
 				)
 		", [
 			'rewardConfigID' => $config->getID(),
-			'name'           => $constraint->getName(),
-			'value'          => $constraint->getValue(),
+			'name'           => $rewardOption->getName(),
+			'value'          => $rewardOption->getValue(),
 		]);
 	}
 

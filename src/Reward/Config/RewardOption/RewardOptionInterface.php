@@ -1,22 +1,12 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Reward\Config\Constraint;
+namespace Message\Mothership\ReferAFriend\Reward\Config\RewardOption;
 
 use Message\Mothership\ReferAFriend\Reward\RewardEntityInterface;
-use Message\Mothership\ReferAFriend\Referral\ReferralInterface;
-
-use Message\Cog\Event\Event;
-
 use Symfony\Component\Form\FormBuilderInterface;
 
-interface ConstraintInterface extends RewardEntityInterface
+interface RewardOptionInterface extends RewardEntityInterface
 {
-	/**
-	 * @param ReferralInterface $referral
-	 * @param Event $event
-	 */
-	public function isValid(ReferralInterface $referral, Event $event);
-
 	/**
 	 * @param $value
 	 */

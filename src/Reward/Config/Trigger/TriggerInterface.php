@@ -2,9 +2,9 @@
 
 namespace Message\Mothership\ReferAFriend\Reward\Config\Trigger;
 
-use Message\Mothership\ReferAFriend\Referral\ReferralEntityInterface;
+use Message\Mothership\ReferAFriend\Reward\RewardEntityInterface;
 
-interface TriggerInterface extends ReferralEntityInterface
+interface TriggerInterface extends RewardEntityInterface
 {
 	/**
 	 * @return string

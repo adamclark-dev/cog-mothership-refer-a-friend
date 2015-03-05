@@ -30,16 +30,23 @@ interface TypeInterface
 	public function getDescription();
 
 	/**
-	 * Toggle which constraints can be set against this of referral
+	 * Toggle which constraints can be set against this type of reward
 	 *
 	 * @return array       Array of constraint names
 	 */
 	public function validConstraints();
 
 	/**
-	 * Toggle which triggers can be set against this of referral
+	 * Toggle which triggers can be set against this type of reward
 	 *
 	 * @return array       Array of trigger names
 	 */
 	public function validTriggers();
+
+	/**
+	 * Toggle which reward options can be set against this type of reward
+	 *
+	 * @return array       Array of option names
+	 */
+	public function validRewardOptions();
 }

@@ -20,6 +20,10 @@ interface ConfigInterface
 
 	public function setType(Reward\Type\TypeInterface $type);
 
+	public function setMessage($message);
+
+	public function getMessage();
+
 	public function getType();
 
 	public function getConstraints();
@@ -29,4 +33,8 @@ interface ConfigInterface
 	public function getTriggers();
 
 	public function addTrigger(Trigger\TriggerInterface $trigger);
+
+	public function getRewardOptions();
+
+	public function addRewardOption(RewardOption\RewardOptionInterface $rewardOption);
 }

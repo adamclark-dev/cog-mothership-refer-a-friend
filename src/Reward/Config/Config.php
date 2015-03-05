@@ -25,6 +25,11 @@ class Config implements ConfigInterface
 	private $_type;
 
 	/**
+	 * @var string
+	 */
+	private $_message;
+
+	/**
 	 * @var \DateTime
 	 */
 	private $_createdAt;
@@ -43,6 +48,11 @@ class Config implements ConfigInterface
 	 * @var Trigger\Collection
 	 */
 	protected $_triggers;
+
+	/**
+	 * @var RewardOption\Collection
+	 */
+	protected $_rewardOptions;
 
 	public function __construct(Translator $translator)
 	{
@@ -92,6 +102,20 @@ class Config implements ConfigInterface
 		$name[] = $this->_getNameSuffix();
 
 		return implode(' ', $name);
+	}
+
+	public function setMessage($message)
+	{
+		if (!is_string($message)) {
+			throw new \InvalidArgumentException('Message must be a string!');
+		}
+
+		$this->_message = $message;
+	}
+
+	public function getMessage()
+	{
+		return $this->_message;
 	}
 
 	public function setCreatedAt(\DateTime $createdAt)
@@ -159,6 +183,24 @@ class Config implements ConfigInterface
 		}
 
 		$this->_triggers->add($trigger);
+	}
+
+	public function getRewardOptions()
+	{
+		return $this->_rewardOptions ?: new RewardOption\Collection;
+	}
+
+	public function addRewardOption(RewardOption\RewardOptionInterface $rewardOption)
+	{
+		if (!in_array($rewardOption->getName(), $this->_type->validRewardOptions())) {
+			throw new \LogicException('Reward options of type `' . $rewardOption->getName() . '` cannot be set on rewards with a type of `' . $this->_type->getName() . '`');
+		}
+
+		if (null === $this->_rewardOptions) {
+			$this->_rewardOptions = new RewardOption\Collection;
+		}
+
+		$this->_rewardOptions->add($rewardOption);
 	}
 
 	private function _getNameSuffix()

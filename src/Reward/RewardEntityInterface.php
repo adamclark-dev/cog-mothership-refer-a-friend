@@ -1,8 +1,6 @@
 <?php
 
-namespace Message\Mothership\ReferAFriend\Referral;
-
-use Symfony\Component\Form\FormBuilderInterface;
+namespace Message\Mothership\ReferAFriend\Reward;
 
 /**
  * Interface ReferralEntityInterface
@@ -10,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Thomas Marchant <thomas@message.co.uk>
  */
-interface ReferralEntityInterface
+interface RewardEntityInterface
 {
 	/**
 	 * @return string

@@ -34,6 +34,7 @@ class _1424275225_SetUpReferAFriendDatabases extends Migration
 					reward_config_id INT(11) AUTO_INCREMENT,
 					`name` VARCHAR(255) DEFAULT NULL,
 					`type` VARCHAR(255) NOT NULL,
+					message LONGTEXT NOT NULL
 					created_at INT(11) NOT NULL,
 					created_by VARCHAR(255) NOT NULL,
 					deleted_at INT(11) DEFAULT NULL,
@@ -62,6 +63,17 @@ class _1424275225_SetUpReferAFriendDatabases extends Migration
 					PRIMARY KEY (reward_config_id, `name`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		");
+
+		$this->run("
+			CREATE TABLE
+				refer_a_friend_reward_option
+				(
+					reward_config_id INT(11) NOT NULL,
+					`name` VARCHAR(255) NOT NULL,
+					`value` VARCHAR(255) NOT NULL,
+					PRIMARY KEY (reward_config_id, `name`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8
+		");
 	}
 
 	public function down()
@@ -70,5 +82,6 @@ class _1424275225_SetUpReferAFriendDatabases extends Migration
 		$this->run("DROP TABLE refer_a_friend_reward_config");
 		$this->run("DROP TABLE refer_a_friend_reward_trigger");
 		$this->run("DROP TABLE refer_a_friend_reward_constraint");
+		$this->run("DROP TABLE refer_a_friend_reward_option");
 	}
 }

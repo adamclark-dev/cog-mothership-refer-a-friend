@@ -2,7 +2,7 @@
 
 namespace Message\Mothership\ReferAFriend\Reward\Config\Trigger;
 
-use Message\Mothership\ReferAFriend\Reward\Config\Config;
+use Message\Mothership\ReferAFriend\Reward\Config\ConfigInterface;
 use Message\Cog\DB\Transaction;
 use Message\Cog\DB\TransactionalInterface;
 
@@ -22,7 +22,7 @@ class Create implements TransactionalInterface
 		$this->_transOverride = true;
 	}
 
-	public function save(Config $config)
+	public function save(ConfigInterface $config)
 	{
 		foreach ($config->getTriggers() as $trigger) {
 			$this->_addToTransaction($config, $trigger);
@@ -31,7 +31,7 @@ class Create implements TransactionalInterface
 		$this->_commitTransaction();
 	}
 
-	private function _addToTransaction(Config $config, TriggerInterface $trigger)
+	private function _addToTransaction(ConfigInterface $config, TriggerInterface $trigger)
 	{
 		$this->_transaction->add("
 			INSERT INTO

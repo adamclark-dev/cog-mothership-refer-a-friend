@@ -29,6 +29,7 @@ class Loader
 	 * @var array
 	 */
 	private $_columns = [
+		'referral_id AS id',
 		'status',
 		'referrer_id AS referrerID',
 		'reward_config_id AS rewardConfigID',
@@ -134,6 +135,7 @@ class Loader
 
 		foreach ($result as $row) {
 			$referral = $this->_referralFactory->getReferralProxy();
+			$referral->setID($row->id);
 			$referral->setStatus($row->status);
 			$referral->setRewardConfigID($row->rewardConfigID);
 			$referral->setReferrerID($row->referrerID);

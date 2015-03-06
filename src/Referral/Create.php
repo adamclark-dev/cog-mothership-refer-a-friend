@@ -35,6 +35,8 @@ class Create
 
 	/**
 	 * @param ReferralInterface $referral
+	 *
+	 * @return ReferralInterface
 	 */
 	public function save(ReferralInterface $referral)
 	{

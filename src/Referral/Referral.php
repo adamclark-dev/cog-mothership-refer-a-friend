@@ -50,8 +50,15 @@ class Referral implements ReferralInterface
 
 	public function setID($id)
 	{
-		if (!is_numeric($id) || $id != (int) $id) {
-			throw new \InvalidArgumentException('ID must be a whole number!');
+		if (!is_numeric($id)) {
+			$type = gettype($id) === 'object' ? get_class($id) : gettype($id);
+			throw new \InvalidArgumentException('ID must be numeric, ' . $type . ' given');
+		}
+
+		$id = (int) $id;
+
+		if ($id <= 0) {
+			throw new \InvalidArgumentException('ID must be a number greater than zero, ' . $id . ' given');
 		}
 
 		$this->_id = (int) $id;

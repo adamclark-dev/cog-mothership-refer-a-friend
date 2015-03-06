@@ -82,6 +82,7 @@ class Edit implements TransactionalInterface
 			'referredEmail'  => $referral->getReferredEmail(),
 			'updatedAt'      => new \DateTime,
 			'updatedBy'      => $this->_currentUser->id,
+			'id'             => $referral->getID(),
 		]);
 	}
 

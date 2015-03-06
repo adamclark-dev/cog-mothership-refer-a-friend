@@ -1,4 +1,6 @@
-{{ form_start(form) }}
-{{ form_rest(form) }}
-<button class="button">Save</button>
+{{ form_start(form, {'action': action}) }}
+    {{ form_rest(form) }}
+    <button type="submit" class="button small save">
+        Save
+    </button>
 {{ form_end(form) }}

@@ -26,8 +26,9 @@ ms.refer:
       name: Friend's name
       message: A message to your friend
   config:
-    current: Current reward config
+    current: Current settings
     success: Reward configuration saved successfully
+    none_set: No reward configuration set
   validator:
     already_referred: This user has already been referred
     current_user: You cannot refer yourself!

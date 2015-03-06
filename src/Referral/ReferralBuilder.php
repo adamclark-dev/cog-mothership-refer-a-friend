@@ -2,7 +2,7 @@
 
 namespace Message\Mothership\ReferAFriend\Referral;
 
-use Message\Mothership\ReferAFriend\Reward\Config\Loader as RewardConfigLoader;
+use Message\Mothership\ReferAFriend\Reward\Config\Config as RewardConfig;
 use Message\User;
 
 class ReferralBuilder
@@ -13,19 +13,19 @@ class ReferralBuilder
 	private $_factory;
 
 	/**
-	 * @var RewardConfigLoader
+	 * @var RewardConfig
 	 */
-	private $_configLoader;
+	private $_config;
 
 	/**
 	 * @var
 	 */
 	private $_user;
 
-	final public function __construct(ReferralFactory $factory, RewardConfigLoader $configLoader, User\UserInterface $user)
+	final public function __construct(ReferralFactory $factory, RewardConfig $config, User\UserInterface $user)
 	{
 		$this->_factory      = $factory;
-		$this->_configLoader = $configLoader;
+		$this->_config       = $config;
 		$this->_user         = $user;
 	}
 
@@ -40,11 +40,9 @@ class ReferralBuilder
 		}
 
 		$referral = $this->_factory->getReferral();
-		$rewardConfig = $this->_configLoader->getCurrent();
-		$rewardConfig = array_shift($rewardConfig);
 
 		$referral->setReferrer($this->_user);
-		$referral->setRewardConfig($rewardConfig);
+		$referral->setRewardConfig($this->_config);
 		$referral->setReferredEmail($data['email']);
 		$referral->setReferredName($data['name']);
 		$referral->setStatus(Statuses::PENDING);

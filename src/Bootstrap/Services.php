@@ -53,7 +53,7 @@ class Services implements ServicesInterface
 		$services['refer.referral_builder'] = function($c) {
 			return new ReferAFriend\Referral\ReferralBuilder(
 				$c['refer.referral_factory'],
-				$c['refer.reward.config.loader'],
+				$c['refer.reward.config.current'],
 				$c['user.current']
 			);
 		};
@@ -82,10 +82,6 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Referral\Validator\UserExists($c['user.loader']);
 		};
 
-		$services['refer.form.type_select'] = function($c) {
-			return new ReferAFriend\Form\TypeSelect($c['refer.reward.types'], $c['translator']);
-		};
-
 		$services['refer.form.reward_config'] = function($c) {
 			return new ReferAFriend\Form\RewardConfig(
 				$c['refer.reward.config.constraint.collection_builder'],
@@ -106,6 +102,12 @@ class Services implements ServicesInterface
 
 		$services['refer.reward.types.no_reward'] = function($c) {
 			return new ReferAFriend\Reward\Type\NoRewardType;
+		};
+
+		$services['refer.reward.config.current'] = function($c) {
+			$current = $c['refer.reward.config.loader']->getCurrent();
+
+			return array_shift($current);
 		};
 
 		$services['refer.reward.config.create'] = function($c) {

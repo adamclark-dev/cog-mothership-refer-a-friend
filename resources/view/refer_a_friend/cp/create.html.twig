@@ -1,31 +1,23 @@
-{% extends 'Message:Mothership:ControlPanel::_templates/full_slideout' %}
-{% block javascripts %}
-    {{ parent() }}
-    {% javascripts
-    '@Message:Mothership:ReferAFriend::resources/assets/js/setup.js'
+{% extends 'Message:Mothership:ReferAFriend::refer_a_friend:cp:dashboard' %}
 
-    output='/assets/js/ms_refer_a_friend.js'
-    filter='?jsmin'
+{% block slideAttr 'data-slide-loaded' %}
 
-    %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}
-
-{% block main %}
+{% block slide %}
     <div class="container-content create-page extended">
-        {{ form_start(form) }}
-        {{ form_label(form.type) }}
-        {% for type in form.type %}
-            <label class="option-block">
-                {{ form_widget(type) }}
-                <p class="type"><strong>{{ type.vars.label }}</strong></p>
-                <p>{{ rewardTypes.get(type.vars.value).description | trans }}</p>
-            </label>
+        {% for type in rewardTypes %}
+            <a class="option-block" href="{{ url('ms.cp.refer_a_friend.set_options', {'type': type.name}) }}" data-load-form>
+                <p class="type"><strong>{{ type.displayName | trans }}</strong></p>
+                <p>{{ type.description | trans }}</p>
+            </a>
         {% endfor %}
-        <button class="button">Save</button>
-
-        {{ form_end(form) }}
-
+        <div id="options-form"></div>
     </div>
+
+    {% javascripts
+        '@Message:Mothership:ReferAFriend::resources/assets/js/create.js'
+        output='/assets/js/ms_refer_a_friend_create.js'
+        filter='?jsmin'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

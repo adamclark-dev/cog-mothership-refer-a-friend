@@ -11,30 +11,9 @@ class Reward extends Controller
 {
 	public function create()
 	{
-		$form = $this->createForm($this->get('refer.form.type_select'));
-
 		return $this->render('Message:Mothership:ReferAFriend::refer_a_friend:cp:create', [
-			'form'        => $form,
 			'rewardTypes' => $this->get('refer.reward.types'),
 		]);
-	}
-
-	public function createAction()
-	{
-		$form = $this->createForm($this->get('refer.form.type_select'));
-
-		$form->handleRequest();
-
-		if ($form->isValid()) {
-			$data = $form->getData();
-			$type = $data[TypeSelect::FIELD_NAME];
-
-			return $this->redirectToRoute('ms.cp.refer_a_friend.set_options', [
-				'type' => $type
-			]);
-		}
-
-		return $this->redirectToReferer();
 	}
 
 	public function setOptions($type)
@@ -42,7 +21,8 @@ class Reward extends Controller
 		$form = $this->_getTypeForm($type);
 
 		return $this->render('Message:Mothership:ReferAFriend::refer_a_friend:cp:set_options', [
-			'form' => $form,
+			'form'   => $form,
+			'action' => $this->generateUrl('ms.cp.refer_a_friend.set_options_action', ['type' => $type,])
 		]);
 	}
 
@@ -68,6 +48,15 @@ class Reward extends Controller
 		}
 
 		return $this->redirectToRoute('ms.cp.refer_a_friend.dashboard');
+	}
+
+	public function viewConfig($configID)
+	{
+		$rewardConfig = $this->get('refer.reward.config.loader')->getByID($configID);
+
+		return $this->render('Message:Mothership:ReferAFriend::refer_a_friend:cp:view_config', [
+			'rewardConfig' => $rewardConfig,
+		]);
 	}
 
 	private function _saveConfigEntities(Config $config)

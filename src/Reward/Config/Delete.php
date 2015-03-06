@@ -8,7 +8,7 @@ use Message\User\UserInterface;
 class Delete implements DB\TransactionalInterface
 {
 	private $_trans;
-	private $_transOverride;
+	private $_transOverride = false;
 	private $_currentUser;
 
 	public function __construct(DB\Transaction $trans, UserInterface $currentUser)

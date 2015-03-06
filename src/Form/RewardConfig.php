@@ -93,6 +93,10 @@ class RewardConfig extends Form\AbstractType
 
 	private function _addConstraintFields(Form\FormBuilderInterface $builder, TypeInterface $rewardType)
 	{
+		if (count($rewardType->validConstraints()) <= 0) {
+			return;
+		}
+
 		$constraintsForm = $builder->create('constraints', null, [
 			'label'    => 'ms.refer.form.constraints.label',
 			'compound' => true,
@@ -148,6 +152,10 @@ class RewardConfig extends Form\AbstractType
 
 	private function _addRewardOptionFields(Form\FormBuilderInterface $builder, TypeInterface $rewardType)
 	{
+		if (count($rewardType->validRewardOptions()) <= 0) {
+			return;
+		}
+
 		$rewardOptionsForm = $builder->create('reward_options', null, [
 			'label'    => 'ms.refer.form.reward_options.label',
 			'compound' => true,

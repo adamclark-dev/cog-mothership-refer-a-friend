@@ -28,6 +28,7 @@ class Loader
 		'reward_config_id AS id',
 		'name',
 		'type',
+		'message',
 		'created_at AS createdAt',
 	];
 
@@ -90,6 +91,7 @@ class Loader
 			$config->setID((int) $row->id);
 			$config->setName($row->name);
 			$config->setType($this->_types->get($row->type));
+			$config->setMessage($row->message);
 
 			$createdAt = new \DateTime;
 			$createdAt->setTimestamp($row->createdAt);

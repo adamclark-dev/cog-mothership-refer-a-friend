@@ -13,6 +13,16 @@
 {% endblock %}
 
 {% block main %}
-    <h2>{{ 'ms.refer.config.current' | trans }}: {{ currentRewardConfig.fullName }}</h2>
-    {{ render(controller('Message:Mothership:ReferAFriend::Controller:Dashboard#referralTable')) }}
+    <hgroup class="title">
+        <h1>Refer a Friend</h1>
+        <div class="controls refer-a-friend">
+            <a href="{{ url('ms.cp.refer_a_friend.create')}}" class="button create refer-a-friend" data-live>Configuration settings</a>
+        </div>
+    </hgroup>
+
+    <div class="container-content">
+        {{ render(controller('Message:Mothership:ReferAFriend::Controller:Dashboard#currentConfig')) }}
+
+        {{ render(controller('Message:Mothership:ReferAFriend::Controller:Dashboard#referralTable')) }}
+    </div>
 {% endblock %}

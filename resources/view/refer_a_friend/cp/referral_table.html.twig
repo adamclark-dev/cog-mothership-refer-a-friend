@@ -1,13 +1,14 @@
 <div class="container-content">
-    <table class="table-filter products">
+    <table class="table-filter referrals">
         <colgroup>
             <col width="100">
             <col width="50">
             <col>
             <col>
             <col>
-            <col width="100">
-            <col width="100">
+            <col>
+            <col>
+            <col>
         </colgroup>
         <thead>
         <tr>
@@ -15,7 +16,8 @@
             <th>Referrer</th>
             <th>Referred name</th>
             <th>Referred email</th>
-            <th class="disable">Status</th>
+            <th>Status</th>
+            <th>Configuration</th>
             <th class="disable">Created at</th>
         </tr>
         </thead>
@@ -26,6 +28,7 @@
             <th>Referred name</th>
             <th>ReferredEmail</th>
             <th>Status</th>
+            <th>Configuration</th>
             <th class="a-center"><a href="#" class="clear-filters">Clear filters</a></th>
         </tr>
         </tfoot>
@@ -36,8 +39,13 @@
                 <td>{{ referral.referrer.name }}</td>
                 <td>{{ referral.referredName }}</td>
                 <td>{{ referral.referredEmail }}</td>
-                <td>{{ referral.status }}</td>
-                <td></td>
+                <td>{{ referral.status | capitalize }}</td>
+                <td>
+                    <a href="{{ url('ms.cp.refer_a_friend.view_config', {'configID': referral.rewardConfig.getID}) }}" data-live>
+                    {{ referral.rewardConfig.fullName }}
+                    </a>
+                </td>
+                <td>{{ referral.createdAt | date }}</td>
             </tr>
         {% endfor %}
         </tbody>

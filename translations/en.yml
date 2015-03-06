@@ -17,6 +17,7 @@ ms.refer:
         name: Name
       message:
         name: Email message
+        help: The text that will be sent to the referred email address. This requires some variables, add <strong>{%toName%}</strong> to insert the referred user's name, <strong>{%fromName%}</strong> for the referrer's name, and <strong>{%link%}</strong> for the link to the site.
     constraints:
       label: Constraints
     reward_options:
@@ -33,3 +34,5 @@ ms.refer:
     already_referred: This user has already been referred
     current_user: You cannot refer yourself!
     user_exists: This user already exists
+  email:
+    subject: You have been referred to {%site%}

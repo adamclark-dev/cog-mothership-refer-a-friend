@@ -69,6 +69,9 @@ class RewardConfig extends Form\AbstractType
 			'label' => 'ms.refer.form.config.message.name',
 			'constraints' => [
 				new FormConstraints\NotBlank
+			],
+			'attr' => [
+				'data-help-key' => 'ms.refer.config.message.help'
 			]
 		]);
 
@@ -107,7 +110,12 @@ class RewardConfig extends Form\AbstractType
 		;
 
 		foreach ($constraints as $constraint) {
-			$options = ['label' => $constraint->getDisplayName()];
+			$options = [
+				'label' => $constraint->getDisplayName(),
+				'attr'  => [
+					'data-help-key' => $constraint->getDescription(),
+				]
+			];
 			$options = $constraint->getFormOptions() + $options;
 			$constraintsForm->add($constraint->getName(), $constraint->getFormType(), $options);
 		};
@@ -145,7 +153,7 @@ class RewardConfig extends Form\AbstractType
 					'choices'  => $choices,
 					'constraints' => [
 						new FormConstraints\NotBlank,
-					]
+					],
 				]);
 		}
 	}
@@ -166,7 +174,12 @@ class RewardConfig extends Form\AbstractType
 		;
 
 		foreach ($rewardOptions as $rewardOption) {
-			$options = ['label' => $rewardOption->getDisplayName()];
+			$options = [
+				'label' => $rewardOption->getDisplayName(),
+				'attr'  => [
+					'data-help-key' => $rewardOption->getDescription(),
+				]
+			];
 			$options = $rewardOption->getFormOptions() + $options;
 			$rewardOptionsForm->add($rewardOption->getName(), $rewardOption->getFormType(), $options);
 		};

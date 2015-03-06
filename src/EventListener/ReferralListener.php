@@ -25,6 +25,10 @@ class ReferralListener extends EventListener implements SubscriberInterface
 		$message = $this->get('mail.message');
 		$message->setTo($referral->getReferredEmail(), $referral->getReferredName());
 
+		$message->setSubject($this->get('translator')->trans('ms.refer.email.subject', [
+			'{%site%}' => $this->get('cfg')->app->name,
+		]));
+
 		$message->setView('Message:Mothership:ReferAFriend::refer_a_friend:email:referral_message', [
 			'toName'   => $referral->getReferredName(),
 			'message'  => $referral->getRewardConfig()->getMessage(),

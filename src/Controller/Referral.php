@@ -24,7 +24,7 @@ class Referral extends Controller
 		return $this->render('Message:Mothership:ReferAFriend::refer_a_friend:front_end:logged_out');
 	}
 
-	public function referAFriendAction()
+	public function referAFriendAction($automaticUrl = false)
 	{
 		if ($this->get('user.current') instanceof AnonymousUser) {
 			throw new \LogicException('User must be logged in to refer a friend!');
@@ -53,7 +53,11 @@ class Referral extends Controller
 			$event = new Event\EmailReferralEvent;
 			$event->setReferral($referral);
 
-			$event->setUrl($this->get('request')->headers->get('referer'));
+			if ($automaticUrl) {
+				$event->setUrl($this->get('request')->headers->get('referer'));
+			} else {
+				$event->setUrl($this->generateUrl('ms.cms.frontend', [], true));
+			}
 
 			try {
 				$this->get('event.dispatcher')->dispatch(

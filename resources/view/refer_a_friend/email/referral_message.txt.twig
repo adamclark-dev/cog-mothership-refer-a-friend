@@ -1,8 +1,1 @@
-To {{ referral.referredName }}
-
-{{ message }}
-
-{{ url }}
-
-Love you lots
-{{ referrer.name }}
+{{ message | trans({'{%toName%}': toName, '{%fromName%}' : referrer.name, '{%link%}': url}) }}

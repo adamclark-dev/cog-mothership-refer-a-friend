@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as FormConstraints;
 
 class RewardConfig extends Form\AbstractType
 {
+	const NAME        = 'refer_a_friend_reward_options';
 	const REWARD_TYPE = 'reward_type';
 	const NONE        = 'none';
 
@@ -43,7 +44,7 @@ class RewardConfig extends Form\AbstractType
 
 	public function getName()
 	{
-		return 'refer_a_friend_reward_options';
+		return self::NAME;
 	}
 
 	public function buildForm(Form\FormBuilderInterface $builder, array $options)

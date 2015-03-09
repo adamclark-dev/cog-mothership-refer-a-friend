@@ -3,6 +3,14 @@
 {% block slideAttr 'data-slide-loaded' %}
 
 {% block slide %}
+    <hgroup class="title">
+        <h1>Create Referral</h1>
+        {% block save %}
+        <button type="submit" id="save-button" class="button small save" form="formname" disabled="disabled">
+            Save
+        </button>
+{% endblock %}
+    </hgroup>
     <div class="container-content create-page extended">
         {% for type in rewardTypes %}
             <a class="option-block" href="{{ url('ms.cp.refer_a_friend.set_options', {'type': type.name}) }}" data-load-form>

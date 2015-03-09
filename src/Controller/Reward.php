@@ -80,8 +80,30 @@ class Reward extends Controller
 
 	private function _getTypeForm($type)
 	{
+		$currentConfig = $this->get('refer.reward.config.current');
+
+		$data = [
+			'name'           => $currentConfig->getName(),
+			'message'        => $currentConfig->getMessage(),
+			'constraints'    => [],
+			'reward_options' => [],
+		];
+
+		foreach ($currentConfig->getConstraints() as $constraint) {
+			$data['constraints'][$constraint->getName()] = $constraint->getValue();
+		}
+
+		foreach ($currentConfig->getTriggers() as $trigger) {
+			$data['triggers'] = $trigger->getName();
+		}
+
+		foreach ($currentConfig->getRewardOptions() as $rewardOption) {
+			$data['reward_options'][$rewardOption->getName()] = $rewardOption->getValue();
+		}
+
 		return $this->createForm($this->get('refer.form.reward_config'), null, [
 			RewardConfig::REWARD_TYPE => $this->get('refer.reward.types')->get($type),
+			'data' => $data,
 		]);
 	}
 }

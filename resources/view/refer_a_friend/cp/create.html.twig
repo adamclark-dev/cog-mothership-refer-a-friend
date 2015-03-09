@@ -6,7 +6,7 @@
     <hgroup class="title">
         <h1>Create Referral</h1>
         {% block save %}
-        <button type="submit" id="save-button" class="button small save" form="formname" disabled="disabled">
+        <button type="submit" id="save-button" class="button small save" form="{{ constant('Message\\Mothership\\ReferAFriend\\Form\\RewardConfig::NAME') }}" disabled="disabled">
             Save
         </button>
 {% endblock %}

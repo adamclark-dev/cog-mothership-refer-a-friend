@@ -74,6 +74,26 @@ class _1424275225_SetUpReferAFriendDatabases extends Migration
 					PRIMARY KEY (reward_config_id, `name`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8
 		");
+
+		$this->run("
+			INSERT INTO
+				`refer_a_friend_reward_config`
+				(
+					`name`,
+					`type`,
+					`message`,
+					`created_at`,
+					`created_by`
+				)
+			VALUES
+				(
+					'Default configuration',
+					'no_reward',
+					'Hi {%toName%}" . PHP_EOL . PHP_EOL . "You have been referred to {%link%} by {%fromName%}.',
+					UNIX_TIMESTAMP(),
+					'0'
+				);
+");
 	}
 
 	public function down()

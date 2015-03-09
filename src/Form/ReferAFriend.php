@@ -28,6 +28,5 @@ class ReferAFriend extends Form\AbstractType
 				new Constraints\NotBlank,
 			]
 		]);
-
 	}
 }

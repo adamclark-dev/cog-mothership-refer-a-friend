@@ -8,7 +8,7 @@
 
         <p><strong>Message</strong></p>
 
-        <p>{{ rewardConfig.message }}</p>
+        <p>{{ rewardConfig.message | nl2br }}</p>
 
         {% if rewardConfig.constraints | length > 0 %}
             <h2>Constraints</h2>

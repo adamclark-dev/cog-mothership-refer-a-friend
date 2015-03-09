@@ -91,7 +91,10 @@ class RewardConfig extends Form\AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults([
-			self::REWARD_TYPE => null
+			self::REWARD_TYPE => null,
+			'attr' => [
+				'id' => self::NAME,
+			],
 		]);
 	}
 

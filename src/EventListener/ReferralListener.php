@@ -7,8 +7,17 @@ use Message\Cog\Event\SubscriberInterface;
 use Message\Mothership\ReferAFriend\Referral\Event;
 use Message\Mothership\ReferAFriend\Referral\Exception\EmailException;
 
+/**
+ * Class ReferralListener
+ * @package Message\Mothership\ReferAFriend\EventListener
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ */
 class ReferralListener extends EventListener implements SubscriberInterface
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	static public function getSubscribedEvents()
 	{
 		return [
@@ -18,6 +27,11 @@ class ReferralListener extends EventListener implements SubscriberInterface
 		];
 	}
 
+	/**
+	 * Send email to referred email address upon submission of Refer a Friend form
+	 *
+	 * @param Event\EmailReferralEvent $event
+	 */
 	public function sendReferralEmail(Event\EmailReferralEvent $event)
 	{
 		$referral = $event->getReferral();

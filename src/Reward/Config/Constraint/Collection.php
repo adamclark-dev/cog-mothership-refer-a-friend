@@ -5,8 +5,20 @@ namespace Message\Mothership\ReferAFriend\Reward\Config\Constraint;
 use Message\Mothership\ReferAFriend\Reward\EntityCollectionInterface;
 use Message\Cog\ValueObject\Collection as BaseCollection;
 
+/**
+ * Class Collection
+ * @package Message\Mothership\ReferAFriend\Reward\Config\Constraint
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Collection of constraints. Used both for registering constraints in the service container, and for storing against a
+ * reward configuration
+ */
 class Collection extends BaseCollection implements EntityCollectionInterface
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	protected function _configure()
 	{
 		$this->addValidator(function($item) {

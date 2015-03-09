@@ -8,9 +8,9 @@ use Message\Cog\DB\Entity\EntityLoaderCollection;
  * Class ReferralProxy
  * @package Message\Mothership\ReferAFriend\Referral
  *
- * @author Thomas Marchant <thomas@message.co.uk>
+ * @author Thomas Marchant <thomas@mothership.ec>
  *
- * Class for handling lazy loading of constraints and triggers on referrals
+ * Class for handling lazy loading of referrers and reward configurations
  */
 class ReferralProxy extends Referral
 {
@@ -92,11 +92,7 @@ class ReferralProxy extends Referral
 	}
 
 	/**
-	 * Load referrer on request
-	 *
-	 * @throws \LogicException               Throws exception if no user can be found
-	 *
-	 * @return \Message\User\UserInterface
+	 * {@inheritDoc}
 	 */
 	public function getReferrer()
 	{
@@ -118,8 +114,8 @@ class ReferralProxy extends Referral
 	}
 
 	/**
-	 * @return \Message\Mothership\ReferAFriend\Reward\Config\Config
-	 */
+	 * {@inheritDoc}
+	*/
 	public function getRewardConfig()
 	{
 		if (null === $this->_rewardConfig) {

@@ -6,7 +6,7 @@ namespace Message\Mothership\ReferAFriend\Reward\Type;
  * Interface TypeInterface
  * @package Message\Mothership\ReferAFriend\Referral\Type
  *
- * @author Thomas Marchant <thomas@message.co.uk>
+ * @author Thomas Marchant <thomas@mothership.ec>
  */
 interface TypeInterface
 {

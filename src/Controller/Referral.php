@@ -7,8 +7,21 @@ use Message\User\AnonymousUser;
 use Message\Mothership\ReferAFriend\Referral\Event;
 use Message\Mothership\ReferAFriend\Referral\Exception\EmailException;
 
+/**
+ * Class Referral
+ * @package Message\Mothership\ReferAFriend\Controller
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Controller for handling the referring of users to the site
+ */
 class Referral extends Controller
 {
+	/**
+	 * Display form on front end for users to refer friends
+	 *
+	 * @return \Message\Cog\HTTP\Response
+	 */
 	public function referAFriend()
 	{
 		if (!$this->get('user.current') instanceof AnonymousUser) {
@@ -24,6 +37,14 @@ class Referral extends Controller
 		return $this->render('Message:Mothership:ReferAFriend::refer_a_friend:front_end:logged_out');
 	}
 
+	/**
+	 * Create and validate referral. Email referred email address if referral is valid, and save the referral to the database.
+	 *
+	 * @param bool $automaticUrl        If set to true, the link injected into the email will be to the page the user
+	 *                                  was on when they sent the referral. If set to false, it will inject the base URL
+	 *
+	 * @return \Message\Cog\HTTP\RedirectResponse
+	 */
 	public function referAFriendAction($automaticUrl = false)
 	{
 		if ($this->get('user.current') instanceof AnonymousUser) {

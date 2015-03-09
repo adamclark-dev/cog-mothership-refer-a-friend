@@ -5,6 +5,14 @@ namespace Message\Mothership\ReferAFriend\Referral;
 use Message\Mothership\ReferAFriend\Reward\Config\Config as RewardConfig;
 use Message\User;
 
+/**
+ * Class ReferralBuilder
+ * @package Message\Mothership\ReferAFriend\Referral
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Class for taking data from a ReferAFriend form and creating an instance of ReferralInterface from it
+ */
 class ReferralBuilder
 {
 	/**
@@ -18,7 +26,7 @@ class ReferralBuilder
 	private $_config;
 
 	/**
-	 * @var
+	 * @var User\UserInterface
 	 */
 	private $_user;
 
@@ -29,6 +37,14 @@ class ReferralBuilder
 		$this->_user         = $user;
 	}
 
+	/**
+	 * Build an instance of ReferralInterface using data from the form, and tie it to the logged in user and the current
+	 * existing reward configuration from the database.
+	 *
+	 * @param array $data    Data from a ReferAFriend form
+	 *
+	 * @return Referral
+	 */
 	public function build(array $data)
 	{
 		if ($this->_user instanceof User\AnonymousUser) {

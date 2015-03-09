@@ -8,7 +8,9 @@ use Message\Cog\DB\Entity\EntityLoaderCollection;
  * Class ReferralFactory
  * @package Message\Mothership\ReferAFriend\Referral
  *
- * @author Thomas Marchant <thomas@message.co.uk>
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Class for creating new instances of Referral and ReferralProxy
  */
 class ReferralFactory
 {
@@ -23,6 +25,8 @@ class ReferralFactory
 	}
 
 	/**
+	 * Create a new instance of Referral and return it
+	 *
 	 * @return Referral
 	 */
 	public function getReferral()
@@ -31,6 +35,8 @@ class ReferralFactory
 	}
 
 	/**
+	 * Create a new instance of ReferralProxy and set the entity loaders against it
+	 *
 	 * @return ReferralProxy
 	 */
 	public function getReferralProxy()

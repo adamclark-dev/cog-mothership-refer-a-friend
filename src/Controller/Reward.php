@@ -3,12 +3,25 @@
 namespace Message\Mothership\ReferAFriend\Controller;
 
 use Message\Cog\Controller\Controller;
-use Message\Mothership\ReferAFriend\Form\TypeSelect;
 use Message\Mothership\ReferAFriend\Form\RewardConfig;
 use Message\Mothership\ReferAFriend\Reward\Config\Config;
 
+/**
+ * Class Reward
+ * @package Message\Mothership\ReferAFriend\Controller
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Controller for handling the configuration of rewards
+ */
 class Reward extends Controller
 {
+	/**
+	 * Render first stage of form to create a new configuration for rewards. This creates two links that will make an
+	 * AJAX request to bring up the appropriate form.
+	 *
+	 * @return \Message\Cog\HTTP\Response
+	 */
 	public function create()
 	{
 		return $this->render('Message:Mothership:ReferAFriend::refer_a_friend:cp:create', [
@@ -16,6 +29,13 @@ class Reward extends Controller
 		]);
 	}
 
+	/**
+	 * Render form for creating a new configuration for rewards.
+	 *
+	 * @param string $type        The name of the reward type (set by URLs in the `create()` method)
+	 *
+	 * @return \Message\Cog\HTTP\Response
+	 */
 	public function setOptions($type)
 	{
 		$form = $this->_getTypeForm($type);
@@ -26,6 +46,13 @@ class Reward extends Controller
 		]);
 	}
 
+	/**
+	 * Save the configuration for the rewards.
+	 *
+	 * @param string $type        The name of the reward type (set by URLs in the `create()` method)
+	 *
+	 * @return \Message\Cog\HTTP\RedirectResponse
+	 */
 	public function setOptionsAction($type)
 	{
 		$form = $this->_getTypeForm($type);
@@ -50,6 +77,13 @@ class Reward extends Controller
 		return $this->redirectToRoute('ms.cp.refer_a_friend.dashboard');
 	}
 
+	/**
+	 * View the current configuration for rewards.
+	 *
+	 * @param int $configID
+	 *
+	 * @return \Message\Cog\HTTP\Response
+	 */
 	public function viewConfig($configID)
 	{
 		$rewardConfig = $this->get('refer.reward.config.loader')->getByID($configID);
@@ -59,6 +93,11 @@ class Reward extends Controller
 		]);
 	}
 
+	/**
+	 * Save constraints, triggers and reward options against a reward configuration.
+	 *
+	 * @param Config $config
+	 */
 	private function _saveConfigEntities(Config $config)
 	{
 		$transaction = clone $this->get('db.transaction');
@@ -71,13 +110,20 @@ class Reward extends Controller
 		$triggerCreate->setTransaction($transaction);
 		$triggerCreate->save($config);
 
-		$RewardOptionCreate = clone($this->get('refer.reward.config.reward_option_create'));
-		$RewardOptionCreate->setTransaction($transaction);
-		$RewardOptionCreate->save($config);
+		$rewardOptionCreate = clone($this->get('refer.reward.config.reward_option_create'));
+		$rewardOptionCreate->setTransaction($transaction);
+		$rewardOptionCreate->save($config);
 
 		$transaction->commit();
 	}
 
+	/**
+	 * Get form for creating reward configuration
+	 *
+	 * @param string $type
+	 *
+	 * @return \Symfony\Component\Form\Form
+	 */
 	private function _getTypeForm($type)
 	{
 		$currentConfig = $this->get('refer.reward.config.current');

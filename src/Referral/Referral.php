@@ -9,7 +9,9 @@ use Message\User;
  * Class Referral
  * @package Message\Mothership\ReferAFriend\Referral
  *
- * @author Thomas Marchant <thomas@message.co.uk>
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * A model representing a referral from an existing user to an email address
  */
 class Referral implements ReferralInterface
 {
@@ -48,6 +50,9 @@ class Referral implements ReferralInterface
 	 */
 	private $_createdAt;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function setID($id)
 	{
 		if (!is_numeric($id)) {
@@ -64,6 +69,9 @@ class Referral implements ReferralInterface
 		$this->_id = (int) $id;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getID()
 	{
 		return $this->_id;
@@ -170,7 +178,7 @@ class Referral implements ReferralInterface
 	}
 
 	/**
-	 * @param RewardConfig $rewardConfig
+	 * {@inheritDoc}
 	 */
 	public function setRewardConfig(RewardConfig $rewardConfig)
 	{
@@ -178,7 +186,7 @@ class Referral implements ReferralInterface
 	}
 
 	/**
-	 * @return RewardConfig
+	 * {@inheritDoc}
 	 */
 	public function getRewardConfig()
 	{
@@ -186,9 +194,7 @@ class Referral implements ReferralInterface
 	}
 
 	/**
-	 * @param string $eventName
-	 *
-	 * @return bool
+	 * {@inheritDoc}
 	 */
 	public function hasTriggered($eventName)
 	{

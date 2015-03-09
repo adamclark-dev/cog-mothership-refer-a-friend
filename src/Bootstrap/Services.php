@@ -9,12 +9,16 @@ use Message\Cog\Bootstrap\ServicesInterface;
  * Class Services
  * @package Message\Mothership\ReferAFriend\Bootstrap
  *
- * @author Thomas Marchant <thomas@message.co.uk>
+ * @author Thomas Marchant <thomas@mothership.ec>
  */
 class Services implements ServicesInterface
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	public function registerServices($services)
 	{
+		// Referrals
 		$services['refer.referral_factory'] = function($c) {
 			return new ReferAFriend\Referral\ReferralFactory(
 				$c['refer.referral.entity_loaders']
@@ -58,6 +62,7 @@ class Services implements ServicesInterface
 			);
 		};
 
+		// Validation
 		$services['refer.validator'] = function($c) {
 			return new ReferAFriend\Referral\Validator\Collection([
 				$c['refer.validator.current_user'],
@@ -82,6 +87,7 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Referral\Validator\UserExists($c['user.loader']);
 		};
 
+		// Forms
 		$services['refer.form.reward_config'] = function($c) {
 			return new ReferAFriend\Form\RewardConfig(
 				$c['refer.reward.config.constraint.collection_builder'],
@@ -94,6 +100,7 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Form\ReferAFriend;
 		};
 
+		// Reward types
 		$services['refer.reward.types'] = function($c) {
 			return new ReferAFriend\Reward\Type\Collection([
 				$c['refer.reward.types.no_reward'],
@@ -104,6 +111,7 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Reward\Type\NoRewardType;
 		};
 
+		// Reward configurations
 		$services['refer.reward.config.current'] = function($c) {
 			$current = $c['refer.reward.config.loader']->getCurrent();
 
@@ -144,6 +152,7 @@ class Services implements ServicesInterface
 			]);
 		};
 
+		// Reward constraints
 		$services['refer.reward.config.constraint_loader'] = function($c) {
 			return new ReferAFriend\Reward\Config\Constraint\Loader($c['db.query.builder.factory'], $c['refer.reward.config.constraints']);
 		};
@@ -153,19 +162,14 @@ class Services implements ServicesInterface
 		};
 
 		$services['refer.reward.config.constraints'] = function($c) {
-			return new ReferAFriend\Reward\Config\Constraint\Collection([
-				$c['refer.reward.config.constraints.timeout'],
-			]);
+			return new ReferAFriend\Reward\Config\Constraint\Collection([]);
 		};
 
 		$services['refer.reward.config.constraint.collection_builder'] = function($c) {
 			return new ReferAFriend\Reward\Config\Constraint\CollectionBuilder($c['refer.reward.config.constraints']);
 		};
 
-		$services['refer.reward.config.constraints.timeout'] = function($c) {
-			return new ReferAFriend\Reward\Config\Constraint\Constraints\Timeout;
-		};
-
+		// Reward triggers
 		$services['refer.reward.config.trigger_loader'] = function($c) {
 			return new ReferAFriend\Reward\Config\Trigger\Loader($c['db.query.builder.factory'], $c['refer.reward.config.triggers']);
 		};
@@ -182,6 +186,7 @@ class Services implements ServicesInterface
 			return new ReferAFriend\Reward\Config\Trigger\CollectionBuilder($c['refer.reward.config.triggers']);
 		};
 
+		// Reward options
 		$services['refer.reward.config.reward_option_loader'] = function($c) {
 			return new ReferAFriend\Reward\Config\RewardOption\Loader($c['db.query.builder.factory'], $c['refer.reward.config.reward_options']);
 		};

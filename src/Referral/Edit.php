@@ -7,6 +7,15 @@ use Message\Cog\DB\TransactionalInterface;
 
 use Message\User\UserInterface;
 
+/**
+ * Class Edit
+ * @package Message\Mothership\ReferAFriend\Referral
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Class for saving an existing referral to the database. Implements TransactionalInterface so that several
+ * referrals could potentially be updated at once.
+ */
 class Edit implements TransactionalInterface
 {
 	/**
@@ -31,7 +40,7 @@ class Edit implements TransactionalInterface
 	}
 
 	/**
-	 * @param Transaction $trans
+	 * {@inheritDoc}
 	 */
 	public function setTransaction(Transaction $trans)
 	{
@@ -40,6 +49,8 @@ class Edit implements TransactionalInterface
 	}
 
 	/**
+	 * Save the changes to the referral to the database
+	 *
 	 * @param ReferralInterface $referral
 	 */
 	public function save(ReferralInterface $referral)
@@ -49,6 +60,8 @@ class Edit implements TransactionalInterface
 	}
 
 	/**
+	 * Save several instances of ReferralInterface to the database
+	 *
 	 * @param array $referrals
 	 */
 	public function saveBatch(array $referrals)
@@ -61,6 +74,8 @@ class Edit implements TransactionalInterface
 	}
 
 	/**
+	 * Add query saving the referral to the database transaction
+	 *
 	 * @param ReferralInterface $referral
 	 */
 	private function _addToTransaction(ReferralInterface $referral)

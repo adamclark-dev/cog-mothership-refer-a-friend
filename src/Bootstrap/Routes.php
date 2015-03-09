@@ -4,10 +4,20 @@ namespace Message\Mothership\ReferAFriend\Bootstrap;
 
 use Message\Cog\Bootstrap\RoutesInterface;
 
+/**
+ * Class Routes
+ * @package Message\Mothership\ReferAFriend\Bootstrap
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ */
 class Routes implements RoutesInterface
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	public function registerRoutes($router)
 	{
+		// Control panel
 		$router['ms.cp.refer_a_friend']->setParent('ms.cp')->setPrefix('/refer-a-friend');
 		$router['ms.cp.refer_a_friend']->add('ms.cp.refer_a_friend.dashboard', '/', 'Message:Mothership:ReferAFriend::Controller:Dashboard#index');
 		$router['ms.cp.refer_a_friend']->add('ms.cp.refer_a_friend.create', '/create', 'Message:Mothership:ReferAFriend::Controller:Reward#create');
@@ -23,6 +33,7 @@ class Routes implements RoutesInterface
 			->setRequirement('type', '\d+')
 		;
 
+		// Website front end
 		$router['ms.refer_a_friend']->setPrefix('/')->setPriority(-400);
 		$router['ms.refer_a_friend']->add('ms.refer_a_friend.refer_action', '/refer-a-friend/submit', 'Message:Mothership:ReferAFriend::Controller:Referral#referAFriendAction')
 			->setMethod('POST');

@@ -5,6 +5,14 @@ namespace Message\Mothership\ReferAFriend\Referral\Event;
 use Message\Mothership\ReferAFriend\Referral\ReferralInterface;
 use Message\Cog\Event\Event;
 
+/**
+ * Class ReferralEvent
+ * @package Message\Mothership\ReferAFriend\Referral\Event
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Event for carrying a ReferralInterface instance between modules
+ */
 class ReferralEvent extends Event
 {
 	/**

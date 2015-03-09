@@ -6,6 +6,14 @@ use Message\Mothership\ReferAFriend\Reward\Config\EntityLoaderInterface;
 use Message\Mothership\ReferAFriend\Reward\Config\ConfigProxy;
 use Message\Cog\DB\QueryBuilderFactory;
 
+/**
+ * Class Loader
+ * @package Message\Mothership\ReferAFriend\Reward\Config\RewardOption
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Class for lazy loading the reward options into the RewardProxy
+ */
 class Loader implements EntityLoaderInterface
 {
 	/**
@@ -33,11 +41,17 @@ class Loader implements EntityLoaderInterface
 		$this->_rewardOptions = $rewardOptions;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getName()
 	{
 		return 'reward_option';
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function load(ConfigProxy $config)
 	{
 		$result = $this->_qbFactory

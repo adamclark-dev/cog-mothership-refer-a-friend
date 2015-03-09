@@ -5,13 +5,25 @@ namespace Message\Mothership\ReferAFriend\Form;
 use Symfony\Component\Form;
 use Symfony\Component\Validator\Constraints;
 
+/**
+ * Class ReferAFriend
+ * @package Message\Mothership\ReferAFriend\Form
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ */
 class ReferAFriend extends Form\AbstractType
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getName()
 	{
 		return 'refer_a_friend';
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function buildForm(Form\FormBuilderInterface $builder, array $options)
 	{
 		$builder->add('name', 'text', [

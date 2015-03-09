@@ -5,13 +5,27 @@ namespace Message\Mothership\ReferAFriend\Reward\Config\RewardOption;
 use Message\Mothership\ReferAFriend\Reward\AbstractEntityCollectionBuilder;
 use Message\Mothership\ReferAFriend\Reward\Type;
 
+/**
+ * Class CollectionBuilder
+ * @package Message\Mothership\ReferAFriend\Reward\Config\RewardOption
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Class for creating a collection of reward options against a specific type of reward configuration
+ */
 class CollectionBuilder extends AbstractEntityCollectionBuilder
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getCollection()
 	{
 		return new Collection;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getCollectionFromType(Type\TypeInterface $type)
 	{
 		$collection = $this->getCollection();

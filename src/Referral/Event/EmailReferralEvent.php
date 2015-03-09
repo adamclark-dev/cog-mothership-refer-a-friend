@@ -2,6 +2,15 @@
 
 namespace Message\Mothership\ReferAFriend\Referral\Event;
 
+/**
+ * Class EmailReferralEvent
+ * @package Message\Mothership\ReferAFriend\Referral\Event
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Event that is fired when an email address is referred to the site. Used for triggering an email to be sent to that
+ * email address.
+ */
 class EmailReferralEvent extends ReferralEvent
 {
 	private $_url;

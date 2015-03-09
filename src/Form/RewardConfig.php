@@ -10,6 +10,14 @@ use Symfony\Component\Form;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints as FormConstraints;
 
+/**
+ * Class RewardConfig
+ * @package Message\Mothership\ReferAFriend\Form
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Class to dynamically create configuration form based on the reward type set
+ */
 class RewardConfig extends Form\AbstractType
 {
 	const NAME        = 'refer_a_friend_reward_options';
@@ -42,11 +50,17 @@ class RewardConfig extends Form\AbstractType
 		$this->_rewardOptionCollectionBuilder = $rewardOptionBuilder;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getName()
 	{
 		return self::NAME;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function buildForm(Form\FormBuilderInterface $builder, array $options)
 	{
 		if (null === $options[self::REWARD_TYPE]) {
@@ -81,6 +95,11 @@ class RewardConfig extends Form\AbstractType
 		$this->_addRewardOptionFields($builder, $options[self::REWARD_TYPE]);
 	}
 
+	/**
+	 * Validate that reward type field exists on form
+	 *
+	 * {@inheritDoc}
+	 */
 	public function finishView(Form\FormView $view, Form\FormInterface $form, array $options)
 	{
 		if (!$view->offsetExists(self::REWARD_TYPE)) {
@@ -88,6 +107,12 @@ class RewardConfig extends Form\AbstractType
 		}
 	}
 
+	/**
+	 * Allow reward_type option, and set the ID of the form to match the name, so that the Save button can be tied to the
+	 * form from an external view
+	 *
+	 * {@inheritDoc}
+	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults([
@@ -98,6 +123,12 @@ class RewardConfig extends Form\AbstractType
 		]);
 	}
 
+	/**
+	 * Loop through reward constraints and create fields for the form
+	 *
+	 * @param Form\FormBuilderInterface $builder
+	 * @param TypeInterface $rewardType
+	 */
 	private function _addConstraintFields(Form\FormBuilderInterface $builder, TypeInterface $rewardType)
 	{
 		if (count($rewardType->validConstraints()) <= 0) {
@@ -127,6 +158,14 @@ class RewardConfig extends Form\AbstractType
 		$builder->add($constraintsForm);
 	}
 
+	/**
+	 * If one or zero triggers are applicable for reward config, create a hidden form field with value set to either
+	 * 'none' or the name of the sole available trigger. If there are more than one possible triggers, create a radio
+	 * choice field with an option for each trigger.
+	 *
+	 * @param Form\FormBuilderInterface $builder
+	 * @param TypeInterface $rewardType
+	 */
 	private function _addTriggerFields(Form\FormBuilderInterface $builder, TypeInterface $rewardType)
 	{
 		$triggers = $this->_triggerCollectionBuilder
@@ -162,6 +201,12 @@ class RewardConfig extends Form\AbstractType
 		}
 	}
 
+	/**
+	 * Loop through reward options and create fields for the form
+	 *
+	 * @param Form\FormBuilderInterface $builder
+	 * @param TypeInterface $rewardType
+	 */
 	private function _addRewardOptionFields(Form\FormBuilderInterface $builder, TypeInterface $rewardType)
 	{
 		if (count($rewardType->validRewardOptions()) <= 0) {

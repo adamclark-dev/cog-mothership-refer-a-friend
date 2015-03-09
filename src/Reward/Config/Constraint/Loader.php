@@ -7,6 +7,14 @@ use Message\Mothership\ReferAFriend\Reward\Config\ConfigProxy;
 
 use Message\Cog\DB\QueryBuilderFactory;
 
+/**
+ * Class Loader
+ * @package Message\Mothership\ReferAFriend\Reward\Config\Constraint
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Class for lazy loading constraints into a RewardProxy object
+ */
 class Loader implements EntityLoaderInterface
 {
 	/**
@@ -34,11 +42,17 @@ class Loader implements EntityLoaderInterface
 		$this->_constraints = $constraints;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getName()
 	{
 		return 'constraint';
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function load(ConfigProxy $config)
 	{
 		$result = $this->_qbFactory

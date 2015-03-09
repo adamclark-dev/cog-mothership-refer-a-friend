@@ -9,7 +9,9 @@ use Message\User\UserInterface;
  * Class Create
  * @package Message\Mothership\ReferAFriend\Referral
  *
- * @author Thomas Marchant <thomas@message.co.uk>
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Class for saving a new referral to the database.
  */
 class Create
 {
@@ -23,7 +25,6 @@ class Create
 	 */
 	private $_currentUser;
 
-
 	public function __construct(
 		Query $query,
 		UserInterface $currentUser
@@ -34,6 +35,8 @@ class Create
 	}
 
 	/**
+	 * Save the referral to the database.
+	 *
 	 * @param ReferralInterface $referral
 	 *
 	 * @return ReferralInterface

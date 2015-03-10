@@ -129,8 +129,8 @@ class Reward extends Controller
 		$currentConfig = $this->get('refer.reward.config.current');
 
 		$data = [
-			'name'           => $currentConfig->getName(),
-			'message'        => $currentConfig->getMessage(),
+			'name'           => ($type === $currentConfig->getType()->getName()) ? $currentConfig->getName() : null,
+			'message'        => ($type === $currentConfig->getType()->getName()) ? $currentConfig->getMessage() : null,
 			'constraints'    => [],
 			'reward_options' => [],
 		];

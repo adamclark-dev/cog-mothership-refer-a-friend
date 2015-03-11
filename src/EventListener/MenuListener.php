@@ -11,6 +11,8 @@ use Message\Mothership\ControlPanel\Event\BuildMenuEvent;
  * @package Message\Mothership\ReferAFriend\EventListener
  *
  * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Event listener for adding the Refer a Friend tab to the main admin menu
  */
 class MenuListener extends EventListener implements SubscriberInterface
 {

@@ -5,11 +5,34 @@ namespace Message\Mothership\ReferAFriend\Reward\Config;
 use Message\Mothership\ReferAFriend\Reward\Type;
 use Message\Mothership\ReferAFriend\Form\RewardConfig;
 
+/**
+ * Class ConfigBuilder
+ * @package Message\Mothership\ReferAFriend\Reward\Config
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Class for building Config instances from form data
+ */
 class ConfigBuilder
 {
+	/**
+	 * @var ConfigFactory
+	 */
 	private $_factory;
+
+	/**
+	 * @var Constraint\Collection
+	 */
 	private $_constraints;
+
+	/**
+	 * @var Trigger\Collection
+	 */
 	private $_triggers;
+
+	/**
+	 * @var RewardOption\Collection
+	 */
 	private $_rewardOptions;
 
 	public function __construct(
@@ -25,6 +48,14 @@ class ConfigBuilder
 		$this->_rewardOptions = $rewardOptions;
 	}
 
+	/**
+	 * Build a Config instance using form data and the reward type
+	 *
+	 * @param Type\TypeInterface $type
+	 * @param array $formData
+	 *
+	 * @return Config
+	 */
 	public function build(Type\TypeInterface $type, array $formData)
 	{
 		$config = $this->_factory->getConfig();
@@ -43,6 +74,13 @@ class ConfigBuilder
 		return $config;
 	}
 
+	/**
+	 * Load and populate constraints with values, and add them to the Config
+	 *
+	 * @param Config $config
+	 *
+	 * @param array $formData
+	 */
 	private function _addConstraints(Config $config, array $formData)
 	{
 		if (empty($formData['constraints'])) {
@@ -68,6 +106,13 @@ class ConfigBuilder
 		}
 	}
 
+	/**
+	 * Load trigger and add it to the Config
+	 *
+	 * @param Config $config
+	 *
+	 * @param array $formData
+	 */
 	private function _addTriggers(Config $config, array $formData)
 	{
 		if (empty($formData['triggers']) || $formData['triggers'] === RewardConfig::NONE) {
@@ -78,6 +123,13 @@ class ConfigBuilder
 		$config->addTrigger($trigger);
 	}
 
+	/**
+	 * Load and populate reward options and add them to the Config
+	 *
+	 * @param Config $config
+	 *
+	 * @param array $formData
+	 */
 	private function _addRewardOptions(Config $config, array $formData)
 	{
 		if (empty($formData['reward_options'])) {

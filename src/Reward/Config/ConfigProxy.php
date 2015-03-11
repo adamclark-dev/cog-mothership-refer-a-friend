@@ -4,8 +4,19 @@ namespace Message\Mothership\ReferAFriend\Reward\Config;
 
 use Message\Cog\DB\Entity\EntityLoaderCollection;
 
+/**
+ * Class ConfigProxy
+ * @package Message\Mothership\ReferAFriend\Reward\Config
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Proxy class for lazy loading Config entities (Constraints, Triggers and RewardOptions)
+ */
 class ConfigProxy extends Config
 {
+	/**
+	 * @var EntityLoaderCollection
+	 */
 	private $_loaders;
 
 	/**
@@ -16,6 +27,9 @@ class ConfigProxy extends Config
 		$this->_loaders = $loaders;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getConstraints()
 	{
 		if (null === $this->_constraints) {
@@ -33,6 +47,9 @@ class ConfigProxy extends Config
 		return parent::getConstraints();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getTriggers()
 	{
 		if (null === $this->_triggers) {
@@ -50,6 +67,9 @@ class ConfigProxy extends Config
 		return parent::getTriggers();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getRewardOptions()
 	{
 		if (null === $this->_rewardOptions) {

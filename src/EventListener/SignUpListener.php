@@ -7,8 +7,19 @@ use Message\Cog\Event\EventListener;
 use Message\Cog\Event\SubscriberInterface;
 use Message\User\Event\Event as UserEvent;
 
+/**
+ * Class SignUpListener
+ * @package Message\Mothership\ReferAFriend\EventListener
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Event listener for checking if a user logged in had been referred
+ */
 class SignUpListener extends EventListener implements SubscriberInterface
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	static public function getSubscribedEvents()
 	{
 		return [
@@ -18,6 +29,13 @@ class SignUpListener extends EventListener implements SubscriberInterface
 		];
 	}
 
+	/**
+	 * Set status to complete if a referred user has signed up and logged in. Unfortunately, this needs to listen out
+	 * for logins, as the create event is not dispatched, despite existing. However, even if it does, the user is saved
+	 * to the database via a database transaction, which means that the referral `updated_by` column cannot be saved
+	 *
+	 * @param UserEvent $event
+	 */
 	public function setStatusToComplete(UserEvent $event)
 	{
 		$user = $event->getUser();

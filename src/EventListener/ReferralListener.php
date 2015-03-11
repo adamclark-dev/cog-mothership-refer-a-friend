@@ -12,6 +12,8 @@ use Message\Mothership\ReferAFriend\Referral\Exception\EmailException;
  * @package Message\Mothership\ReferAFriend\EventListener
  *
  * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Event listener for handling the creation of referrals
  */
 class ReferralListener extends EventListener implements SubscriberInterface
 {

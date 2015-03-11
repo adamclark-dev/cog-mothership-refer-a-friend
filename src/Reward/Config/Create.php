@@ -5,9 +5,24 @@ namespace Message\Mothership\ReferAFriend\Reward\Config;
 use Message\Cog\DB;
 use Message\User\UserInterface;
 
+/**
+ * Class Create
+ * @package Message\Mothership\ReferAFriend\Reward\Config
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * Class for saving configurations to the database
+ */
 class Create
 {
+	/**
+	 * @var DB\Query
+	 */
 	private $_query;
+
+	/**
+	 * @var UserInterface
+	 */
 	private $_currentUser;
 
 	public function __construct(DB\Query $query, UserInterface $currentUser)
@@ -16,6 +31,13 @@ class Create
 		$this->_currentUser = $currentUser;
 	}
 
+	/**
+	 * Save the Config details to the database. Does not save entities.
+	 *
+	 * @param Config $config
+	 *
+	 * @return Config
+	 */
 	public function save(Config $config)
 	{
 		$result = $this->_query->run("

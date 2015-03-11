@@ -5,6 +5,17 @@ namespace Message\Mothership\ReferAFriend\Reward\Config;
 use Message\Mothership\ReferAFriend\Reward\Type;
 use Message\Cog\Localisation\Translator;
 
+/**
+ * Class Config
+ * @package Message\Mothership\ReferAFriend\Reward\Config
+ *
+ * @author Thomas Marchant <thomas@mothership.ec>
+ *
+ * A class representing a reward configuration set up.
+ *
+ * A configuration determines what rules apply to a reward, what needs to happen for a reward to be fulfilled, and what
+ * the reward is.
+ */
 class Config implements ConfigInterface
 {
 	const DATE_FORMAT = 'D j M Y';
@@ -59,11 +70,17 @@ class Config implements ConfigInterface
 		$this->_translator = $translator;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function setID($id)
 	{
 		$this->_id = (int) $id;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getID()
 	{
 		if (null === $this->_id) {
@@ -73,6 +90,9 @@ class Config implements ConfigInterface
 		return $this->_id;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function setName($name)
 	{
 		if (empty($name)) {
@@ -86,11 +106,17 @@ class Config implements ConfigInterface
 		$this->_name = $name;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getName()
 	{
 		return $this->_name;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getFullName()
 	{
 		$name = [];
@@ -104,6 +130,9 @@ class Config implements ConfigInterface
 		return implode(' ', $name);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function setMessage($message)
 	{
 		if (!is_string($message)) {
@@ -113,21 +142,33 @@ class Config implements ConfigInterface
 		$this->_message = $message;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getMessage()
 	{
 		return $this->_message;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function setCreatedAt(\DateTime $createdAt)
 	{
 		$this->_createdAt = $createdAt;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function setType(Type\TypeInterface $type)
 	{
 		$this->_type = $type;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getType()
 	{
 		if (null === $this->_type) {
@@ -209,6 +250,11 @@ class Config implements ConfigInterface
 		$this->_rewardOptions->add($rewardOption);
 	}
 
+	/**
+	 * Add extra details to the end of the name to help users better identify them
+	 *
+	 * @return string
+	 */
 	private function _getNameSuffix()
 	{
 		$suffix = $this->getName() ? '(' : '';

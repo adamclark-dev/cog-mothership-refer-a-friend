@@ -118,7 +118,7 @@ class Reward extends Controller
 	}
 
 	/**
-	 * Get form for creating reward configuration
+	 * Get form for creating reward configuration. The form is autopopulated with the current configuration if the type matches.
 	 *
 	 * @param string $type
 	 *
@@ -129,22 +129,24 @@ class Reward extends Controller
 		$currentConfig = $this->get('refer.reward.config.current');
 
 		$data = [
-			'name'           => ($type === $currentConfig->getType()->getName()) ? $currentConfig->getName() : null,
-			'message'        => ($type === $currentConfig->getType()->getName()) ? $currentConfig->getMessage() : null,
-			'constraints'    => [],
+			'name' => ($type === $currentConfig->getType()->getName()) ? $currentConfig->getName() : null,
+			'message' => ($type === $currentConfig->getType()->getName()) ? $currentConfig->getMessage() : null,
+			'constraints' => [],
 			'reward_options' => [],
 		];
 
-		foreach ($currentConfig->getConstraints() as $constraint) {
-			$data['constraints'][$constraint->getName()] = $constraint->getValue();
-		}
+		if ($type === $currentConfig->getType()->getName()) {
+			foreach ($currentConfig->getConstraints() as $constraint) {
+				$data['constraints'][$constraint->getName()] = $constraint->getValue();
+			}
 
-		foreach ($currentConfig->getTriggers() as $trigger) {
-			$data['triggers'] = $trigger->getName();
-		}
+			foreach ($currentConfig->getTriggers() as $trigger) {
+				$data['triggers'] = $trigger->getName();
+			}
 
-		foreach ($currentConfig->getRewardOptions() as $rewardOption) {
-			$data['reward_options'][$rewardOption->getName()] = $rewardOption->getValue();
+			foreach ($currentConfig->getRewardOptions() as $rewardOption) {
+				$data['reward_options'][$rewardOption->getName()] = $rewardOption->getValue();
+			}
 		}
 
 		return $this->createForm($this->get('refer.form.reward_config'), null, [

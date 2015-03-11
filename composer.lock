@@ -63,6 +63,7 @@
             "keywords": [
                 "markdown"
             ],
+            "abandoned": "michelf/php-markdown",
             "time": "2013-09-23 12:00:18"
         },
         {
@@ -625,16 +626,16 @@
         },
         {
             "name": "mothership-ec/cog",
-            "version": "4.0.0",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mothership-ec/cog.git",
-                "reference": "c3b31bb61a50c4e0a9e34dbfc695da97288e8a6e"
+                "reference": "5c20f3cdc89506d33700d8369464dc0379e4f511"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mothership-ec/cog/zipball/c3b31bb61a50c4e0a9e34dbfc695da97288e8a6e",
-                "reference": "c3b31bb61a50c4e0a9e34dbfc695da97288e8a6e",
+                "url": "https://api.github.com/repos/mothership-ec/cog/zipball/5c20f3cdc89506d33700d8369464dc0379e4f511",
+                "reference": "5c20f3cdc89506d33700d8369464dc0379e4f511",
                 "shasum": ""
             },
             "require": {
@@ -711,7 +712,7 @@
                 "cog",
                 "framework"
             ],
-            "time": "2015-02-25 14:14:39"
+            "time": "2015-03-10 17:11:14"
         },
         {
             "name": "mothership-ec/cog-imageresize",

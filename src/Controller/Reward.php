@@ -26,6 +26,7 @@ class Reward extends Controller
 	{
 		return $this->render('Message:Mothership:ReferAFriend::refer_a_friend:cp:create', [
 			'rewardTypes' => $this->get('refer.reward.types'),
+			'currentType' => $this->get('refer.reward.config.current')->getType()->getName(),
 		]);
 	}
 

@@ -7,6 +7,12 @@ use Message\Mothership\ReferAFriend\Reward\Config\ConfigProxy;
 
 use Message\Cog\DB\QueryBuilderFactory;
 
+/**
+ * Class Loader
+ * @package Message\Mothership\ReferAFriend\Reward\Config\Trigger
+ *
+ * Class for loading reward triggers from the database
+ */
 class Loader implements EntityLoaderInterface
 {
 	/**
@@ -33,11 +39,17 @@ class Loader implements EntityLoaderInterface
 		$this->_triggers  = $triggers;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getName()
 	{
 		return 'trigger';
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function load(ConfigProxy $config)
 	{
 		$result = $this->_qbFactory

@@ -13,8 +13,16 @@ namespace Message\Mothership\ReferAFriend\Referral\Event;
  */
 class EmailReferralEvent extends ReferralEvent
 {
+	/**
+	 * @var string
+	 */
 	private $_url;
 
+	/**
+	 * Set the URL to link the referred user to the site
+	 *
+	 * @param $url
+	 */
 	public function setUrl($url)
 	{
 		if (!is_string($url)) {
@@ -27,6 +35,11 @@ class EmailReferralEvent extends ReferralEvent
 		$this->_url = $url;
 	}
 
+	/**
+	 * Get the URL to link the referred user to the site
+	 *
+	 * @return string
+	 */
 	public function getUrl()
 	{
 		return $this->_url;

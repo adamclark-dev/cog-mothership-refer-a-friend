@@ -23,7 +23,7 @@
                 </label>
             {% endfor %}
         </form>
-        <div id="options-form"></div>
+        <div id="options-form" data-current-type="{{ currentType }}">{{ render(controller('Message:Mothership:ReferAFriend::Controller:Reward#setOptions', {'type': currentType})) }}</div>
     </div>
 
     {% javascripts

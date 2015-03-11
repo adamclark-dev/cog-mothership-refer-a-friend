@@ -5,7 +5,7 @@ ms.refer:
       email_not_sent: Email could not be sent
   reward:
     config:
-      create: Configure Reward
+      create: Set Reward
     types:
       no_reward:
         name: No reward

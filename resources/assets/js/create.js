@@ -1,4 +1,8 @@
 $(function () {
+
+    var currentType = $('#options-form').attr('data-current-type');
+    $('#radio_' + currentType).prop('checked', true);
+
     $('.select-reward-type').on('click', function(e) {
         e.preventDefault();
     });

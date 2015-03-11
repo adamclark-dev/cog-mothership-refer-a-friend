@@ -16,7 +16,7 @@
         <p>{{ 'ms.refer.form.type_select.help' | trans }}</p>
         <form>
             {% for type in rewardTypes %}
-                <input type="radio" name="{{ type.name }}" value="{{ type.name }}" id="radio-{{ type.name }}" class="select-reward-type">
+                <input type="radio" name="{{ type.name }}" value="{{ type.name }}" id="radio_{{ type.name }}" class="select-reward-type">
                 <a class="option-block" href="{{ url('ms.cp.refer_a_friend.set_options', {'type': type.name}) }}" data-load-form>
                     <p class="type"><strong>{{ type.displayName | trans }}</strong></p>
                     <p>{{ type.description | trans }}</p>

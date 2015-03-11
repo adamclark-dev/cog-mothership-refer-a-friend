@@ -1,7 +1,7 @@
 ms.refer:
   referral:
     create:
-      success: Thank you, your referral has been saved successfully
+      success: Your referral has been sent
       email_not_sent: Email could not be sent
   reward:
     config:

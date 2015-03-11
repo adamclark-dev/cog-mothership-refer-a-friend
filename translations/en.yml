@@ -4,14 +4,16 @@ ms.refer:
       success: Thank you, your referral has been saved successfully
       email_not_sent: Email could not be sent
   reward:
+    config:
+      create: Configure Reward
     types:
       no_reward:
         name: No reward
         description: A blank referral type that cannot have any constraints or triggers
   form:
     type_select:
-      name: Select referral type
-      help: Referrals can come in different forms, with different rewards and triggers. This field determines which set of rules will apply to the referrals.
+      name: Select reward type
+      help: Rewards can come in different forms, with different options. This field determines which set of rules will apply to the referrals.
     config:
       name:
         name: Name

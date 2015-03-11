@@ -4,7 +4,7 @@
 
 {% block slide %}
     <hgroup class="title">
-        <h1>Create Referral</h1>
+        <h1>{{ 'ms.refer.reward.config.create' | trans }}</h1>
         {% block save %}
         <button type="submit" id="save-button" class="button small save" form="{{ constant('Message\\Mothership\\ReferAFriend\\Form\\RewardConfig::NAME') }}" disabled="disabled">
             Save
@@ -12,12 +12,17 @@
 {% endblock %}
     </hgroup>
     <div class="container-content create-page extended">
-        {% for type in rewardTypes %}
-            <a class="option-block" href="{{ url('ms.cp.refer_a_friend.set_options', {'type': type.name}) }}" data-load-form>
-                <p class="type"><strong>{{ type.displayName | trans }}</strong></p>
-                <p>{{ type.description | trans }}</p>
-            </a>
-        {% endfor %}
+        <h2>{{ 'ms.refer.form.type_select.name' | trans }}</h2>
+        <p>{{ 'ms.refer.form.type_select.help' | trans }}</p>
+        <form>
+            {% for type in rewardTypes %}
+                <input type="radio" name="{{ type.name }}" value="{{ type.name }}" id="radio-{{ type.name }}" class="select-reward-type">
+                <a class="option-block" href="{{ url('ms.cp.refer_a_friend.set_options', {'type': type.name}) }}" data-load-form>
+                    <p class="type"><strong>{{ type.displayName | trans }}</strong></p>
+                    <p>{{ type.description | trans }}</p>
+                </a>
+            {% endfor %}
+        </form>
         <div id="options-form"></div>
     </div>
 

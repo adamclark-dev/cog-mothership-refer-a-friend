@@ -26,7 +26,9 @@ class NoRewardType implements TypeInterface
 
 	public function validTriggers()
 	{
-		return [];
+		return [
+			'refer_a_friend_sign_up',
+		];
 	}
 
 	public function validRewardOptions()

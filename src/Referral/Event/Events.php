@@ -13,4 +13,5 @@ namespace Message\Mothership\ReferAFriend\Referral\Event;
 class Events
 {
 	const EMAIL_REFERRED = 'ms.refer_a_friend.email_referred';
+	const SIGN_UP        = 'ms.refer_a_friend.sign_up';
 }

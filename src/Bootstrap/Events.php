@@ -22,5 +22,6 @@ class Events implements EventsInterface
 	{
 		$dispatcher->addSubscriber(new EventListener\MenuListener);
 		$dispatcher->addSubscriber(new EventListener\ReferralListener);
+		$dispatcher->addSubscriber(new EventListener\SignUpListener);
 	}
 }

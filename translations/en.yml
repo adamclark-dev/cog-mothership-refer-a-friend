@@ -10,6 +10,10 @@ ms.refer:
       no_reward:
         name: No reward
         description: A blank referral type that cannot have any constraints or triggers
+    triggers:
+      sign_up:
+        name: Sign up
+        description: The reward is created when the user signs up and logs in for the first time
   form:
     type_select:
       name: Select reward type

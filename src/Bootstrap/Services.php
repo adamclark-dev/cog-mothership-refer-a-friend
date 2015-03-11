@@ -179,7 +179,13 @@ class Services implements ServicesInterface
 		};
 
 		$services['refer.reward.config.triggers'] = function($c) {
-			return new ReferAFriend\Reward\Config\Trigger\Collection;
+			return new ReferAFriend\Reward\Config\Trigger\Collection([
+				$c['refer.reward.config.trigger.sign_up']
+			]);
+		};
+
+		$services['refer.reward.config.trigger.sign_up'] = function($c) {
+			return new ReferAFriend\Reward\Config\Trigger\Triggers\SignUp;
 		};
 
 		$services['refer.reward.config.trigger.collection_builder'] = function($c) {

@@ -42,7 +42,7 @@ The Referral object has a `hasTriggered()` method to quickly determine whether i
 
 In order for a trigger to be effective, there must be an event listener listening out for the same event that loads the reward. This can then load the referral using a the email address, e.g.:
 
-```
+```php
 public function createReward(SomeEvent $event)
 {
     $referrals = $this->get('refer.referral.loader')->getByEmail($event->getEmail());
@@ -68,7 +68,7 @@ public function createReward(SomeEvent $event)
 Triggers must be added by extending the `refer.reward.config.triggers` service in the service container, and adding them via the `add()` method on the collection:
 
 
-```
+```php
 $services['refer.reward.config.triggers'] = $services->extend('refer.reward.config.triggers', function($triggers, $c) {
     $triggers->add(new My\New\Trigger);
 
@@ -86,7 +86,7 @@ Constraints also have an `isValid()` method which take the referral as its first
 
 So to extend the example above, we can check the validity of the referral by looping through its constraints:
 
-```
+```php
 public function createReward(SomeEvent $event)
 {
     $referrals = $this->get('refer.referral.loader')->getByEmail($event->getEmail());
@@ -126,7 +126,7 @@ public function createReward(SomeEvent $event)
 
 Constraints must be added by extending the `refer.reward.config.constraints` service in the service container, and calling the `add()` method on the collection:
 
-```
+```php
 $services['refer.reward.config.constraints'] = $services->extend('refer.reward.config.constraints', function($constraints, $c) {
     $constraints->add(new My\New\Constraint);
 
@@ -142,7 +142,7 @@ Like constraints, they are stored as a key/value pair, and they must be associat
 
 Reward options must be added by extending the `refer.reward.config.reward_options` service in the service container, and calling the `add()` method on the collection:
 
-```
+```php
 $services['refer.reward.config.reward_options'] = $services->extend('refer.reward.config.reward_options', function($rewardOptions, $c) {
     $rewardOptions->add(new My\New\RewardOption);
 
@@ -155,7 +155,7 @@ $services['refer.reward.config.reward_options'] = $services->extend('refer.rewar
 This module uses lazy loading on both the referrals and the reward configurations, and hence classes for `Message\Mothership\ReferAFriend\Referral\ReferralProxy` and `Message\Mothership\ReferAFriend\Reward\Config\ConfigProxy` exist.
 These classes hold the loaders for their entities, as well as any IDs that they may need for loading, rather than the entities themselves. They extend the getters to call the loaders to load them entities from the database and set them against themselves as and when they need them. Once they have been loaded once, they will retrieve them from memory instead of the database for the rest of the request. For example, in the `ConfigProxy`:
 
-```
+```php
 /**
  * {@inheritDoc}
  */

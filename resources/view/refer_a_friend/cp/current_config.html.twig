@@ -1,0 +1,8 @@
+<h2>
+    {{ 'ms.refer.config.current' | trans }}:
+    {% if null == rewardConfig %}
+        {{ 'ms.refer.config.none_set' | trans }}
+    {% else %}
+        <a href="{{ url('ms.cp.refer_a_friend.view_config', {'configID': rewardConfig.getID}) }}" data-live>{{ rewardConfig.fullName }}</a>
+    {% endif %}
+</h2>

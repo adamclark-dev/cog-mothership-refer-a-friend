@@ -1,0 +1,51 @@
+{% extends 'Message:Mothership:ReferAFriend::refer_a_friend:cp:dashboard' %}
+
+{% block slideAttr 'data-slide-loaded' %}
+
+{% block slide %}
+    <hgroup class="title">
+            <h1>{{ rewardConfig.fullName }}</h1>
+    </hgroup>    
+
+    <div class="container-content create-page extended">
+        <section class="group">
+            <h2 class="title">Message</h2>
+            <div class="content">
+                 <p>{{ rewardConfig.message | nl2br }}</p>
+            </div>
+        </section> 
+
+        {% if rewardConfig.constraints | length > 0 %}
+            <section class="group">
+                <h2 class="title">Constraints</h2>
+                <div class="content">
+                    {% for constraint in rewardConfig.constraints %}
+                        <p><strong>{{ constraint.displayName | trans }}:</strong> {{ constraint.value | capitalize }}</p>
+                    {% endfor %}
+                </div>    
+            </section>    
+        {% endif %}
+
+        {% if rewardConfig.triggers | length > 0 %}
+            <section class="group">
+                <h2 class="title">Trigger</h2>
+                <div class="content">
+                    {% for trigger in rewardConfig.triggers %}
+                        <p><strong>{{ trigger.displayName | trans }}</strong>: {{ trigger.description | trans }}</p>
+                    {% endfor %}
+                </div>
+            </section>    
+        {% endif %}
+
+        {% if rewardConfig.rewardOptions | length > 0 %}
+            <section class="group">
+                <h2 class="title">Reward Options</h2>
+                <div class="content">
+                    {% for option in rewardConfig.rewardOptions %}
+                        <p><strong>{{ option.displayName | trans }}</strong>: {{ option.value | capitalize }}</p>
+                    {% endfor %}
+                </div>    
+            </section>    
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+ms.refer:
+  referral:
+    create:
+      success: Your referral has been sent
+      email_not_sent: Email could not be sent
+  reward:
+    config:
+      create: Set Reward
+    types:
+      no_reward:
+        name: No reward
+        description: A blank referral type that cannot have any constraints or triggers
+    triggers:
+      sign_up:
+        name: Sign up
+        description: The reward is created when the user signs up and logs in for the first time
+  form:
+    type_select:
+      name: Select reward type
+      help: Rewards can come in different forms, with different options. This field determines which set of rules will apply to the referrals.
+    config:
+      name:
+        name: Name
+      message:
+        name: Email message *
+        help: The text that will be sent to the referred email address. This requires some variables, add <strong>{%toName%}</strong> to insert the referred user's name, <strong>{%fromName%}</strong> for the referrer's name, and <strong>{%link%}</strong> for the link to the site.
+    constraints:
+      label: Constraints
+    reward_options:
+      label: Reward options
+    refer_a_friend:
+      email: Friend's email address
+      name: Friend's name
+      message: A message to your friend
+  config:
+    current: Current settings
+    success: Reward configuration saved successfully
+    none_set: No reward configuration set
+  validator:
+    already_referred: This user has already been referred
+    current_user: You cannot refer yourself!
+    user_exists: This user already exists
+  email:
+    subject: You have been referred to {%site%}

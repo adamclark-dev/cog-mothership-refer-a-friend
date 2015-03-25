@@ -1,0 +1,36 @@
+{% extends 'Message:Mothership:ReferAFriend::refer_a_friend:cp:dashboard' %}
+
+{% block slideAttr 'data-slide-loaded' %}
+
+{% block slide %}
+    <hgroup class="title">
+        <h1>{{ 'ms.refer.reward.config.create' | trans }}</h1>
+        {% block save %}
+        <button type="submit" id="save-button" class="button small save ts" form="{{ constant('Message\\Mothership\\ReferAFriend\\Form\\RewardConfig::NAME') }}" disabled="disabled">
+            Save
+        </button>
+        {% endblock %}
+    </hgroup>
+    <div class="container-content create-page extended">
+        <h2>{{ 'ms.refer.form.type_select.name' | trans }}</h2>
+        <p>{{ 'ms.refer.form.type_select.help' | trans }}</p>
+        <form>
+            {% for type in rewardTypes %}
+                <label class="option-block" data-href="{{ url('ms.cp.refer_a_friend.set_options', {'type': type.name}) }}" data-load-form>
+                     <input type="radio" name="{{ type.name }}" value="{{ type.name }}" id="radio_{{ type.name }}" class="select-reward-type">
+                    <p class="type"><strong>{{ type.displayName | trans }}</strong></p>
+                    <p>{{ type.description | trans }}</p>
+                </label>
+            {% endfor %}
+        </form>
+        <div id="options-form" data-current-type="{{ currentType }}">{{ render(controller('Message:Mothership:ReferAFriend::Controller:Reward#setOptions', {'type': currentType})) }}</div>
+    </div>
+
+    {% javascripts
+        '@Message:Mothership:ReferAFriend::resources/assets/js/create.js'
+        output='/assets/js/ms_refer_a_friend_create.js'
+        filter='?jsmin'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

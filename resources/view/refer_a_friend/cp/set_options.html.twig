@@ -1,0 +1,7 @@
+{{ form_start(form, {'action': action}) }}
+    {{ form_row(form['name']) }}
+    {{ form_label(form['message']) }}
+    <p>{{ 'ms.refer.form.config.message.help' | trans | raw }}</p>
+    {{ form_widget(form['message']) }}
+    {{ form_rest(form) }}
+{{ form_end(form) }}

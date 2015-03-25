@@ -1,4 +1,4 @@
-# Refer a Friend
+# Mothership Refer a Friend
 
 The `Message\Mothership\ReferAFriend` cogule allows users to refer non-users to the site, and potentially receive a reward for doing so.
 

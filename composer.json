@@ -1,5 +1,5 @@
 {
-	"name": "message/cog-mothership-refer-a-friend",
+	"name": "mothership-ec/cog-mothership-refer-a-friend",
 	"description": "Cog module for 'Refer a Friend' functionality in Mothership",
 	"keywords": ["refer a friend", "rewards", "cog", "mothership"],
 	"homepage": "http://mothership.ec",
